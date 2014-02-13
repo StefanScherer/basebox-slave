@@ -1,0 +1,4 @@
+# all batch scripts should be windowish
+*.bat text eol=crlf
+
+
