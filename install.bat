@@ -13,15 +13,16 @@ mkdir c:\hashicorp\packer
 cd /D c:\hashicorp\packer
 unzip %TEMP%\0.5.1_windows_amd64.zip
 cd /D %USERPROFILE%
+:PACKER_INSTALLED
 where packer
 if ERRORLEVEL 1 call :addPackerToUserPath
-goto PACKER_INSTALLED
+goto PACKER_DONE
 :addPackerToUserPath
 for /F "tokens=2* delims= " %%f IN ('reg query "HKCU\Environment" /v Path ^| findstr /i path') do set OLD_USER_PATH=%%g
 reg add HKCU\Environment /v Path /d "%OLD_USER_PATH%;C:\hashicorp\packer" /f
 set PATH=%PATH%;C:\hashicorp\packer
 exit /b
-:PACKER_INSTALLED
+:PACKER_DONE
 
 
 rem Install VirtualBox 4.3.6
@@ -33,15 +34,16 @@ if not exist D:\VirtualBox mkdir D:\VirtualBox
 if exist "c:\program files\oracle\virtualbox\vboxmanage.exe" goto VIRTUALBOX_INSTALLED
 wget http://download.virtualbox.org/virtualbox/4.3.6/VirtualBox-4.3.6-91406-Win.exe -O %TEMP%\VirtualBox-4.3.6-91406-Win.exe
 %TEMP%\VirtualBox-4.3.6-91406-Win.exe -s
+:VIRTUALBOX_INSTALLED
 where vboxmanage
 if ERRORLEVEL 1 call :addVirtualBoxToUserPath
-goto VIRTUALBOX_INSTALLED
+goto VIRTUALBOX_DONE
 :addVirtualBoxToUserPath
 for /F "tokens=2* delims= " %%f IN ('reg query "HKCU\Environment" /v Path ^| findstr /i path') do set OLD_USER_PATH=%%g
 reg add HKCU\Environment /v Path /d "%OLD_USER_PATH%;c:\program files\oracle\virtualbox" /f
 set PATH=%PATH%;c:\program files\oracle\virtualbox
 exit /b
-:VIRTUALBOX_INSTALLED
+:VIRTUALBOX_DONE
 
 rem Install Jenkins
 rem wget http://mirrors.jenkins-ci.org/windows/latest -O %TEMP%\jenkins.zip
@@ -54,13 +56,14 @@ if exist "c:\Program Files (x86)\Git\bin" goto GIT_INSTALLED
 dir "c:\Program Files (x86)\Git\bin
 wget --no-check-certificate https://msysgit.googlecode.com/files/Git-1.8.5.2-preview20131230.exe -O %TEMP%\gitsetup.exe
 %TEMP%\gitsetup.exe /VERYSILENT
+:GIT_INSTALLED
 where git
 if ERRORLEVEL 1 call :addGitToUserPath
-goto GIT_INSTALLED
+goto GIT_DONE
 :addGitToUserPath
 for /F "tokens=2* delims= " %%f IN ('reg query "HKCU\Environment" /v Path ^| findstr /i path') do set OLD_USER_PATH=%%g
 reg add HKCU\Environment /v Path /d "%OLD_USER_PATH%;c:\Program Files (x86)\Git\bin" /f
 set PATH=%PATH%;c:\Program Files (x86)\Git\bin
 exit /b
-:GIT_INSTALLED
+:GIT_DONE
 
