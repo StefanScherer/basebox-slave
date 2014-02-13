@@ -43,4 +43,24 @@ set PATH=%PATH%;c:\program files\oracle\virtualbox
 exit /b
 :VIRTUALBOX_INSTALLED
 
+rem Install Jenkins
+rem wget http://mirrors.jenkins-ci.org/windows/latest -O %TEMP%\jenkins.zip
+rem cd /D %TEMP%
+rem unzip jenkins.zip
+rem setup.exe -s
+
+rem Install git for Windows
+if exist "c:\Program Files (x86)\Git\bin" goto GIT_INSTALLED
+dir "c:\Program Files (x86)\Git\bin
+wget --no-check-certificate https://msysgit.googlecode.com/files/Git-1.8.5.2-preview20131230.exe -O %TEMP%\gitsetup.exe
+%TEMP%\gitsetup.exe /VERYSILENT
+where git
+if ERRORLEVEL 1 call :addGitToUserPath
+goto GIT_INSTALLED
+:addGitToUserPath
+for /F "tokens=2* delims= " %%f IN ('reg query "HKCU\Environment" /v Path ^| findstr /i path') do set OLD_USER_PATH=%%g
+reg add HKCU\Environment /v Path /d "%OLD_USER_PATH%;c:\Program Files (x86)\Git\bin" /f
+set PATH=%PATH%;c:\Program Files (x86)\Git\bin
+exit /b
+:GIT_INSTALLED
 

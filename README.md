@@ -4,11 +4,9 @@ Setup a Windows Jenkins slave to build baseboxes with packer.
 This slave is on real hardware to build 64bit baseboxes as well.
 
 ## Environment
+The given environment is
 
 * Windows Server 2003 R2 64bit SP2
-* VMware Workstation 10
-* VirtualBox 4.3.6
-* packer 0.5.1
 * wget.exe
 * unzip.exe
 
@@ -27,6 +25,13 @@ Then enter following command:
     wget --no-check-certificate https://github.com/StefanScherer/basebox-slave/raw/master/install.bat -O %TEMP%\install.bat && %TEMP%\install.bat
 
 Afterwards you have VirtualBox 4.3.6 and Packer 0.5.1 installed and in PATH.
+
+### Installed Software
+These software will be installed
+
+* VirtualBox 4.3.6
+* packer 0.5.1
+* git 1.8.5 commandline
 
 # Licensing
 Copyright (c) 2014 Stefan Scherer
