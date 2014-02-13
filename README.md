@@ -12,6 +12,11 @@ This slave is on real hardware to build 64bit baseboxes as well.
 * wget.exe
 * unzip.exe
 
+## Directories
+* PACKER_CACHE_DIR D:\Packer\cache
+* PACKER_TEMP_DIR D:\Packer\temp
+* VirtualBox D:\VirtualBox
+
 ## Installation
 To install it in the preinstalled machine without PowerShell, you must
 have at least wget.exe and unzip.exe to download a file and extract ZIP files.
