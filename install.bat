@@ -67,3 +67,8 @@ set PATH=%PATH%;c:\Program Files (x86)\Git\bin
 exit /b
 :GIT_DONE
 
+if not exist D:\ISO mkdir D:\ISO
+if not exist D:\GitHub mkdir D:\GitHub
+cd /D D:\GitHub
+git clone https://github.com/StefanScherer/basebox-packer.git
+
