@@ -1,5 +1,12 @@
 
 rem Install packer 0.5.1
+if not exist D:\Packer\cache mkdir D:\Packer\cache
+setx PACKER_CACHE_DIR D:\Packer\cache
+set PACKER_CACHE_DIR=D:\Packer\cache
+if not exist D:\Packer\temp mkdir D:\Packer\temp
+setx PACKER_TEMP_DIR D:\Packer\temp
+set PACKER_TEMP_DIR=D:\Packer\temp
+
 if exist c:\hashicorp\packer\packer.exe goto PACKER_INSTALLED
 wget --no-check-certificate https://dl.bintray.com/mitchellh/packer/0.5.1_windows_amd64.zip -O %TEMP%\0.5.1_windows_amd64.zip
 mkdir c:\hashicorp\packer
