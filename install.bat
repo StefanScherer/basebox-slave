@@ -22,6 +22,7 @@ if not exist "%USERPROFILE%\.VirtualBox\VirtualBox.xml" (
   mkdir "%USERPROFILE%\.VirtualBox"
   wget --no-check-certificate https://github.com/StefanScherer/basebox-slave/raw/master/VirtualBox.xml -O "%USERPROFILE%\.VirtualBox\VirtualBox.xml"
 )
+if not exist D:\VirtualBox mkdir D:\VirtualBox
 if exist "c:\program files\oracle\virtualbox\vboxmanage.exe" goto VIRTUALBOX_INSTALLED
 wget http://download.virtualbox.org/virtualbox/4.3.6/VirtualBox-4.3.6-91406-Win.exe -O %TEMP%\VirtualBox-4.3.6-91406-Win.exe
 %TEMP%\VirtualBox-4.3.6-91406-Win.exe -s
