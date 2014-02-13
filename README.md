@@ -19,7 +19,7 @@ have at least wget.exe and unzip.exe to download a file and extract ZIP files.
 Open up a command prompt by typing **Windows+R** and enter **cmd** and press enter.
 Then enter following command:
 
-    wget https://github.com/StefanScherer/basebox-slave/raw/master/install.bat -O %TEMP%\install.bat && %TEMP%\install.bat
+    wget --no-check-certificate https://github.com/StefanScherer/basebox-slave/raw/master/install.bat -O %TEMP%\install.bat && %TEMP%\install.bat
 
 Afterwards you have VirtualBox 4.3.6 and Packer 0.5.1 installed and in PATH.
 
