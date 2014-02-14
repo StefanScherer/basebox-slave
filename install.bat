@@ -7,10 +7,10 @@ if not exist D:\Packer\temp mkdir D:\Packer\temp
 setx PACKER_TEMP_DIR D:\Packer\temp
 set PACKER_TEMP_DIR=D:\Packer\temp
 
-if exist c:\hashicorp\packer\packer.exe goto PACKER_INSTALLED
+if exist C:\hashicorp\packer\packer.exe goto PACKER_INSTALLED
 wget --no-check-certificate https://dl.bintray.com/mitchellh/packer/0.5.1_windows_amd64.zip -O %TEMP%\0.5.1_windows_amd64.zip
-mkdir c:\hashicorp\packer
-cd /D c:\hashicorp\packer
+mkdir C:\hashicorp\packer
+cd /D C:\hashicorp\packer
 unzip %TEMP%\0.5.1_windows_amd64.zip
 cd /D %USERPROFILE%
 :PACKER_INSTALLED
@@ -31,7 +31,7 @@ if not exist "%USERPROFILE%\.VirtualBox\VirtualBox.xml" (
   wget --no-check-certificate https://github.com/StefanScherer/basebox-slave/raw/master/VirtualBox.xml -O "%USERPROFILE%\.VirtualBox\VirtualBox.xml"
 )
 if not exist D:\VirtualBox mkdir D:\VirtualBox
-if exist "c:\program files\oracle\virtualbox\vboxmanage.exe" goto VIRTUALBOX_INSTALLED
+if exist "C:\program files\oracle\virtualbox\vboxmanage.exe" goto VIRTUALBOX_INSTALLED
 wget http://download.virtualbox.org/virtualbox/4.3.6/VirtualBox-4.3.6-91406-Win.exe -O %TEMP%\VirtualBox-4.3.6-91406-Win.exe
 %TEMP%\VirtualBox-4.3.6-91406-Win.exe -s
 :VIRTUALBOX_INSTALLED
@@ -40,8 +40,8 @@ if ERRORLEVEL 1 call :addVirtualBoxToUserPath
 goto VIRTUALBOX_DONE
 :addVirtualBoxToUserPath
 for /F "tokens=2* delims= " %%f IN ('reg query "HKCU\Environment" /v Path ^| findstr /i path') do set OLD_USER_PATH=%%g
-reg add HKCU\Environment /v Path /d "%OLD_USER_PATH%;c:\program files\oracle\virtualbox" /f
-set PATH=%PATH%;c:\program files\oracle\virtualbox
+reg add HKCU\Environment /v Path /d "%OLD_USER_PATH%;C:\program files\oracle\virtualbox" /f
+set PATH=%PATH%;C:\program files\oracle\virtualbox
 exit /b
 :VIRTUALBOX_DONE
 
@@ -52,8 +52,8 @@ rem unzip jenkins.zip
 rem setup.exe -s
 
 rem Install git for Windows
-if exist "c:\Program Files (x86)\Git\bin" goto GIT_INSTALLED
-dir "c:\Program Files (x86)\Git\bin
+if exist "C:\Program Files (x86)\Git\bin" goto GIT_INSTALLED
+dir "C:\Program Files (x86)\Git\bin
 wget --no-check-certificate https://msysgit.googlecode.com/files/Git-1.8.5.2-preview20131230.exe -O %TEMP%\gitsetup.exe
 %TEMP%\gitsetup.exe /VERYSILENT
 :GIT_INSTALLED
@@ -62,8 +62,8 @@ if ERRORLEVEL 1 call :addGitToUserPath
 goto GIT_DONE
 :addGitToUserPath
 for /F "tokens=2* delims= " %%f IN ('reg query "HKCU\Environment" /v Path ^| findstr /i path') do set OLD_USER_PATH=%%g
-reg add HKCU\Environment /v Path /d "%OLD_USER_PATH%;c:\Program Files (x86)\Git\bin" /f
-set PATH=%PATH%;c:\Program Files (x86)\Git\bin
+reg add HKCU\Environment /v Path /d "%OLD_USER_PATH%;C:\Program Files (x86)\Git\bin" /f
+set PATH=%PATH%;C:\Program Files (x86)\Git\bin
 exit /b
 :GIT_DONE
 
