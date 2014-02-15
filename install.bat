@@ -18,22 +18,34 @@ cd /D %USERPROFILE%\Documents
 
 call cinst curl
 call cinst 7zip
-set PATH=%PATH%;c:\Program Files\7-Zip
+set PATH=%PATH%;C:\Program Files\7-Zip
 call cinst vim
+where gvim.exe
+if ERRORLEVEL 1 call :addVimToUserPath
+goto VIM_DONE
+:addPackerToUserPath
+for /F "tokens=2* delims= " %%f IN ('reg query "HKCU\Environment" /v Path ^| findstr /i path') do set OLD_USER_PATH=%%g
+reg add HKCU\Environment /v Path /d "%OLD_USER_PATH%;C:\Program Fiels (x86)\vim\vim74" /f
+set PATH=%PATH%;C:\Program Files (x86)\vim\vim74
+exit /b
+:VIM_DONE
+
 call cinst msysgit
 call cinst firefox
 
+set WORKDRIVE=C:
+
 rem Install packer 0.5.1
-if not exist D:\Packer\cache mkdir D:\Packer\cache
-setx PACKER_CACHE_DIR D:\Packer\cache
-set PACKER_CACHE_DIR=D:\Packer\cache
-if not exist D:\Packer\temp mkdir D:\Packer\temp
-setx PACKER_TEMP_DIR D:\Packer\temp
-set PACKER_TEMP_DIR=D:\Packer\temp
+if not exist %WORKDRIVE%\Packer\cache mkdir %WORKDRIVE%\Packer\cache
+setx PACKER_CACHE_DIR %WORKDRIVE%\Packer\cache
+set PACKER_CACHE_DIR=%WORKDRIVE%\Packer\cache
+if not exist %WORKDRIVE%\Packer\temp mkdir %WORKDRIVE%\Packer\temp
+setx PACKER_TEMP_DIR %WORKDRIVE%\Packer\temp
+set PACKER_TEMP_DIR=%WORKDRIVE%\Packer\temp
 
 rem call cinst packer
 if exist C:\hashicorp\packer\packer.exe goto PACKER_INSTALLED
-curl -J -k https://dl.bintray.com/mitchellh/packer/0.5.1_windows_amd64.zip -O %TEMP%\0.5.1_windows_amd64.zip
+call curl -J -k https://dl.bintray.com/mitchellh/packer/0.5.1_windows_amd64.zip -O %TEMP%\0.5.1_windows_amd64.zip
 mkdir C:\hashicorp\packer
 cd /D C:\hashicorp\packer
 7z x %TEMP%\0.5.1_windows_amd64.zip
@@ -56,7 +68,7 @@ if not exist "%USERPROFILE%\.VirtualBox\VirtualBox.xml" (
   call curl -L -k https://github.com/StefanScherer/basebox-slave/raw/master/VirtualBox.xml -O "%USERPROFILE%\.VirtualBox\VirtualBox.xml"
 )
 call cinst virtualbox
-if not exist D:\VirtualBox mkdir D:\VirtualBox
+if not exist %WORKDRIVE%\VirtualBox mkdir %WORKDRIVE%\VirtualBox
 rem if exist "C:\program files\oracle\virtualbox\vboxmanage.exe" goto VIRTUALBOX_INSTALLED
 rem wget http://download.virtualbox.org/virtualbox/4.3.6/VirtualBox-4.3.6-91406-Win.exe -O %TEMP%\VirtualBox-4.3.6-91406-Win.exe
 rem %TEMP%\VirtualBox-4.3.6-91406-Win.exe -s
@@ -77,8 +89,8 @@ rem cd /D %TEMP%
 rem unzip jenkins.zip
 rem setup.exe -s
 
-if not exist D:\GitHub mkdir D:\GitHub
-cd /D D:\GitHub
+if not exist %WORKDRIVE%\GitHub mkdir %WORKDRIVE%\GitHub
+cd /D %WORKDRIVE%\GitHub
 if not exist basebox-packer (
   git clone https://github.com/StefanScherer/basebox-packer.git
 ) else (
