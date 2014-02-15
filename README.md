@@ -26,7 +26,6 @@ Afterwards you have VirtualBox 4.3.6 and Packer 0.5.1 installed and in PATH.
 These software will be installed
 
 * Chocolatey package manager
-* Curl
 * Firefox 27
 * Git 1.8.5 commandline
 * Packer 0.5.1
@@ -35,6 +34,7 @@ These software will be installed
 * Vagrant 1.4.3
 * Vim 7.4
 * VirtualBox 4.3.6
+* wget
 
 # Licensing
 Copyright (c) 2014 Stefan Scherer

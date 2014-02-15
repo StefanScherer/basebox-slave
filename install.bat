@@ -16,14 +16,14 @@ call cinst vagrant
 set PATH=%PATH%;%SystemDrive%\hashicorp\vagrant\bin
 cd /D %USERPROFILE%\Documents
 
-call cinst curl
+call cinst wget
 call cinst 7zip
 set PATH=%PATH%;C:\Program Files\7-Zip
 call cinst vim
 where gvim.exe
 if ERRORLEVEL 1 call :addVimToUserPath
 goto VIM_DONE
-:addPackerToUserPath
+:addVimToUserPath
 for /F "tokens=2* delims= " %%f IN ('reg query "HKCU\Environment" /v Path ^| findstr /i path') do set OLD_USER_PATH=%%g
 reg add HKCU\Environment /v Path /d "%OLD_USER_PATH%;C:\Program Fiels (x86)\vim\vim74" /f
 set PATH=%PATH%;C:\Program Files (x86)\vim\vim74
@@ -47,7 +47,7 @@ set PACKER_TEMP_DIR=%WORKDRIVE%\Packer\temp
 
 rem call cinst packer
 if exist C:\hashicorp\packer\packer.exe goto PACKER_INSTALLED
-call curl -J -k https://dl.bintray.com/mitchellh/packer/0.5.1_windows_amd64.zip -O %TEMP%\0.5.1_windows_amd64.zip
+call wget --no-check-certificate https://dl.bintray.com/mitchellh/packer/0.5.1_windows_amd64.zip -O %TEMP%\0.5.1_windows_amd64.zip
 mkdir C:\hashicorp\packer
 cd /D C:\hashicorp\packer
 7z x %TEMP%\0.5.1_windows_amd64.zip
@@ -67,7 +67,7 @@ exit /b
 rem Install VirtualBox 4.3.6
 if not exist "%USERPROFILE%\.VirtualBox\VirtualBox.xml" (
   mkdir "%USERPROFILE%\.VirtualBox"
-  call curl -L -k https://github.com/StefanScherer/basebox-slave/raw/master/VirtualBox.xml -O "%USERPROFILE%\.VirtualBox\VirtualBox.xml"
+  call wget --no-check-certificate https://github.com/StefanScherer/basebox-slave/raw/master/VirtualBox.xml -O "%USERPROFILE%\.VirtualBox\VirtualBox.xml"
 )
 call cinst virtualbox
 if not exist %WORKDRIVE%\VirtualBox mkdir %WORKDRIVE%\VirtualBox
