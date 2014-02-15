@@ -51,7 +51,7 @@ call wget --no-check-certificate https://dl.bintray.com/mitchellh/packer/0.5.1_w
 mkdir C:\hashicorp\packer
 cd /D C:\hashicorp\packer
 7z x %TEMP%\0.5.1_windows_amd64.zip
-rem cd /D %USERPROFILE%
+cd /D %USERPROFILE%
 rem :PACKER_INSTALLED
 where packer
 if ERRORLEVEL 1 call :addPackerToUserPath
@@ -128,20 +128,25 @@ if not exist D:\ISO\san\windows\licensed\datacenter_san\win2012r2_datacenter_en\
 
 echo Install VMware PowerCLI...
 if not exist "c:\Program Files (x86)\VMware\VMware VIX" (
-  if not exist "%USERPROFILE%\Downloads\VMware-PowerCLI-5.5.0-1295336.exe" (
-    copy "\\roettfs1\scratch\keep\VMware\VMware-PowerCLI-5.5.0-1295336.exe" %USERPROFILE%\Downloads
+  if not exist "%TEMP%\VMware-PowerCLI-5.5.0-1295336.exe" (
+    copy "\\adminlin01\iso\vmware\powercli\VMware-PowerCLI-5.5.0-1295336.exe" %TEMP%\
+  )
+  if not exist "%TEMP%\VMware-PowerCLI-5.5.0-1295336.exe" (
+    copy "\\roettfs1\scratch\keep\VMware\VMware-PowerCLI-5.5.0-1295336.exe" %TEMP%\
   )
   powershell -Command "Import-Module ServerManager; Add-WindowsFeature NET-Framework-Features"
-  "%USERPROFILE%\Downloads\VMware-PowerCLI-5.5.0-1295336.exe" /s /v/qn
+  "%TEMP%\VMware-PowerCLI-5.5.0-1295336.exe" /s /v/qn
+  del "%TEMP%\VMware-PowerCLI-5.5.0-1295336.exe"
 )
 
 echo Install VMware Workstation...
 rem Install VMware Workstation
 if not exist "c:\Program Files (x86)\VMware\VMware Workstation" (
-  if not exist "%USERPROFILE%\Downloads\VMware-workstation-full-10.0.0-1295980.exe" (
-    copy \\adminlin01\iso\vmware\workstation10\VMware-workstation-full-10.0.0-1295980.exe %USERPROFILE%\Downloads
+  if not exist "%TEMP%\VMware-workstation-full-10.0.0-1295980.exe" (
+    copy \\adminlin01\iso\vmware\workstation10\VMware-workstation-full-10.0.0-1295980.exe %TEMP%\
   )
-  rem "%USERPROFILE%\Downloads\VMware-workstation-full-10.0.0-1295980.exe" /s /nsr /v EULAS_AGREED=1 SERIALNUMBER="xxxxx-xxxxx-xxxxx-xxxxx-xxxxx"
-  "%USERPROFILE%\Downloads\VMware-workstation-full-10.0.0-1295980.exe" /s /nsr /v EULAS_AGREED=1 
+  rem "%TEMP%\VMware-workstation-full-10.0.0-1295980.exe" /s /nsr /v EULAS_AGREED=1 SERIALNUMBER="xxxxx-xxxxx-xxxxx-xxxxx-xxxxx"
+  "%TEMP%\VMware-workstation-full-10.0.0-1295980.exe" /s /nsr /v EULAS_AGREED=1 
+  del "%TEMP%\VMware-workstation-full-10.0.0-1295980.exe"
 )
 
