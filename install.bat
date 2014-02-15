@@ -109,6 +109,14 @@ if not exist packer-windows (
   cd ..
 )
 
+if not exist basebox-slave (
+  git clone https://github.com/StefanScherer/basebox-slave.git
+) else (
+  cd basebox-slave
+  git pull
+  cd ..
+)
+
 echo Copy ISO files...
 if not exist D:\ISO\san\windows\licensed\datacenter_san mkdir D:\ISO\san\windows\licensed\datacenter_san
 if not exist D:\ISO\san\windows\licensed\datacenter_san\win2008r2sp1_datacenter_en mkdir D:\ISO\san\windows\licensed\datacenter_san\win2008r2sp1_datacenter_en
