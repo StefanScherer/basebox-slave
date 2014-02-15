@@ -150,3 +150,14 @@ if not exist "c:\Program Files (x86)\VMware\VMware Workstation" (
   del "%TEMP%\VMware-workstation-full-10.0.0-1295980.exe"
 )
 
+rem put ovftool into path
+where ovftool
+if ERRORLEVEL 1 call :addOvftoolToUserPath
+goto OVFTOOL_DONE
+:addOvftoolToUserPath
+for /F "tokens=2* delims= " %%f IN ('reg query "HKCU\Environment" /v Path ^| findstr /i path') do set OLD_USER_PATH=%%g
+reg add HKCU\Environment /v Path /d "%OLD_USER_PATH%;c:\Program Files (x86)\VMware\VMware Workstation\ovftool" /f
+set PATH=%PATH%;c:\Program Files (x86)\VMware\VMware Workstation\ovftool
+exit /b
+:OVFTOOL_DONE
+

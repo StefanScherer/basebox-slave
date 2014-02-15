@@ -35,6 +35,7 @@ These software will be installed
 * Vim 7.4
 * VirtualBox 4.3.6
 * wget
+* ovftool (part of VMware Workstation)
 
 # Licensing
 Copyright (c) 2014 Stefan Scherer
