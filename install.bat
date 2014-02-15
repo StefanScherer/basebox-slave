@@ -94,3 +94,20 @@ if not exist D:\ISO\san\windows\licensed\datacenter_san\win2012r2_datacenter_en\
   copy \\adminlin01\iso\windows\licensed\datacenter_san\win2012r2_datacenter_en\SW_DVD9_Windows_Svr_Std_and_DataCtr_2012_R2_64Bit_English_-2_Core_MLF_X19-31419.ISO D:\ISO\san\windows\licensed\datacenter_san\win2012r2_datacenter_en
  )
 
+if not exist "c:\Program Files (x86)\VMware\VMware VIX" (
+  if not exist "%USERPROFILE%\Downloads\VMware-PowerCLI-5.5.0-1295336.exe" (
+    copy "\\roettfs1\scratch\keep\VMware\VMware-PowerCLI-5.5.0-1295336.exe" %USERPROFILE%\Downloads
+  )
+  powershell -Command "Import-Module ServerManager; Add-WindowsFeature NET-Framework-Features"
+  "%USERPROFILE%\Downloads\VMware-PowerCLI-5.5.0-1295336.exe" /s /v/qn
+)
+
+rem Install VMware Workstation
+if not exist "c:\Program Files (x86)\VMware\VMware Workstation" (
+  if not exist "%USERPROFILE%\Downloads\VMware-workstation-full-10.0.0-1295980.exe" (
+    copy \\adminlin01\iso\vmware\workstation10\VMware-workstation-full-10.0.0-1295980.exe %USERPROFILE%\Downloads
+  )
+  rem "%USERPROFILE%\Downloads\VMware-workstation-full-10.0.0-1295980.exe" /s /nsr /v EULAS_AGREED=1 SERIALNUMBER="xxxxx-xxxxx-xxxxx-xxxxx-xxxxx"
+  "%USERPROFILE%\Downloads\VMware-workstation-full-10.0.0-1295980.exe" /s /nsr /v EULAS_AGREED=1 
+)
+
