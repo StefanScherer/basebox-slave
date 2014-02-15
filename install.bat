@@ -12,14 +12,13 @@ set ChocolateyInstall=%SystemDrive%\Chocolatey
 set PATH=%PATH%;%ChocolateyInstall%\bin
 :inst
 
-call cinst virtualbox
 call cinst vagrant
-set PATH=%PATH%;%ProgramFiles%\Oracle\VirtualBox
 set PATH=%PATH%;%SystemDrive%\hashicorp\vagrant\bin
 cd /D %USERPROFILE%\Documents
 
 call cinst curl
-call cinst 7zip.commandline 
+call cinst 7zip
+set PATH=%PATH%;c:\Program Files\7-Zip
 call cinst vim
 call cinst msysgit
 call cinst firefox
@@ -32,12 +31,12 @@ if not exist D:\Packer\temp mkdir D:\Packer\temp
 setx PACKER_TEMP_DIR D:\Packer\temp
 set PACKER_TEMP_DIR=D:\Packer\temp
 
-call cinst packer
-rem if exist C:\hashicorp\packer\packer.exe goto PACKER_INSTALLED
-rem wget --no-check-certificate https://dl.bintray.com/mitchellh/packer/0.5.1_windows_amd64.zip -O %TEMP%\0.5.1_windows_amd64.zip
-rem mkdir C:\hashicorp\packer
-rem cd /D C:\hashicorp\packer
-rem unzip %TEMP%\0.5.1_windows_amd64.zip
+rem call cinst packer
+if exist C:\hashicorp\packer\packer.exe goto PACKER_INSTALLED
+curl -J -k https://dl.bintray.com/mitchellh/packer/0.5.1_windows_amd64.zip -O %TEMP%\0.5.1_windows_amd64.zip
+mkdir C:\hashicorp\packer
+cd /D C:\hashicorp\packer
+7z x %TEMP%\0.5.1_windows_amd64.zip
 rem cd /D %USERPROFILE%
 rem :PACKER_INSTALLED
 where packer
@@ -96,6 +95,7 @@ if not exist packer-windows (
   cd ..
 )
 
+echo Copy ISO files...
 if not exist D:\ISO\san\windows\licensed\datacenter_san mkdir D:\ISO\san\windows\licensed\datacenter_san
 if not exist D:\ISO\san\windows\licensed\datacenter_san\win2008r2sp1_datacenter_en mkdir D:\ISO\san\windows\licensed\datacenter_san\win2008r2sp1_datacenter_en
 if not exist D:\ISO\san\windows\licensed\datacenter_san\win2008r2sp1_datacenter_en\SW_DVD5_Windows_Svr_DC_EE_SE_Web_2008_R2_64Bit_English_w_SP1_MLF_X17-22580.ISO (
@@ -112,6 +112,7 @@ if not exist D:\ISO\san\windows\licensed\datacenter_san\win2012r2_datacenter_en\
   copy \\adminlin01\iso\windows\licensed\datacenter_san\win2012r2_datacenter_en\SW_DVD9_Windows_Svr_Std_and_DataCtr_2012_R2_64Bit_English_-2_Core_MLF_X19-31419.ISO D:\ISO\san\windows\licensed\datacenter_san\win2012r2_datacenter_en
  )
 
+echo Install VMware PowerCLI...
 if not exist "c:\Program Files (x86)\VMware\VMware VIX" (
   if not exist "%USERPROFILE%\Downloads\VMware-PowerCLI-5.5.0-1295336.exe" (
     copy "\\roettfs1\scratch\keep\VMware\VMware-PowerCLI-5.5.0-1295336.exe" %USERPROFILE%\Downloads
@@ -120,6 +121,7 @@ if not exist "c:\Program Files (x86)\VMware\VMware VIX" (
   "%USERPROFILE%\Downloads\VMware-PowerCLI-5.5.0-1295336.exe" /s /v/qn
 )
 
+echo Install VMware Workstation...
 rem Install VMware Workstation
 if not exist "c:\Program Files (x86)\VMware\VMware Workstation" (
   if not exist "%USERPROFILE%\Downloads\VMware-workstation-full-10.0.0-1295980.exe" (
