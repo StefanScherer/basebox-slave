@@ -1,3 +1,12 @@
+powershell -NoProfile -ExecutionPolicy unrestricted -Command "((new-object net.webclient).DownloadFile('https://raw.github.com/StefanScherer/dotfiles-windows/install/install.bat', '%Temp%\install.bat'))"
+%Temp%\install.bat
+
+call cinst curl
+call cinst vagrant
+call cinst 7zip.commandline 
+call cinst vim
+call cinst msysgit
+call cinst firefox
 
 rem Install packer 0.5.1
 if not exist D:\Packer\cache mkdir D:\Packer\cache
@@ -7,13 +16,14 @@ if not exist D:\Packer\temp mkdir D:\Packer\temp
 setx PACKER_TEMP_DIR D:\Packer\temp
 set PACKER_TEMP_DIR=D:\Packer\temp
 
-if exist C:\hashicorp\packer\packer.exe goto PACKER_INSTALLED
-wget --no-check-certificate https://dl.bintray.com/mitchellh/packer/0.5.1_windows_amd64.zip -O %TEMP%\0.5.1_windows_amd64.zip
-mkdir C:\hashicorp\packer
-cd /D C:\hashicorp\packer
-unzip %TEMP%\0.5.1_windows_amd64.zip
-cd /D %USERPROFILE%
-:PACKER_INSTALLED
+call cinst packer
+rem if exist C:\hashicorp\packer\packer.exe goto PACKER_INSTALLED
+rem wget --no-check-certificate https://dl.bintray.com/mitchellh/packer/0.5.1_windows_amd64.zip -O %TEMP%\0.5.1_windows_amd64.zip
+rem mkdir C:\hashicorp\packer
+rem cd /D C:\hashicorp\packer
+rem unzip %TEMP%\0.5.1_windows_amd64.zip
+rem cd /D %USERPROFILE%
+rem :PACKER_INSTALLED
 where packer
 if ERRORLEVEL 1 call :addPackerToUserPath
 goto PACKER_DONE
@@ -30,10 +40,11 @@ if not exist "%USERPROFILE%\.VirtualBox\VirtualBox.xml" (
   mkdir "%USERPROFILE%\.VirtualBox"
   wget --no-check-certificate https://github.com/StefanScherer/basebox-slave/raw/master/VirtualBox.xml -O "%USERPROFILE%\.VirtualBox\VirtualBox.xml"
 )
+call cinst virtualbox
 if not exist D:\VirtualBox mkdir D:\VirtualBox
-if exist "C:\program files\oracle\virtualbox\vboxmanage.exe" goto VIRTUALBOX_INSTALLED
-wget http://download.virtualbox.org/virtualbox/4.3.6/VirtualBox-4.3.6-91406-Win.exe -O %TEMP%\VirtualBox-4.3.6-91406-Win.exe
-%TEMP%\VirtualBox-4.3.6-91406-Win.exe -s
+rem if exist "C:\program files\oracle\virtualbox\vboxmanage.exe" goto VIRTUALBOX_INSTALLED
+rem wget http://download.virtualbox.org/virtualbox/4.3.6/VirtualBox-4.3.6-91406-Win.exe -O %TEMP%\VirtualBox-4.3.6-91406-Win.exe
+rem %TEMP%\VirtualBox-4.3.6-91406-Win.exe -s
 :VIRTUALBOX_INSTALLED
 where vboxmanage
 if ERRORLEVEL 1 call :addVirtualBoxToUserPath
@@ -77,6 +88,13 @@ if not exist basebox-packer (
   cd ..
 )
 
+if not exist packer-windows (
+  git clone -b san https://github.com/StefanScherer/packer-windows.git
+) else (
+  cd packer-windows
+  git pull
+  cd ..
+)
 
 if not exist D:\ISO\san\windows\licensed\datacenter_san mkdir D:\ISO\san\windows\licensed\datacenter_san
 if not exist D:\ISO\san\windows\licensed\datacenter_san\win2008r2sp1_datacenter_en mkdir D:\ISO\san\windows\licensed\datacenter_san\win2008r2sp1_datacenter_en
