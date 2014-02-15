@@ -31,6 +31,8 @@ exit /b
 :VIM_DONE
 
 call cinst msysgit
+set PATH=%PATH%;C:\Program Files (x86)\Git\cmd
+
 call cinst firefox
 
 set WORKDRIVE=C:
