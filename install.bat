@@ -1,8 +1,24 @@
-powershell -NoProfile -ExecutionPolicy unrestricted -Command "((new-object net.webclient).DownloadFile('https://raw.github.com/StefanScherer/dotfiles-windows/install/install.bat', '%Temp%\install.bat'))"
-%Temp%\install.bat
+@echo off
+echo Ensuring .NET 4.0 is installed
+@powershell -NoProfile -ExecutionPolicy unrestricted -Command "iex ((new-object net.webclient).DownloadString('https://raw.github.com/StefanScherer/arduino-ide/install/InstallNet4.ps1'))"
+echo Installing Chocolatey
+@powershell -NoProfile -ExecutionPolicy unrestricted -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%systemdrive%\chocolatey\bin
+
+where cinst
+if ERRORLEVEL 1 goto set_chocolatey
+goto inst
+:set_chocolatey
+set ChocolateyInstall=%SystemDrive%\Chocolatey
+set PATH=%PATH%;%ChocolateyInstall%\bin
+:inst
+
+call cinst virtualbox
+call cinst vagrant
+set PATH=%PATH%;%ProgramFiles%\Oracle\VirtualBox
+set PATH=%PATH%;%SystemDrive%\hashicorp\vagrant\bin
+cd /D %USERPROFILE%\Documents
 
 call cinst curl
-call cinst vagrant
 call cinst 7zip.commandline 
 call cinst vim
 call cinst msysgit
@@ -38,7 +54,7 @@ exit /b
 rem Install VirtualBox 4.3.6
 if not exist "%USERPROFILE%\.VirtualBox\VirtualBox.xml" (
   mkdir "%USERPROFILE%\.VirtualBox"
-  wget --no-check-certificate https://github.com/StefanScherer/basebox-slave/raw/master/VirtualBox.xml -O "%USERPROFILE%\.VirtualBox\VirtualBox.xml"
+  call curl -L -k https://github.com/StefanScherer/basebox-slave/raw/master/VirtualBox.xml -O "%USERPROFILE%\.VirtualBox\VirtualBox.xml"
 )
 call cinst virtualbox
 if not exist D:\VirtualBox mkdir D:\VirtualBox
@@ -61,22 +77,6 @@ rem wget http://mirrors.jenkins-ci.org/windows/latest -O %TEMP%\jenkins.zip
 rem cd /D %TEMP%
 rem unzip jenkins.zip
 rem setup.exe -s
-
-rem Install git for Windows
-if exist "C:\Program Files (x86)\Git\bin" goto GIT_INSTALLED
-dir "C:\Program Files (x86)\Git\bin
-wget --no-check-certificate https://msysgit.googlecode.com/files/Git-1.8.5.2-preview20131230.exe -O %TEMP%\gitsetup.exe
-%TEMP%\gitsetup.exe /VERYSILENT
-:GIT_INSTALLED
-where git
-if ERRORLEVEL 1 call :addGitToUserPath
-goto GIT_DONE
-:addGitToUserPath
-for /F "tokens=2* delims= " %%f IN ('reg query "HKCU\Environment" /v Path ^| findstr /i path') do set OLD_USER_PATH=%%g
-reg add HKCU\Environment /v Path /d "%OLD_USER_PATH%;C:\Program Files (x86)\Git\bin" /f
-set PATH=%PATH%;C:\Program Files (x86)\Git\bin
-exit /b
-:GIT_DONE
 
 if not exist D:\GitHub mkdir D:\GitHub
 cd /D D:\GitHub
