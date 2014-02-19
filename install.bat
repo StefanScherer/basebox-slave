@@ -149,6 +149,10 @@ set PATH=%PATH%;c:\Program Files (x86)\VMware\VMware Workstation\ovftool
 exit /b
 :OVFTOOL_DONE
 
+rem install addtime to measure time
+call cinst strawberryperl
+set PATH=%PATH%;c:\strawberry\perl\bin
+wget --no-check-certificate -O c:\chocolatey\bin\addtime.bat https://github.com/StefanScherer/dotfiles-windows/raw/master/bin/addtime.bat
 
 call cinst javaruntime
 if not exist %WORKDRIVE%\jenkins mkdir %WORKDRIVE%\jenkins
@@ -162,4 +166,11 @@ net localgroup Administrators swarmclient /add
 rem Due to problems with UDP broadcast, use the -master switch at the moment
 rem Schedule start of swarm client at start of the machine (after next reboot)
 schtasks /CREATE /SC ONSTART /RU swarmclient /RP K8934jASD,x9 /TN JenkinsSwarmClient /TR "java.exe -jar %WORKDRIVE%\swarmclient\swarm-client.jar -master http://%jenkinshost% -labels packer -fsroot %WORKDRIVE%\jenkins"
+
+
+cd %WORKDRIVE%\GitHub\packer-windows
+vagrant --version
+packer --version
+vboxmanage --version
+ovftool -version
 
