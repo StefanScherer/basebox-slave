@@ -117,30 +117,10 @@ if not exist basebox-slave (
   cd ..
 )
 
-echo Copy ISO files...
-if not exist D:\ISO\san\windows\licensed\datacenter_san mkdir D:\ISO\san\windows\licensed\datacenter_san
-if not exist D:\ISO\san\windows\licensed\datacenter_san\win2008r2sp1_datacenter_en mkdir D:\ISO\san\windows\licensed\datacenter_san\win2008r2sp1_datacenter_en
-if not exist D:\ISO\san\windows\licensed\datacenter_san\win2008r2sp1_datacenter_en\SW_DVD5_Windows_Svr_DC_EE_SE_Web_2008_R2_64Bit_English_w_SP1_MLF_X17-22580.ISO (
-  copy \\adminlin01\iso\windows\licensed\datacenter_san\win2008r2sp1_datacenter_en\SW_DVD5_Windows_Svr_DC_EE_SE_Web_2008_R2_64Bit_English_w_SP1_MLF_X17-22580.ISO D:\ISO\san\windows\licensed\datacenter_san\win2008r2sp1_datacenter_en
-)
-
-if not exist D:\ISO\san\windows\licensed\datacenter_san\win2012_datacenter_en mkdir D:\ISO\san\windows\licensed\datacenter_san\win2012_datacenter_en
-if not exist D:\ISO\san\windows\licensed\datacenter_san\win2012_datacenter_en\SW_DVD5_Win_Svr_Std_and_DataCtr_2012_64Bit_English_Core_MLF_X18-27588.ISO (
-  copy \\adminlin01\iso\windows\licensed\datacenter_san\win2012_datacenter_en\SW_DVD5_Win_Svr_Std_and_DataCtr_2012_64Bit_English_Core_MLF_X18-27588.ISO D:\ISO\san\windows\licensed\datacenter_san\win2012_datacenter_en
-)
-
-if not exist D:\ISO\san\windows\licensed\datacenter_san\win2012r2_datacenter_en mkdir D:\ISO\san\windows\licensed\datacenter_san\win2012r2_datacenter_en
-if not exist D:\ISO\san\windows\licensed\datacenter_san\win2012r2_datacenter_en\SW_DVD9_Windows_Svr_Std_and_DataCtr_2012_R2_64Bit_English_-2_Core_MLF_X19-31419.ISO (
-  copy \\adminlin01\iso\windows\licensed\datacenter_san\win2012r2_datacenter_en\SW_DVD9_Windows_Svr_Std_and_DataCtr_2012_R2_64Bit_English_-2_Core_MLF_X19-31419.ISO D:\ISO\san\windows\licensed\datacenter_san\win2012r2_datacenter_en
- )
-
 echo Install VMware PowerCLI...
 if not exist "c:\Program Files (x86)\VMware\VMware VIX" (
   if not exist "%TEMP%\VMware-PowerCLI-5.5.0-1295336.exe" (
-    copy "\\adminlin01\iso\vmware\powercli\VMware-PowerCLI-5.5.0-1295336.exe" %TEMP%\
-  )
-  if not exist "%TEMP%\VMware-PowerCLI-5.5.0-1295336.exe" (
-    copy "\\roettfs1\scratch\keep\VMware\VMware-PowerCLI-5.5.0-1295336.exe" %TEMP%\
+    call wget -O "%TEMP%\VMware-PowerCLI-5.5.0-1295336.exe" http://roecloudsrv001/vmware/powercli/VMware-PowerCLI-5.5.0-1295336.exe
   )
   powershell -Command "Import-Module ServerManager; Add-WindowsFeature NET-Framework-Features"
   "%TEMP%\VMware-PowerCLI-5.5.0-1295336.exe" /s /v/qn
@@ -151,7 +131,7 @@ echo Install VMware Workstation...
 rem Install VMware Workstation
 if not exist "c:\Program Files (x86)\VMware\VMware Workstation" (
   if not exist "%TEMP%\VMware-workstation-full-10.0.0-1295980.exe" (
-    copy \\adminlin01\iso\vmware\workstation10\VMware-workstation-full-10.0.0-1295980.exe %TEMP%\
+    call wget -O "%TEMP%\VMware-workstation-full-10.0.0-1295980.exe" http://roecloudsrv001/vmware/workstation10/VMware-workstation-full-10.0.0-1295980.exe
   )
   rem "%TEMP%\VMware-workstation-full-10.0.0-1295980.exe" /s /nsr /v EULAS_AGREED=1 SERIALNUMBER="xxxxx-xxxxx-xxxxx-xxxxx-xxxxx"
   "%TEMP%\VMware-workstation-full-10.0.0-1295980.exe" /s /nsr /v EULAS_AGREED=1 
