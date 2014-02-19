@@ -35,7 +35,7 @@ set PATH=%PATH%;C:\Program Files (x86)\Git\cmd
 
 call cinst firefox
 
-set WORKDRIVE=C:
+set WORKDRIVE=D:
 
 rem Install packer 0.5.1
 if not exist %WORKDRIVE%\Packer\cache mkdir %WORKDRIVE%\Packer\cache

@@ -5,7 +5,7 @@ This slave is used to build 64bit baseboxes as well.
 
 ## Environment
 An vApp with a Windows 2012 R2 will be fine.
-The VM should have a second hard drive D: with plenty of disk space to build boxes on it.
+   * The VM should have a second hard drive D: with plenty of disk space to build boxes on it.
 
 ## Directories
 * PACKER_CACHE_DIR D:\Packer\cache
