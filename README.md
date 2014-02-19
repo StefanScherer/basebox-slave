@@ -9,6 +9,8 @@ An vApp with a Windows 2012 R2 will be fine.
 * The VM must have a **second hard drive D: with plenty of disk space** to build boxes on it. Go into properties of VM and open the hardware tab and add a second hard disk with 64 GByte.
 * Boot the VM, open the Computer Management, remove or move the DVD drive to another drive label than D:, initialize second hard disk as drive D:
 
+![VM hardware settings](pics/vm-hardware-settings.png)
+
 ## Directories
 * PACKER_CACHE_DIR D:\Packer\cache
 * PACKER_TEMP_DIR D:\Packer\temp
