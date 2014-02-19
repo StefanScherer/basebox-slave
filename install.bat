@@ -178,6 +178,7 @@ call wget -O swarm-client.jar http://maven.jenkins-ci.org/content/repositories/r
 
 set jenkinshost=10.115.4.8
 net user swarmclient K8934jASD,x9  /ADD
+net localgroup Administrators swarmclient /add
 rem Due to problems with UDP broadcast, use the -master switch at the moment
 rem Schedule start of swarm client at start of the machine (after next reboot)
 schtasks /CREATE /SC ONSTART /RU swarmclient /RP K8934jASD,x9 /TN JenkinsSwarmClient /TR "
