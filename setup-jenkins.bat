@@ -24,7 +24,7 @@ cd /D C:\jenkins
 call wget http://%jenkinshost%/jnlpJars/jenkins-cli.jar
 
 
-# force read update list
+rem force read update list
 call wget -O default.js http://updates.jenkins-ci.org/update-center.json
 call cinst curl
 call cinst devbox-sed
@@ -34,5 +34,5 @@ java -jar jenkins-cli.jar -s http://%jenkinshost% install-plugin git --username 
 java -jar jenkins-cli.jar -s http://%jenkinshost% install-plugin checkstyle --username %jenkinsuser% --password %jenkinspass% 
 java -jar jenkins-cli.jar -s http://%jenkinshost% install-plugin swarm --username %jenkinsuser% --password %jenkinspass% 
 
-# restart jenkins to activate all plugins
+rem restart jenkins to activate all plugins
 java -jar jenkins-cli.jar -s http://%jenkinshost%/ safe-restart --username %jenkinsuser% --password %jenkinspass% 

@@ -177,8 +177,9 @@ cd /D %WORKDRIVE%\swarmclient
 call wget -O swarm-client.jar http://maven.jenkins-ci.org/content/repositories/releases/org/jenkins-ci/plugins/swarm-client/1.8/swarm-client-1.8-jar-with-dependencies.jar
 
 set jenkinshost=10.115.4.8
-net user vagrant vagrant /ADD
+net user swarmclient K8934jASD,x9  /ADD
 rem Due to problems with UDP broadcast, use the -master switch at the moment
 rem Schedule start of swarm client at start of the machine (after next reboot)
-schtasks /CREATE /SC ONSTART /RU vagrant /RP vagrant /TN JenkinsSwarmClient /TR "java.exe -jar %WORKDRIVE%\swarmclient\swarm-client.jar -master http://%jenkinshost% -labels packer -fsroot %WORKDRIVE%\jenkins"
+schtasks /CREATE /SC ONSTART /RU swarmclient /RP K8934jASD,x9 /TN JenkinsSwarmClient /TR "
+java.exe -jar %WORKDRIVE%\swarmclient\swarm-client.jar -master http://%jenkinshost% -labels packer -fsroot %WORKDRIVE%\jenkins"
 
