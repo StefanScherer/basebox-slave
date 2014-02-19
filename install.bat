@@ -123,7 +123,7 @@ if not exist "c:\Program Files (x86)\VMware\VMware VIX" (
     call wget -O "%TEMP%\VMware-PowerCLI-5.5.0-1295336.exe" http://roecloudsrv001/vmware/powercli/VMware-PowerCLI-5.5.0-1295336.exe
   )
   powershell -Command "Import-Module ServerManager; Add-WindowsFeature NET-Framework-Features"
-  "%TEMP%\VMware-PowerCLI-5.5.0-1295336.exe" /s /v/qn
+  "%TEMP%\VMware-PowerCLI-5.5.0-1295336.exe" /s /v/qn /vADDLOCAL=ALL
   del "%TEMP%\VMware-PowerCLI-5.5.0-1295336.exe"
 )
 
