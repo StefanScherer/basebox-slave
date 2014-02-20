@@ -33,8 +33,14 @@ exit /b
 call cinst msysgit
 set PATH=%PATH%;C:\Program Files (x86)\Git\cmd
 
+rem install firefox and all plugins needed to access vCloud via browser
 call cinst firefox
 call cinst flashplayerplugin
+if not exist "%TEMP%\VMware-ClientIntegrationPlugin-5.5.0.exe" (
+call wget -O "%TEMP%\VMware-ClientIntegrationPlugin-5.5.0.exe" http://roecloudsrv001/vmware/clientintegrationplugin/VMware-ClientIntegrationPlugin-5.5.0.exe
+)
+"%TEMP%\VMware-ClientIntegrationPlugin-5.5.0.exe" /s /v/qn
+del "%TEMP%\VMware-ClientIntegrationPlugin-5.5.0.exe"
 
 set WORKDRIVE=D:
 
