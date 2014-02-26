@@ -48,7 +48,7 @@ call wget -O "%TEMP%\VMware-ClientIntegrationPlugin-5.5.0.exe" http://roecloudsr
 del "%TEMP%\VMware-ClientIntegrationPlugin-5.5.0.exe"
 
 
-rem Install packer 0.5.1
+rem Install packer 0.5.2
 if not exist %WORKDRIVE%\Packer\cache mkdir %WORKDRIVE%\Packer\cache
 setx PACKER_CACHE_DIR %WORKDRIVE%\Packer\cache
 set PACKER_CACHE_DIR=%WORKDRIVE%\Packer\cache
@@ -56,14 +56,7 @@ if not exist %WORKDRIVE%\Packer\temp mkdir %WORKDRIVE%\Packer\temp
 setx PACKER_TEMP_DIR %WORKDRIVE%\Packer\temp
 set PACKER_TEMP_DIR=%WORKDRIVE%\Packer\temp
 
-rem call cinst packer
-if exist C:\hashicorp\packer\packer.exe goto PACKER_INSTALLED
-call wget --no-check-certificate https://dl.bintray.com/mitchellh/packer/0.5.1_windows_amd64.zip -O %TEMP%\0.5.1_windows_amd64.zip
-mkdir C:\hashicorp\packer
-cd /D C:\hashicorp\packer
-7z x %TEMP%\0.5.1_windows_amd64.zip
-cd /D %USERPROFILE%
-rem :PACKER_INSTALLED
+call cinst packer
 where packer
 if ERRORLEVEL 1 call :addPackerToUserPath
 goto PACKER_DONE
