@@ -1,4 +1,9 @@
-@echo off
+echo Extend drive C to maximum 
+echo select volume 2 >%TEMP%\extendC.txt
+echo extend >>%TEMP%\extendC.txt
+diskpart.exe /s %TEMP%\extendC.txt
+set WORKDRIVE=C:
+
 echo Ensuring .NET 4.0 is installed
 @powershell -NoProfile -ExecutionPolicy unrestricted -Command "iex ((new-object net.webclient).DownloadString('https://raw.github.com/StefanScherer/arduino-ide/install/InstallNet4.ps1'))"
 echo Installing Chocolatey
@@ -42,7 +47,6 @@ call wget -O "%TEMP%\VMware-ClientIntegrationPlugin-5.5.0.exe" http://roecloudsr
 "%TEMP%\VMware-ClientIntegrationPlugin-5.5.0.exe" /s /v/qn
 del "%TEMP%\VMware-ClientIntegrationPlugin-5.5.0.exe"
 
-set WORKDRIVE=D:
 
 rem Install packer 0.5.1
 if not exist %WORKDRIVE%\Packer\cache mkdir %WORKDRIVE%\Packer\cache
