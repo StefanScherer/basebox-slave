@@ -9,11 +9,11 @@ echo Ensuring .NET 4.0 is installed
 echo Installing Chocolatey
 @powershell -NoProfile -ExecutionPolicy unrestricted -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%systemdrive%\chocolatey\bin
 
+if "%ChocolateyInstall%x"=="x" set ChocolateyInstall=%SystemDrive%\Chocolatey
 where cinst
 if ERRORLEVEL 1 goto set_chocolatey
 goto inst
 :set_chocolatey
-set ChocolateyInstall=%SystemDrive%\Chocolatey
 set PATH=%PATH%;%ChocolateyInstall%\bin
 :inst
 
@@ -67,6 +67,8 @@ set PATH=%PATH%;C:\hashicorp\packer
 exit /b
 :PACKER_DONE
 
+echo Skipping VirtualBox installation
+goto VIRTUALBOX_DONE
 
 rem Install VirtualBox 4.3.6
 if not exist "%USERPROFILE%\.VirtualBox\VirtualBox.xml" (
