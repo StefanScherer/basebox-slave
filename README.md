@@ -22,7 +22,9 @@ To install it in the preinstalled machine, you must have at least powershell ins
 Open up a command prompt by typing **Windows+R** and enter **cmd** and press enter.
 Then enter following command:
 
-    powershell -NoProfile -ExecutionPolicy unrestricted -Command "((new-object net.webclient).DownloadFile(' https://raw.github.com/StefanScherer/basebox-slave/master/install.bat', '%Temp%\install.bat'))" && %Temp%\install.bat
+```bash
+powershell -NoProfile -ExecutionPolicy unrestricted -Command "((new-object net.webclient).DownloadFile(' https://raw.github.com/StefanScherer/basebox-slave/master/install.bat', '%Temp%\install.bat'))" && %Temp%\install.bat
+```
 
 Afterwards you have VirtualBox 4.3.6 and Packer 0.5.1 installed and in PATH.
 
