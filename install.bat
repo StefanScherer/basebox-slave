@@ -135,9 +135,9 @@ if not exist "c:\Program Files (x86)\VMware\VMware VIX" (
 
 echo Install VMware Workstation...
 rem Install VMware Workstation
-if not exist "%USERPROFILE%\AppData\Local\VMWare\workstationUploadedData.log" (
-  if not exist "%USERPROFILE%\AppData\Local\VMWare" mkdir "%USERPROFILE%\AppData\Local\VMWare"
-  call wget --no-check-certificate -O "%USERPROFILE%\AppData\Local\VMWare\workstationUploadedData.log" https://raw.github.com/StefanScherer/basebox-slave/master/workstationUploadedData.log
+if not exist "%USERPROFILE%\AppData\Roaming\VMWare\preferences.ini" (
+  if not exist "%USERPROFILE%\AppData\Roaming\VMWare" mkdir "%USERPROFILE%\AppData\Roaming\VMWare"
+  call wget --no-check-certificate -O "%USERPROFILE%\AppData\Roaming\VMWare\preferences.ini" https://raw.github.com/StefanScherer/basebox-slave/master/preferences.ini
 )
 if not exist "c:\Program Files (x86)\VMware\VMware Workstation" (
   if not exist "%TEMP%\VMware-workstation-full-10.0.0-1295980.exe" (
