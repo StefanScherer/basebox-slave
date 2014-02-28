@@ -135,6 +135,10 @@ if not exist "c:\Program Files (x86)\VMware\VMware VIX" (
 
 echo Install VMware Workstation...
 rem Install VMware Workstation
+if not exist "%USERPROFILE%\AppData\Local\VMWare\workstationUploadedData.log" (
+  if not exist "%USERPROFILE%\AppData\Local\VMWare" mkdir "%USERPROFILE%\AppData\Local\VMWare"
+  call wget --no-check-certificate -O "%USERPROFILE%\AppData\Local\VMWare\workstationUploadedData.log" https://raw.github.com/StefanScherer/basebox-slave/master/workstationUploadedData.log
+)
 if not exist "c:\Program Files (x86)\VMware\VMware Workstation" (
   if not exist "%TEMP%\VMware-workstation-full-10.0.0-1295980.exe" (
     call wget -O "%TEMP%\VMware-workstation-full-10.0.0-1295980.exe" http://roecloudsrv001/vmware/workstation10/VMware-workstation-full-10.0.0-1295980.exe
@@ -158,7 +162,7 @@ exit /b
 rem install addtime to measure time
 call cinst strawberryperl
 set PATH=%PATH%;c:\strawberry\perl\bin
-wget --no-check-certificate -O c:\chocolatey\bin\addtime.bat https://github.com/StefanScherer/dotfiles-windows/raw/master/bin/addtime.bat
+call wget --no-check-certificate -O c:\chocolatey\bin\addtime.bat https://github.com/StefanScherer/dotfiles-windows/raw/master/bin/addtime.bat
 
 call cinst javaruntime
 if not exist %WORKDRIVE%\jenkins mkdir %WORKDRIVE%\jenkins
