@@ -1,27 +1,25 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-win2012r2_vm_box_url = "../../../packer-windows/windows_2012_r2_vmware.box"
-
-nodes = [
-  { :hostname => "dc",  :box => "windows_2012_r2", :box_url => win2012r2_vm_box_url }
-]
-
 Vagrant.configure("2") do |config|
 
-  nodes.each do |node|
-    config.vm.define node[:hostname] do |node_config|
-      node_config.vm.box = node[:box]
-      node_config.vm.hostname = node[:hostname]
-      node_config.vm.box_url = node[:box_url]
-      node_config.windows.set_work_network = true
-      node_config.vm.guest = :windows 
-      node_config.vm.network :forwarded_port, guest: 5985, host: 5985, id: "winrm", auto_correct: true
-      # node_config.vm.provision :puppet do |puppet|
-      #   puppet.manifests_path = 'puppet/manifests'
-      #   puppet.manifest_file = 'site.pp'
-      #   puppet.module_path = 'puppet/modules'
-      # end
+  config.vm.define :"dc" do |dc|
+    dc.vm.box = "windows_2008_r2"
+    dc.vm.hostname = "dc"
+
+    dc.windows.set_work_network = true
+    dc.vm.guest = :windows 
+    dc.vm.network :forwarded_port, guest: 5985, host: 5985, id: "winrm", auto_correct: true
+
+    dc.vm.provision "shell", path: "scripts/provision.ps1"
+
+    dc.vm.provider :virtualbox do |vb, override|
+      vb.gui = true
+      vb.customize ["modifyvm", :id, "--memory", 768]
+      vb.customize ["modifyvm", :id, "--cpus", 1]
+      vb.customize ["modifyvm", :id, "--vram", "32"]
+      vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
+      vb.customize ["setextradata", "global", "GUI/SuppressMessages", "all" ]
     end
   end
 end
