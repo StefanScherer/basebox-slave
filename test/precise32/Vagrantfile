@@ -4,7 +4,8 @@
 precise32_vm_box_url = "http://vagrant.tsugliani.fr/precise32.box"
 
 nodes = [
-  { :hostname => "web-vm",  :box => "precise32", :box_url => precise32_vm_box_url }
+  { :hostname => "web-vm",  :box => "precise32", :box_url => precise32_vm_box_url },
+  { :hostname => "ssh-vm",  :box => "precise32", :box_url => precise32_vm_box_url }
 ]
 
 Vagrant.configure("2") do |config|

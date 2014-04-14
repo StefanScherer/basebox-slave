@@ -4,7 +4,7 @@
 win2012r2_vm_box_url = "../../../packer-windows/windows_2012_r2_vmware.box"
 
 nodes = [
-  { :hostname => "web-vm",  :box => "win2012r2", :box_url => win2012r2_vm_box_url }
+  { :hostname => "dc",  :box => "windows_2012_r2", :box_url => win2012r2_vm_box_url }
 ]
 
 Vagrant.configure("2") do |config|
@@ -14,7 +14,9 @@ Vagrant.configure("2") do |config|
       node_config.vm.box = node[:box]
       node_config.vm.hostname = node[:hostname]
       node_config.vm.box_url = node[:box_url]
-      node_config.vm.network :forwarded_port, guest: 80, host: 8080, auto_correct: true
+      node_config.windows.set_work_network = true
+      node_config.vm.guest = :windows 
+      node_config.vm.network :forwarded_port, guest: 5985, host: 5985, id: "winrm", auto_correct: true
       # node_config.vm.provision :puppet do |puppet|
       #   puppet.manifests_path = 'puppet/manifests'
       #   puppet.manifest_file = 'site.pp'
