@@ -1,27 +1,53 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-precise32_vm_box_url = "http://vagrant.tsugliani.fr/precise32.box"
-
-nodes = [
-  { :hostname => "web-vm",  :box => "precise32", :box_url => precise32_vm_box_url } #,
-#  { :hostname => "ssh-vm",  :box => "precise32", :box_url => precise32_vm_box_url }
-]
-
 Vagrant.configure("2") do |config|
 
-  nodes.each do |node|
-    config.vm.define node[:hostname] do |node_config|
-      node_config.vm.box = node[:box]
-      node_config.vm.hostname = node[:hostname]
-      node_config.vm.box_url = node[:box_url]
-      node_config.vm.network :forwarded_port, guest: 80, host: 8080, auto_correct: true
-      # node_config.vm.provision :puppet do |puppet|
-      #   puppet.manifests_path = 'puppet/manifests'
-      #   puppet.manifest_file = 'site.pp'
-      #   puppet.module_path = 'puppet/modules'
-      # end
+  if Vagrant.has_plugin?("vagrant-vcloud")
+    # vCloud Director provider settings
+    config.vm.provider :vcloud do |vcloud|
+      vcloud.vapp_prefix = "multiboxes-precise32"
+      # The following settings should go into the global Vagrantfile
+      # vcloud.hostname = "https://your-vcloud-hostname"
+      # vcloud.username = "your-vcloud-username"
+      # vcloud.password = 'your-vcloud-password'
+      # vcloud.org_name = "your-org-name"
+      # vcloud.vdc_name = "your-vdc-name"
+      # vcloud.catalog_name = "Vagrant"
+      # vcloud.ip_subnet = "172.16.32.125/255.255.255.240"
+      # vcloud.vdc_network_name = "your-vdc-network-name"
+      # vcloud.vdc_edge_gateway = "your-egde-gateway"
+      # vcloud.vdc_edge_gateway_ip = "your-edge-gateway-ip"
     end
   end
+
+  # global VirtualBox settings for all boxes
+  config.vm.provider :virtualbox do |vb, override|
+    vb.gui = true
+    vb.customize ["modifyvm", :id, "--memory", 768]
+    vb.customize ["modifyvm", :id, "--cpus", 1]
+    vb.customize ["modifyvm", :id, "--vram", "32"]
+    vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
+    vb.customize ["setextradata", "global", "GUI/SuppressMessages", "all" ]
+  end
+
+  # box 1: web-vm
+  config.vm.define :"web-vm" do |web|
+    web.vm.box = "precise32"
+    web.vm.box_url = "http://vagrant.tsugliani.fr/precise32.box"
+    web.vm.hostname = "web-vm"
+    web.vm.provision "shell", path: "scripts/provision.sh"
+    web.vm.network :forwarded_port, guest: 80, host: 8080, auto_correct: true
+  end
+
+  # box 2: db-vm
+  config.vm.define :"db-vm" do |db|
+    db.vm.box = "precise32"
+    db.vm.box_url = "http://vagrant.tsugliani.fr/precise32.box"
+    db.vm.hostname = "db-vm"
+    db.vm.provision "shell", path: "scripts/provision.sh"
+    db.vm.network :forwarded_port, guest: 5432, host: 5432, auto_correct: true
+  end
+
 end
 

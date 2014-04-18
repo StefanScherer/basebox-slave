@@ -1,8 +1,8 @@
 # precise32 box in vCloud
-This is only a the for the vagrant-vcloud plugin
+This is only a the for the vagrant-vcloud plugin. This will build two VM's in a vApp based on precise32 baseboxes.
 
 ## Installation
-1. Install vagrant 1.5.2 on windows
+1. Install Vagrant 1.5.3 on Windows
 2. Open a CMD shell
 3. Install vagrant-vcloud plugin with `vagrant plugin install vagrant-vcloud`
 
@@ -17,12 +17,12 @@ It should show something like this
 
 ```
 C:\Users\vagrant\code\basebox-slave\test\precise32>vagrant --version
-Vagrant 1.5.2
+Vagrant 1.5.3
 
 C:\Users\vagrant\code\basebox-slave\test\precise32>vagrant plugin list
 vagrant-login (1.0.1, system)
 vagrant-share (1.0.1, system)
-vagrant-vcloud (0.2.1)
+vagrant-vcloud (0.2.2)
 ```
 
 
@@ -45,17 +45,16 @@ Vagrant.configure("2") do |config|
     # vCloud Director provider settings
     config.vm.provider :vcloud do |vcloud|
       vcloud.hostname = "https://roecloud001"
-      vcloud.username = "your_user_name"
-      vcloud.password = "XXXXXXX"
+      vcloud.username = "your-vcloud-username"
+      vcloud.password = "your-vcloud-password"
 
       vcloud.org_name = "SS"
       vcloud.vdc_name = "SS-VDC"
 
       vcloud.catalog_name = "Vagrant"
-      vcloud.ip_subnet = "10.115.4.0/255.255.255.0"
+      vcloud.ip_subnet = "172.16.32.125/255.255.255.240"
 
       vcloud.vdc_network_name = "SS-INTERNAL"
-
       vcloud.vdc_edge_gateway = "SS-EDGE"
       vcloud.vdc_edge_gateway_ip = "10.100.52.4"
     end
@@ -66,7 +65,7 @@ end
 
 
 ## Run
-To start the example `precise32` box, just enter
+To start the example `multiboxes-precise32` vApp, just enter
 
 ```
 vagrant up --provider=vcloud
@@ -95,7 +94,21 @@ Bringing machine 'web-vm' up with 'vcloud' provider...
 
 
 ## Debugging
-If you encounter problems, use the vagrant debug logging by setting the environment `VAGRANT_LOG=debug`
+If you encounter problems, just use the `vagrantd` CMD script instead of the `vagrant` command. It will
+do some convenient steps as stdout and stderr redirection into a log file, numerate the log files if
+you want to play through more steps and debug all these steps afterwards.
+
+Example:
+
+```
+vagrantd up --provider=vcloud
+vagrantd halt
+vagrantd up
+vagrantd destroy -f
+```
+
+### Manual debugging
+To turn on debug logging, you always can use the environment `VAGRANT_LOG=debug`
 
 Example:
 
