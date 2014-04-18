@@ -5,6 +5,7 @@ This is only a the for the vagrant-vcloud plugin. This will build two VM's in a 
 1. Install Vagrant 1.5.3 on Windows
 2. Open a CMD shell
 3. Install vagrant-vcloud plugin with `vagrant plugin install vagrant-vcloud`
+3. Install vagrant-windows plugin with `vagrant plugin install vagrant-windows`
 
 Check your settings with
 
@@ -23,6 +24,7 @@ C:\Users\vagrant\code\basebox-slave\test\precise32>vagrant plugin list
 vagrant-login (1.0.1, system)
 vagrant-share (1.0.1, system)
 vagrant-vcloud (0.2.2)
+vagrant-windows (1.6.0)
 ```
 
 
@@ -107,3 +109,27 @@ set VAGRANT_LOG=debug
 vagrant up --provider=vcloud
 ```
 
+## TODO
+### Port forwarding collission
+There is a problem with the port forwarding. It seems that the vApp NAT rules collide
+
+```
+vagrant up --provider=vcloud --no-provision
+
+Bringing machine 'dc' up with 'vcloud' provider...
+Bringing machine 'web' up with 'vcloud' provider...
+==> dc: Building vApp...
+==> dc: vApp multiboxes-windows-stefan.scherer-roenb014-9a76f9bb successfully created.
+==> dc: Booting VM...
+==> dc: Forwarding Ports: VM port 5985 -> vShield Edge port 5985
+==> dc: Forwarding Ports: VM port 22 -> vShield Edge port 2222
+==> dc: Warning! Folder sync disabled because the rsync binary is missing.
+==> dc: Make sure rsync is installed and the binary can be found in the PATH.
+==> web: Adding VM to existing vApp...
+==> web: Booting VM...
+==> web: Forwarding Ports: VM port 5985 -> vShield Edge port 5985
+==> web: Forwarding Ports: VM port 80 -> vShield Edge port 8080
+==> web: Forwarding Ports: VM port 22 -> vShield Edge port 2222
+==> web: Warning! Folder sync disabled because the rsync binary is missing.
+==> web: Make sure rsync is installed and the binary can be found in the PATH.
+```
