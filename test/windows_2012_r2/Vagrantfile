@@ -1,0 +1,59 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+  if Vagrant.has_plugin?("vagrant-vcloud")
+    # vCloud Director provider settings
+    config.vm.provider :vcloud do |vcloud|
+      vcloud.vapp_prefix = "multiboxes-windows"
+      # The following settings should go into the global Vagrantfile
+      # vcloud.hostname = "https://your-vcloud-hostname"
+      # vcloud.username = "your-vcloud-username"
+      # vcloud.password = 'your-vcloud-password'
+      # vcloud.org_name = "your-org-name"
+      # vcloud.vdc_name = "your-vdc-name"
+      # vcloud.catalog_name = "Vagrant"
+      # vcloud.ip_subnet = "172.16.32.125/255.255.255.240"
+      # vcloud.vdc_network_name = "your-vdc-network-name"
+      # vcloud.vdc_edge_gateway = "your-egde-gateway"
+      # vcloud.vdc_edge_gateway_ip = "your-edge-gateway-ip"
+    end
+  end
+
+  # global VirtualBox settings for all boxes
+  config.vm.provider :virtualbox do |vb, override|
+    vb.gui = true
+    vb.customize ["modifyvm", :id, "--memory", 768]
+    vb.customize ["modifyvm", :id, "--cpus", 1]
+    vb.customize ["modifyvm", :id, "--vram", "32"]
+    vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
+    vb.customize ["setextradata", "global", "GUI/SuppressMessages", "all" ]
+  end
+
+  # box 1: domain controller `dc`
+  config.vm.define :"dc" do |dc|
+    dc.vm.box = "windows_2012_r2"
+    dc.vm.hostname = "dc"
+
+    dc.windows.set_work_network = true
+    dc.vm.guest = :windows 
+    dc.vm.network :forwarded_port, guest: 5985, host: 5985, id: "winrm", auto_correct: true
+
+    dc.vm.provision "shell", path: "scripts/provision.ps1"
+  end
+
+  # box 2: web server `web`
+  config.vm.define :"web" do |web|
+    web.vm.box = "windows_2012_r2"
+    web.vm.hostname = "web"
+
+    web.windows.set_work_network = true
+    web.vm.guest = :windows 
+    web.vm.network :forwarded_port, guest: 5985, host: 5985, id: "winrm", auto_correct: true
+    web.vm.network :forwarded_port, guest: 80, host: 8080, auto_correct: true
+
+    web.vm.provision "shell", path: "scripts/provision.ps1"
+  end
+end
+
