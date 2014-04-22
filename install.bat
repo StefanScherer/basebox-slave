@@ -125,12 +125,12 @@ if not exist basebox-slave (
 
 echo Install VMware PowerCLI...
 if not exist "c:\Program Files (x86)\VMware\VMware VIX" (
-  if not exist "%TEMP%\VMware-PowerCLI-5.5.0-1295336.exe" (
-    call wget -O "%TEMP%\VMware-PowerCLI-5.5.0-1295336.exe" http://roecloudsrv001/vmware/powercli/VMware-PowerCLI-5.5.0-1295336.exe
+  if not exist "%TEMP%\VMware-PowerCLI-5.5.0-1671586.exe" (
+    call wget -O "%TEMP%\VMware-PowerCLI-5.5.0-1671586.exe" http://roecloudsrv001/vmware/powercli/VMware-PowerCLI-5.5.0-1671586.exe
   )
   powershell -Command "Import-Module ServerManager; Add-WindowsFeature NET-Framework-Features"
-  "%TEMP%\VMware-PowerCLI-5.5.0-1295336.exe" /s /v/qn /vADDLOCAL=ALL
-  del "%TEMP%\VMware-PowerCLI-5.5.0-1295336.exe"
+  "%TEMP%\VMware-PowerCLI-5.5.0-1671586.exe" /s /v/qn /vADDLOCAL=ALL
+  del "%TEMP%\VMware-PowerCLI-5.5.0-1671586.exe"
 )
 
 echo Install VMware Workstation...
