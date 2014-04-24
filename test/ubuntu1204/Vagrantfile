@@ -1,18 +1,18 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-precise32_vm_box_url = "c:/vagrant/resources/ubuntu1404-provisionerless.box"
+precise32_vm_box_url = "c:/vagrant/resources/ubuntu1204-provisionerless.box"
 
 nodes = [
-  { :hostname => "web-vm",  :box => "ubuntu1404", :box_url => precise32_vm_box_url } ,
-  { :hostname => "ssh-vm",  :box => "ubuntu1404", :box_url => precise32_vm_box_url }
+  { :hostname => "web-vm",  :box => "ubuntu1204", :box_url => precise32_vm_box_url } ,
+  { :hostname => "ssh-vm",  :box => "ubuntu1204", :box_url => precise32_vm_box_url }
 ]
 
 Vagrant.configure("2") do |config|
 
   if Vagrant.has_plugin?("vagrant-vcloud")
     config.vm.provider :vcloud do |vcloud|
-      vcloud.vapp_prefix = "ubuntu1404"
+      vcloud.vapp_prefix = "ubuntu1204"
     end
   end
 
