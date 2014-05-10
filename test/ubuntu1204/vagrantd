@@ -1,9 +1,15 @@
 #!/usr/bin/perl -w
 
-# this script runs the previous script and catches both 
-# child's stdout and stderr.  It prints progress information
-# as it goes.  It also prints the data it gets to the 
-# corresponding file.
+# this script runs vagrant in debug mode, writes all debug info into a 
+# numbered log file, prints normal output on console with a relative
+# timestamp to measure time. You don't have to append --debug or set
+# the VAGRANT_LOG environment variable.
+
+# Usage: vagrantd any command you linke
+
+# creates a counter.txt file in current directory to save the number
+# creates number-vagrant-any-command-you-like.log file for each
+# time you called with this script.
 
 # derived from http://www.perlmonks.org/?node_id=150748 by abstracts on Mar 15, 2002 at 01:59 UTC
 
