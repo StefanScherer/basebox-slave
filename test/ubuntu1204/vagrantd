@@ -5,11 +5,13 @@
 # timestamp to measure time. You don't have to append --debug or set
 # the VAGRANT_LOG environment variable.
 
-# Usage: vagrantd any command you linke
+# Usage: vagrantd any command you like
 
-# creates a counter.txt file in current directory to save the number
-# creates number-vagrant-any-command-you-like.log file for each
-# time you called with this script.
+# 1. creates a counter.txt file in current directory to save the number
+# 2. creates number-vagrant-any-command-you-like.log file for each
+#    time you called with this script.
+
+# Notice: This script could be renamed to use it do 'debug' other programs as well.
 
 # derived from http://www.perlmonks.org/?node_id=150748 by abstracts on Mar 15, 2002 at 01:59 UTC
 
@@ -19,11 +21,11 @@ use warnings;
 use IPC::Open3;
 use IO::Select;
 use Symbol;
-use Time::HiRes qw( gettimeofday tv_interval);
+use Time::HiRes qw(gettimeofday tv_interval);
 
 my $t0 = [gettimeofday];
 my $argv0 = substr $0, 0, (length($0) - 1);
-$argv0 =~ s/\.\///; # remove ./ 
+$argv0 =~ s/^.*\///; # remove ./ or /Users/... any path 
 
 my $cmd = "$argv0 @ARGV";
 
@@ -33,7 +35,7 @@ my $logfile = sprintf "%02d-%s.log", $counter, $cmd;
 $logfile =~ s/[\s=\-]+/-/g;
 
 # make vagrant run in debug mode
-if ($cmd !~ /--debug/) {
+if ($cmd =~ /^vagrant/ && $cmd !~ /--debug/) {
     $cmd .= " --debug";
 }
 
