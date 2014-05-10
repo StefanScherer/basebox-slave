@@ -3,7 +3,8 @@
 
 ENV['VAGRANT_DEFAULT_PROVIDER'] = 'vcloud'
 
-ubuntu1204_box_url = "http://roecloudsrv001/vagrant/vcloud/ubuntu1204.box"
+# ubuntu1204_box_url = "http://roecloudsrv001/vagrant/vcloud/ubuntu1204.box"
+ubuntu1204_box_url = "http://roecloudsrv001/vagrant/vcloud/fake.box"
 
 nodes = [
   { :hostname => "web-vm",  :box => "ubuntu1204", :box_url => ubuntu1204_box_url } ,
