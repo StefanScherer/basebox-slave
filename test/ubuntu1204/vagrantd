@@ -1,0 +1,67 @@
+#!/usr/bin/perl -w
+
+# this script runs the previous script and catches both 
+# child's stdout and stderr.  It prints progress information
+# as it goes.  It also prints the data it gets to the 
+# corresponding file.
+
+# derived from http://www.perlmonks.org/?node_id=150748 by abstracts on Mar 15, 2002 at 01:59 UTC
+
+use strict;
+use warnings;
+#use diagnostics;
+use IPC::Open3;
+use IO::Select;
+use Symbol;
+use Time::HiRes qw( gettimeofday tv_interval);
+
+my $t0 = [gettimeofday];
+my $argv0 = substr $0, 0, (length($0) - 1);
+$argv0 =~ s/\.\///; # remove ./ 
+
+my $cmd = "$argv0 @ARGV";
+
+my ($infh,$outfh,$errfh);
+$errfh = gensym(); # if you uncomment this line, $errfh will
+                   # never be initialized for you and you
+                   # will get a warning in the next print
+                   # line.
+my $pid;
+eval{
+   $pid = open3($infh, $outfh, $errfh, $cmd);
+};
+die $@ if $@;
+
+# now our child is running, happily printing to 
+# its stdout and stderr (our $outfh and $errfh).
+
+my $sel = new IO::Select; # create a select object
+$sel->add($outfh,$errfh); # and add the fhs
+
+# $sel->can_read will block until there is data available
+# on one or more fhs
+while(my @ready = $sel->can_read) {
+    # now we have a list of all fhs that we can read from
+    foreach my $fh (@ready) { # loop through them
+        my $line = <$fh>; # read one line from this fh
+        if(not defined $line){ # EOF on this FH
+            $sel->remove($fh); # remove it from the list
+            next;              # and go handle the next FH
+        }
+        my $elapsed = tv_interval($t0);
+        printf "%07.3f ", $elapsed;
+        if($fh == $outfh) {     # if we read from the outfh
+            print "STDOUT: $line"; # print it to OUTFH
+        } elsif($fh == $errfh) {# do the same for errfh  
+            print "STDERR: $line";
+        } else { # we read from something else?!?!
+            die "Shouldn't be here\n";
+        }
+    }
+}
+
+# go ahead and reap it
+waitpid $pid, 0; # wait for it to die
+
+my $total = tv_interval($t0);
+printf "%07.3f\n", $total;
