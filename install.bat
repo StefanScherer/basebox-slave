@@ -42,7 +42,7 @@ rem install firefox and all plugins needed to access vCloud via browser
 call cinst firefox
 call cinst flashplayerplugin
 if not exist "%TEMP%\VMware-ClientIntegrationPlugin-5.5.0.exe" (
-call wget -O "%TEMP%\VMware-ClientIntegrationPlugin-5.5.0.exe" http://roecloudsrv001/vmware/clientintegrationplugin/VMware-ClientIntegrationPlugin-5.5.0.exe
+call wget -O "%TEMP%\VMware-ClientIntegrationPlugin-5.5.0.exe" http://roecloudsrv001.sealsystems.local/vmware/clientintegrationplugin/VMware-ClientIntegrationPlugin-5.5.0.exe
 )
 "%TEMP%\VMware-ClientIntegrationPlugin-5.5.0.exe" /s /v/qn
 del "%TEMP%\VMware-ClientIntegrationPlugin-5.5.0.exe"
@@ -126,7 +126,7 @@ if not exist basebox-slave (
 echo Install VMware PowerCLI...
 if not exist "c:\Program Files (x86)\VMware\VMware VIX" (
   if not exist "%TEMP%\VMware-PowerCLI-5.5.0-1671586.exe" (
-    call wget -O "%TEMP%\VMware-PowerCLI-5.5.0-1671586.exe" http://roecloudsrv001/vmware/powercli/VMware-PowerCLI-5.5.0-1671586.exe
+    call wget -O "%TEMP%\VMware-PowerCLI-5.5.0-1671586.exe" http://roecloudsrv001.sealsystems.local/vmware/powercli/VMware-PowerCLI-5.5.0-1671586.exe
   )
   powershell -Command "Import-Module ServerManager; Add-WindowsFeature NET-Framework-Features"
   "%TEMP%\VMware-PowerCLI-5.5.0-1671586.exe" /s /v/qn /vADDLOCAL=ALL
@@ -141,7 +141,7 @@ if not exist "%USERPROFILE%\AppData\Roaming\VMWare\preferences.ini" (
 )
 if not exist "c:\Program Files (x86)\VMware\VMware Workstation" (
   if not exist "%TEMP%\VMware-workstation-full-10.0.0-1295980.exe" (
-    call wget -O "%TEMP%\VMware-workstation-full-10.0.0-1295980.exe" http://roecloudsrv001/vmware/workstation10/VMware-workstation-full-10.0.0-1295980.exe
+    call wget -O "%TEMP%\VMware-workstation-full-10.0.0-1295980.exe" http://roecloudsrv001.sealsystems.local/vmware/workstation10/VMware-workstation-full-10.0.0-1295980.exe
   )
   rem "%TEMP%\VMware-workstation-full-10.0.0-1295980.exe" /s /nsr /v EULAS_AGREED=1 SERIALNUMBER="xxxxx-xxxxx-xxxxx-xxxxx-xxxxx"
   "%TEMP%\VMware-workstation-full-10.0.0-1295980.exe" /s /nsr /v EULAS_AGREED=1 
