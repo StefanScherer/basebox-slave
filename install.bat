@@ -91,26 +91,18 @@ rem setup.exe -s
 
 if not exist %WORKDRIVE%\GitHub mkdir %WORKDRIVE%\GitHub
 cd /D %WORKDRIVE%\GitHub
-if not exist basebox-packer (
-  git clone https://github.com/StefanScherer/basebox-packer.git
+if not exist ubuntu-vm (
+  git clone -b my https://github.com/StefanScherer/ubuntu-vm.git
 ) else (
-  cd basebox-packer
+  cd ubuntu-vm
   git pull
   cd ..
 )
 
 if not exist packer-windows (
-  git clone -b san https://github.com/StefanScherer/packer-windows.git
+  git clone -b my https://github.com/StefanScherer/packer-windows.git
 ) else (
   cd packer-windows
-  git pull
-  cd ..
-)
-
-if not exist basebox-slave (
-  git clone https://github.com/StefanScherer/basebox-slave.git
-) else (
-  cd basebox-slave
   git pull
   cd ..
 )
