@@ -30,7 +30,7 @@ if ERRORLEVEL 1 call :addVimToUserPath
 goto VIM_DONE
 :addVimToUserPath
 for /F "tokens=2* delims= " %%f IN ('reg query "HKCU\Environment" /v Path ^| findstr /i path') do set OLD_USER_PATH=%%g
-reg add HKCU\Environment /v Path /d "%OLD_USER_PATH%;C:\Program Fiels (x86)\vim\vim74" /f
+reg add HKCU\Environment /v Path /d "%OLD_USER_PATH%;C:\Program Files (x86)\vim\vim74" /f
 set PATH=%PATH%;C:\Program Files (x86)\vim\vim74
 exit /b
 :VIM_DONE
