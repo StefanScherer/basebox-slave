@@ -67,20 +67,12 @@ set PATH=%PATH%;C:\hashicorp\packer
 exit /b
 :PACKER_DONE
 
-echo Skipping VirtualBox installation
-goto VIRTUALBOX_DONE
-
-rem Install VirtualBox 4.3.6
+rem Install VirtualBox 4.3
 if not exist "%USERPROFILE%\.VirtualBox\VirtualBox.xml" (
   mkdir "%USERPROFILE%\.VirtualBox"
   call wget --no-check-certificate https://github.com/StefanScherer/basebox-slave/raw/master/VirtualBox.xml -O "%USERPROFILE%\.VirtualBox\VirtualBox.xml"
 )
 call cinst virtualbox
-if not exist %WORKDRIVE%\VirtualBox mkdir %WORKDRIVE%\VirtualBox
-rem if exist "C:\program files\oracle\virtualbox\vboxmanage.exe" goto VIRTUALBOX_INSTALLED
-rem wget http://download.virtualbox.org/virtualbox/4.3.6/VirtualBox-4.3.6-91406-Win.exe -O %TEMP%\VirtualBox-4.3.6-91406-Win.exe
-rem %TEMP%\VirtualBox-4.3.6-91406-Win.exe -s
-:VIRTUALBOX_INSTALLED
 where vboxmanage
 if ERRORLEVEL 1 call :addVirtualBoxToUserPath
 goto VIRTUALBOX_DONE
