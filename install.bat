@@ -20,6 +20,7 @@ set PATH=%PATH%;%ChocolateyInstall%\bin
 call cinst vagrant
 set PATH=%PATH%;%SystemDrive%\hashicorp\vagrant\bin
 cd /D %USERPROFILE%\Documents
+vagrant plugin install vagrant-vcloud
 
 call cinst wget
 call cinst 7zip
