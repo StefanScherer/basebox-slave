@@ -17,7 +17,7 @@ Vagrant.configure("2") do |config|
   
     ci.vm.hostname = "basebox-jenkins"
     ci.vm.network :private_network, ip: "172.16.32.2" # VirtualBox
-    ci.vm.network :forwarded_port, guest: 80, host: 80
+    ci.vm.network :forwarded_port, guest: 80, host: 80, id: "http", auto_correct: true
   
     ci.vm.provision "shell", privileged: false, path: "scripts/install-jenkins-server.sh"
   

@@ -20,10 +20,12 @@ then
   mkdir /vagrant/resources
 fi
 
-# make jenkins available on port 80 in host-only network eth1
+# make jenkins available on port 80 in network eth0 in vCloud
+sudo iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8080
+# make jenkins available on port 80 in host-only network eth1 in VirtualBox
 sudo iptables -t nat -A PREROUTING -i eth1 -p tcp --dport 80 -j REDIRECT --to-port 8080
 sudo DEBIAN_FRONTEND=noninteractive apt-get install -y iptables-persistent
-# sudo iptables-save | sudo tee /etc/iptables/rules.v4
+sudo iptables-save | sudo tee /etc/iptables/rules.v4
 
 # install jenkins
 wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -
