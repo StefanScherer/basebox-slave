@@ -85,6 +85,10 @@ call :heredoc html >%TEMP%\JenkinsSwarmClient.xml && goto next2
 </Task>
 :next2
 
+rem IF Jenkins has security set, use following Arguments for scheduled task:
+rem add options -username and -password to swarm-client:
+rem       <Arguments>-jar c:\jenkins\swarm-client.jar -autoDiscoveryAddress 172.16.32.255 -username vagrant -password vagrant -labels windows -fsroot c:\jenkins</Arguments>
+
 rem Schedule start of swarm client at start of the machine (after next reboot)
 rem
 
