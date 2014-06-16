@@ -29,7 +29,10 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.BatchFile>
-      <command>packer build --only=vmware-iso windows_2008_r2_vcloud.json</command>
+      <command>if exist output-vmware-iso (
+  rmdir /S /Q output-vmware-iso
+)
+packer build --only=vmware-iso windows_2008_r2_vcloud.json</command>
     </hudson.tasks.BatchFile>
   </builders>
   <publishers/>
