@@ -29,6 +29,7 @@ echo Vagrant 1.6.3 installed
 set PATH=%PATH%;%SystemDrive%\hashicorp\vagrant\bin
 cd /D %USERPROFILE%\Documents
 vagrant plugin install vagrant-vcloud
+del %TEMP%\vagrant.msi
 
 call cinst msysgit
 set PATH=%PATH%;C:\Program Files (x86)\Git\cmd
@@ -76,7 +77,7 @@ if not exist "%USERPROFILE%\AppData\Roaming\VMWare\preferences.ini" (
 )
 if not exist "c:\Program Files (x86)\VMware\VMware Workstation" (
   if not exist "%TEMP%\VMware-workstation-full-10.0.0-1295980.exe" (
-    call wget -O "%TEMP%\VMware-workstation-full-10.0.0-1295980.exe" http://%ROECLOUDSRV001%/vmware/workstation10/VMware-workstation-full-10.0.0-1295980.exe
+    call wget --no-verbose -O "%TEMP%\VMware-workstation-full-10.0.0-1295980.exe" http://%ROECLOUDSRV001%/vmware/workstation10/VMware-workstation-full-10.0.0-1295980.exe
   )
   rem "%TEMP%\VMware-workstation-full-10.0.0-1295980.exe" /s /nsr /v EULAS_AGREED=1 SERIALNUMBER="xxxxx-xxxxx-xxxxx-xxxxx-xxxxx"
   "%TEMP%\VMware-workstation-full-10.0.0-1295980.exe" /s /nsr /v EULAS_AGREED=1 
