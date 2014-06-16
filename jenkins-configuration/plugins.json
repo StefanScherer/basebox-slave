@@ -90,5 +90,13 @@
   {
     "id": "antisamy-markup-formatter",
     "version": "1.1"
+  },
+  {
+    "id": "ansicolor",
+    "version": "0.4.0"
+  },
+  {
+    "id": "timestamper",
+    "version": "1.5.12"
   }
 ]
