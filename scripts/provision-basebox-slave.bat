@@ -19,20 +19,17 @@ set PATH=%PATH%;%ChocolateyInstall%\bin
 
 call cinst wget
 
-rem workaround until chocolatey has a vagrant 1.6 package
-rem call cinst vagrant
-echo Downloading Vagrant 1.6.3
-call wget --no-check-certificate --no-verbose https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.3.msi -O %TEMP%\vagrant.msi
-echo Installing Vagrant 1.6.3
-msiexec /i %TEMP%\vagrant.msi /quiet
-echo Vagrant 1.6.3 installed
-set PATH=%PATH%;%SystemDrive%\hashicorp\vagrant\bin
-cd /D %USERPROFILE%\Documents
-vagrant plugin install vagrant-vcloud
-del %TEMP%\vagrant.msi
-
 call cinst msysgit
+where git
+if ERRORLEVEL 1 call :addGitToUserPath
+goto GIT_DONE
+:addGitToUserPath
+for /F "tokens=2* delims= " %%f IN ('reg query "HKCU\Environment" /v Path ^| findstr /i path') do set OLD_USER_PATH=%%g
+reg add HKCU\Environment /v Path /d "%OLD_USER_PATH%;C:\Program Files (x86)\Git\cmd" /f
 set PATH=%PATH%;C:\Program Files (x86)\Git\cmd
+exit /b
+:GIT_DONE
+
 
 set ROECLOUDSRV001=roecloudsrv001.sealsystems.local
 set ROECLOUDSRV001=10.100.100.101
@@ -52,26 +49,6 @@ call cinst packer-post-processor-vagrant-vmware-ovf
 netsh advfirewall firewall add name="packer-builder-vmware-iso" dir=in program="c:\HashiCorp\packer\packer-builder-vmware-iso.exe" action=allow
 netsh advfirewall firewall add name="packer-builder-virtualbox-iso" dir=in program="c:\HashiCorp\packer\packer-builder-virtualbox-iso.exe" action=allow
 
-call cinst SublimeText3.app
-
-if not exist %WORKDRIVE%\GitHub mkdir %WORKDRIVE%\GitHub
-cd /D %WORKDRIVE%\GitHub
-if not exist ubuntu-vm (
-  git clone -b my https://github.com/StefanScherer/ubuntu-vm.git
-) else (
-  cd ubuntu-vm
-  git pull
-  cd ..
-)
-
-if not exist packer-windows (
-  git clone -b my https://github.com/StefanScherer/packer-windows.git
-) else (
-  cd packer-windows
-  git pull
-  cd ..
-)
-
 echo Install VMware Workstation...
 rem Install VMware Workstation
 if not exist "%USERPROFILE%\AppData\Roaming\VMWare\preferences.ini" (
@@ -86,7 +63,6 @@ if not exist "c:\Program Files (x86)\VMware\VMware Workstation" (
   "%TEMP%\VMware-workstation-full-10.0.0-1295980.exe" /s /nsr /v EULAS_AGREED=1 
   del "%TEMP%\VMware-workstation-full-10.0.0-1295980.exe"
 )
-
 
 cd %WORKDRIVE%\GitHub\packer-windows
 vagrant --version
