@@ -44,6 +44,8 @@ Vagrant.configure("2") do |config|
 
     slave.vm.provision "shell", path: "scripts/provision-basebox-slave.bat"
     slave.vm.provision "shell", path: "scripts/install-jenkins-slave.bat"
+    # reboot the basebox-slave to have all tools in PATH and then start the swarm client 
+    slave.vm.provision "shell", path: "scripts/reboot-to-slave.bat"
     slave.vm.provider "vcloud" do |v|
       v.memory = 4096
       v.cpus = 2
