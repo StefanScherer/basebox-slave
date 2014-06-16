@@ -65,6 +65,5 @@ if not exist "c:\Program Files (x86)\VMware\VMware Workstation" (
 )
 
 cd %WORKDRIVE%\GitHub\packer-windows
-vagrant --version
 packer --version
 
