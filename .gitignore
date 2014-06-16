@@ -156,3 +156,4 @@ $RECYCLE.BIN/
 *.swp
 
 resources
+node_modules

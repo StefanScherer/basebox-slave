@@ -43,6 +43,46 @@ These software will be installed
 * wget
 * ovftool (part of VMware Workstation)
 
+# Jenkins
+
+Set up your host, install node and grunt:
+
+```
+brew update
+brew install node
+npm install -g grunt-cli
+```
+
+## Manage Jenkins configuration
+After each time you made changes to the global Jenkins configuration, plugins
+or jobs just do:
+
+```
+grunt jenkins-backup
+```
+
+This will backup all stuff to the jenkins-configuration folder. You may put it
+under version control, yay!
+
+You can install jenkins configuration using:
+
+```
+grunt jenkins-install
+```
+
+When you added / removed plugins you must restart Jenkins:
+
+```
+open http://10.100.50.4:2200/safeRestart
+```
+
+## View Jenkins Web Interface
+If you just want to view into Jenkins use this command:
+
+```
+open http://10.100.50.4:2200/
+```     
+
 # Licensing
 Copyright (c) 2014 Stefan Scherer
 

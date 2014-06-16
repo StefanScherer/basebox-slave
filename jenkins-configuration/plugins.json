@@ -1,0 +1,94 @@
+[
+  {
+    "id": "matrix-auth",
+    "version": "1.1"
+  },
+  {
+    "id": "matrix-project",
+    "version": "1.2"
+  },
+  {
+    "id": "pam-auth",
+    "version": "1.1"
+  },
+  {
+    "id": "analysis-core",
+    "version": "1.57"
+  },
+  {
+    "id": "ant",
+    "version": "1.2"
+  },
+  {
+    "id": "windows-slaves",
+    "version": "1.0"
+  },
+  {
+    "id": "ssh-credentials",
+    "version": "1.7.1"
+  },
+  {
+    "id": "ssh-slaves",
+    "version": "1.5"
+  },
+  {
+    "id": "swarm",
+    "version": "1.15"
+  },
+  {
+    "id": "javadoc",
+    "version": "1.1"
+  },
+  {
+    "id": "translation",
+    "version": "1.10"
+  },
+  {
+    "id": "subversion",
+    "version": "1.54"
+  },
+  {
+    "id": "ldap",
+    "version": "1.6"
+  },
+  {
+    "id": "checkstyle",
+    "version": "3.39"
+  },
+  {
+    "id": "scm-api",
+    "version": "0.2"
+  },
+  {
+    "id": "credentials",
+    "version": "1.14"
+  },
+  {
+    "id": "maven-plugin",
+    "version": "2.3"
+  },
+  {
+    "id": "git-client",
+    "version": "1.9.1"
+  },
+  {
+    "id": "mailer",
+    "version": "1.8"
+  },
+  {
+    "id": "external-monitor-job",
+    "version": "1.2"
+  },
+  {
+    "id": "cvs",
+    "version": "2.11"
+  },
+  {
+    "id": "git",
+    "version": "2.2.1"
+  },
+  {
+    "id": "antisamy-markup-formatter",
+    "version": "1.1"
+  }
+]
