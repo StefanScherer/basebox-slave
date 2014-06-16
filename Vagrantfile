@@ -19,7 +19,7 @@ Vagrant.configure("2") do |config|
     slave.vm.network :forwarded_port, guest: 22, host: 2222, id: "ssh", auto_correct: true
     slave.vm.network :forwarded_port, guest: 3389, host: 3389, id: "rdp", auto_correct: true
 
-    slave.vm.provision "shell", path: "install.bat"
+    slave.vm.provision "shell", path: "provision-basebox-slave.bat"
     slave.vm.provider "vcloud" do |v|
       v.memory = 4096
       v.cpus = 2
