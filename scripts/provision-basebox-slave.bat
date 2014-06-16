@@ -49,6 +49,9 @@ exit /b
 :PACKER_DONE
 call cinst packer-post-processor-vagrant-vmware-ovf
 
+netsh advfirewall firewall add name="packer-builder-vmware-iso" dir=in program="c:\HashiCorp\packer\packer-builder-vmware-iso.exe" action=allow
+netsh advfirewall firewall add name="packer-builder-virtualbox-iso" dir=in program="c:\HashiCorp\packer\packer-builder-virtualbox-iso.exe" action=allow
+
 call cinst SublimeText3.app
 
 if not exist %WORKDRIVE%\GitHub mkdir %WORKDRIVE%\GitHub
