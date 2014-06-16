@@ -21,26 +21,14 @@ call cinst wget
 
 rem workaround until chocolatey has a vagrant 1.6 package
 rem call cinst vagrant
-call wget --no-check-certificate https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.3.msi -O %TEMP%\vagrant.msi
-https://github.com/StefanScherer/basebox-slave/raw/master/VirtualBox.xml -O "%USERPROFILE%\.VirtualBox\VirtualBox.xml"
+echo Downloading Vagrant 1.6.3
+call wget --no-check-certificate --no-verbose https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.3.msi -O %TEMP%\vagrant.msi
+echo Installing Vagrant 1.6.3
 msiexec /i %TEMP%\vagrant.msi /quiet
-
+echo Vagrant 1.6.3 installed
 set PATH=%PATH%;%SystemDrive%\hashicorp\vagrant\bin
 cd /D %USERPROFILE%\Documents
 vagrant plugin install vagrant-vcloud
-
-call cinst 7zip
-set PATH=%PATH%;C:\Program Files\7-Zip
-call cinst vim
-where gvim.exe
-if ERRORLEVEL 1 call :addVimToUserPath
-goto VIM_DONE
-:addVimToUserPath
-for /F "tokens=2* delims= " %%f IN ('reg query "HKCU\Environment" /v Path ^| findstr /i path') do set OLD_USER_PATH=%%g
-reg add HKCU\Environment /v Path /d "%OLD_USER_PATH%;C:\Program Files (x86)\vim\vim74" /f
-set PATH=%PATH%;C:\Program Files (x86)\vim\vim74
-exit /b
-:VIM_DONE
 
 call cinst msysgit
 set PATH=%PATH%;C:\Program Files (x86)\Git\cmd
@@ -58,28 +46,9 @@ reg add HKCU\Environment /v Path /d "%OLD_USER_PATH%;C:\hashicorp\packer" /f
 set PATH=%PATH%;C:\hashicorp\packer
 exit /b
 :PACKER_DONE
+call cinst packer-post-processor-vagrant-vmware-ovf
 
-rem Install VirtualBox 4.3
-if not exist "%USERPROFILE%\.VirtualBox\VirtualBox.xml" (
-  mkdir "%USERPROFILE%\.VirtualBox"
-  call wget --no-check-certificate https://github.com/StefanScherer/basebox-slave/raw/master/VirtualBox.xml -O "%USERPROFILE%\.VirtualBox\VirtualBox.xml"
-)
-call cinst virtualbox
-where vboxmanage
-if ERRORLEVEL 1 call :addVirtualBoxToUserPath
-goto VIRTUALBOX_DONE
-:addVirtualBoxToUserPath
-for /F "tokens=2* delims= " %%f IN ('reg query "HKCU\Environment" /v Path ^| findstr /i path') do set OLD_USER_PATH=%%g
-reg add HKCU\Environment /v Path /d "%OLD_USER_PATH%;C:\program files\oracle\virtualbox" /f
-set PATH=%PATH%;C:\program files\oracle\virtualbox
-exit /b
-:VIRTUALBOX_DONE
-
-rem Install Jenkins
-rem wget http://mirrors.jenkins-ci.org/windows/latest -O %TEMP%\jenkins.zip
-rem cd /D %TEMP%
-rem unzip jenkins.zip
-rem setup.exe -s
+call cinst SublimeText3.app
 
 if not exist %WORKDRIVE%\GitHub mkdir %WORKDRIVE%\GitHub
 cd /D %WORKDRIVE%\GitHub
@@ -114,22 +83,8 @@ if not exist "c:\Program Files (x86)\VMware\VMware Workstation" (
   del "%TEMP%\VMware-workstation-full-10.0.0-1295980.exe"
 )
 
-call cinst javaruntime
-if not exist %WORKDRIVE%\jenkins mkdir %WORKDRIVE%\jenkins
-if not exist %WORKDRIVE%\swarmclient mkdir %WORKDRIVE%\swarmclient
-cd /D %WORKDRIVE%\swarmclient
-call wget -O swarm-client.jar http://maven.jenkins-ci.org/content/repositories/releases/org/jenkins-ci/plugins/swarm-client/1.8/swarm-client-1.8-jar-with-dependencies.jar
-
-set jenkinshost=10.115.4.8
-net user swarmclient K8934jASD,x9  /ADD
-net localgroup Administrators swarmclient /add
-rem Due to problems with UDP broadcast, use the -master switch at the moment
-rem Schedule start of swarm client at start of the machine (after next reboot)
-schtasks /CREATE /SC ONSTART /RU swarmclient /RP K8934jASD,x9 /TN JenkinsSwarmClient /TR "java.exe -jar %WORKDRIVE%\swarmclient\swarm-client.jar -master http://%jenkinshost% -labels packer -fsroot %WORKDRIVE%\jenkins"
-
 
 cd %WORKDRIVE%\GitHub\packer-windows
 vagrant --version
 packer --version
-vboxmanage -version
 

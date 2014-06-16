@@ -25,6 +25,13 @@ Vagrant.configure("2") do |config|
       v.cpus = 2
       v.nested_hypervisor = true
     end
+    slave.vm.provider :virtualbox do |v|
+      v.gui = true
+      v.memory = 2048
+      v.cpus = 2
+      v.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
+      v.customize ["modifyvm", :id, "--vram", "32"]
+    end
 
   end
 
