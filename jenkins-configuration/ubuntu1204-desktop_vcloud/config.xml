@@ -36,5 +36,10 @@ packer build --only=vmware-iso ubuntu1204-desktop-vcloud.json</command>
     </hudson.tasks.BatchFile>
   </builders>
   <publishers/>
-  <buildWrappers/>
+  <buildWrappers>
+    <hudson.plugins.ansicolor.AnsiColorBuildWrapper plugin="ansicolor@0.4.0">
+      <colorMapName>xterm</colorMapName>
+    </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.12"/>
+  </buildWrappers>
 </project>
