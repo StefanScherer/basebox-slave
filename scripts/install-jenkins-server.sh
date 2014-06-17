@@ -38,7 +38,7 @@ sudo sed -i 's/#JAVA_ARGS="-Xmx256m"/JAVA_ARGS="-Xmx512m"/g' /etc/default/jenkin
 cat <<LOCATION | sudo -u jenkins tee /var/lib/jenkins/jenkins.model.JenkinsLocationConfiguration.xml
 <?xml version='1.0' encoding='UTF-8'?>
 <jenkins.model.JenkinsLocationConfiguration>
-  <adminAddress>nobody@nowhere</adminAddress>
+  <adminAddress>jenkins@basebox</adminAddress>
   <jenkinsUrl>http://172.16.32.2/</jenkinsUrl>
 </jenkins.model.JenkinsLocationConfiguration>
 LOCATION
