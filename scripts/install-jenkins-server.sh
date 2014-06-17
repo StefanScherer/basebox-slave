@@ -34,6 +34,7 @@ sudo apt-get update -y
 sudo apt-get install -y jenkins
 
 sudo sed -i 's/#JAVA_ARGS="-Xmx256m"/JAVA_ARGS="-Xmx512m"/g' /etc/default/jenkins
+
 cat <<LOCATION | sudo -u jenkins tee /var/lib/jenkins/jenkins.model.JenkinsLocationConfiguration.xml
 <?xml version='1.0' encoding='UTF-8'?>
 <jenkins.model.JenkinsLocationConfiguration>
@@ -41,6 +42,17 @@ cat <<LOCATION | sudo -u jenkins tee /var/lib/jenkins/jenkins.model.JenkinsLocat
   <jenkinsUrl>http://172.16.32.2/</jenkinsUrl>
 </jenkins.model.JenkinsLocationConfiguration>
 LOCATION
+
+cat <<MAILER | sudo -u jenkins tee /var/lib/jenkins/hudson.tasks.Mailer.xml
+<?xml version='1.0' encoding='UTF-8'?>
+<hudson.tasks.Mailer_-DescriptorImpl plugin="mailer@1.8">
+  <hudsonUrl>http://172.16.32.2/</hudsonUrl>
+  <smtpHost>mailrelay.roett.de.sealsystems.com</smtpHost>
+  <useSsl>false</useSsl>
+  <charset>UTF-8</charset>
+</hudson.tasks.Mailer_-DescriptorImpl>
+MAILER
+
 sudo service jenkins restart
 
 echo "Waiting until Jenkins server is up"
