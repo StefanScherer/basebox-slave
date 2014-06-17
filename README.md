@@ -1,51 +1,96 @@
 # basebox-slave
 
-Setup a Windows Jenkins slave to build baseboxes with packer.
-This slave is used to build 64bit baseboxes as well.
-
-## Environment
-An vApp with a Windows 2012 R2 will be fine.
-* The VM must have **Expose hardware-assisted CPU virtualization to guest OS** enabled. Go into properties of VM and open the hardware tab and enable the checkbox
-* The VM must have a **second hard drive D: with plenty of disk space** to build boxes on it. Go into properties of VM and open the hardware tab and add a second hard disk with 64 GByte.
-* Boot the VM, open the Computer Management, remove or move the DVD drive to another drive label than D:, initialize second hard disk as drive D:
-
-![VM hardware settings](pics/vm-hardware-settings.png)
-
-## Directories
-* PACKER_CACHE_DIR D:\Packer\cache
-* PACKER_TEMP_DIR D:\Packer\temp
-* VirtualBox D:\VirtualBox
+This is my work in progress to setup a build environment to build baseboxes for VMware vCloud
+to be used with Vagrant and the vagrant-vcloud plugin.
+The basebox build environment itself can be built with the same tools and created inside the vCloud, eating and creating its own dogfood.
 
 ## Installation
-To install it in the preinstalled machine, you must have at least powershell installed.
+On your host machine you will need the following tools installed:
 
-Open up a command prompt by typing **Windows+R** and enter **cmd** and press enter.
-Then enter following command:
+* Vagrant 1.6.3
+* vagrant-vcloud plugin 0.4.0 with the command `vagrant plugin install vagrant-vcloud`
+* Your vCloud access informations in your global `~/.vagrant.d/Vagrantfile`
+
+After that you should clone this repo and have some customizations. See below for more details.
+
+## Create the basebox builder
+
+Now you can build the vApp 'the Vagrant way':
 
 ```bash
-powershell -NoProfile -ExecutionPolicy unrestricted -Command "((new-object net.webclient).DownloadFile(' https://raw.github.com/StefanScherer/basebox-slave/master/install.bat', '%Temp%\install.bat'))" && %Temp%\install.bat
+npm install
+vagrant up --provider=vcloud
+grunt jenkins-install
 ```
 
-Afterwards you have VirtualBox 4.3.6 and Packer 0.5.1 installed and in PATH.
+The other commands will be explained below as the Jenkins server could be filled with some packer build jobs I'm currently working on.
 
-### Installed Software
-These software will be installed
+This will spin up an vApp with two VMs:
 
-* Chocolatey package manager
-* Firefox 27
-* Git 1.8.5 commandline
-* Packer 0.5.1
-* VMware PowerCLI 5.5
-* VMware Workstation 10
-* Vagrant 1.4.3
-* Vim 7.4
-* VirtualBox 4.3.6
+### basebox-jenkins
+The `basebox-jenkins` VM is an Ubuntu server with a Jenkins server installed. This server has the IP address `176.16.32.2` and the HTTP port of Jenkins web interface listens on port 80.
+A port forwarding is done even through your vCloud edge gateway if you have to use it.
+
+Check out for the forwarded port while spinning up the vApp, or check it later with
+
+```bash
+vagrant vcloud -n
+```
+
+So you can retrieve the correct IP address and port number to access the Jenkins web interface from your host machine.
+
+You can login to your jenkins server with just the following command:
+
+```bash
+vagrant ssh basebox-jenkins
+```
+
+### basebox-slave
+The `basebox-slave` VM is a Windows machine (I use a windows_2008_r2). This machine has the IP address `176.16.32.3` and has RDP, SSH and WinRM ports open.
+
+You can login to your jenkins slave with RDP with the following command:
+
+```bash
+vagrant rdp basebox-slave
+```
+
+Notice: Windows host users need Vagrant 1.6.4 or at least a patch for the bug in Vagrant 1.6.3 to make `vagrant rdp` work. There is a problem writing the rdp file for mstsc at the moment.
+
+After creating the basebox-slave VM you have to licsense the installed VMware Workstation manually. I have added a command in the `./scripts/provision-basebox-slave.bat` script to directly enter the VMware license, but I cannot put that into the repo.
+
+This is a good situation to test the `vagrant rdp basebox-slave` which works nice.
+
+The software installed in the basebox-slave is:
+
+* Chocolatey - package like installations on Windows
+* packer 0.6.0
+* packer-post-processor-vagrant-vmware-ovf 0.1.2
+* VMWare Workstation 10
+* msysgit
 * wget
-* ovftool (part of VMware Workstation)
 
-# Jenkins
+## Customization
+As I have started the project much smaller with simple shell provisioning scripts, it still has its roots in plain shell scripts. Perhaps in the future there will be some higher level solution with Chef, Puppet, Ansible, ...
 
-Set up your host, install node and grunt:
+### Choose the baseboxes
+In the `Vagrantfile` you may adjust the boxes and box_urls used for the two VMs.
+As I cannot make the Windows VM public, I will change at least the box_url of the Ubuntu VM to one pointing to the vagrantcloud soon.
+
+### Mail Server for Jenkins mails
+Edit the file `./scripts/install-jenkins-server.sh` to change the `smtpHost`
+
+### Download URL for VMware Workstation
+As VMware Workstation is not available with a anonymous download, you have to customize the download link into your intranet in the script `./scripts/provision-basebox-slave.bat`
+
+
+## Jenkins
+
+I use `grunt-jenkins` to customize and backup the Jenkins configuration. So my Jenkins box is only a throw away product to be set up again with Jenkins job configurations from source control.
+
+My current Jenkins jobs are stored in this repo as well in the directory `jenkins-configuration`.
+
+### Install grunt
+On your host machine, you will need node, npm and grunt:
 
 ```
 brew update
@@ -53,7 +98,24 @@ brew install node
 npm install -g grunt-cli
 ```
 
-## Manage Jenkins configuration
+### Install Node dependencies
+On you host machine, you have to call 
+
+```
+npm install
+```
+
+to install grunt-jenkins and other Node dependencies.
+
+
+### Customize Jenkins URL
+In the `Gruntfile.js` you have to enter the Jenkins IP address and port to connect from your host to the Jenkins VM.
+
+In my case this is `10.100.50.4:2200` as you can see in the Gruntfile.js.
+
+You also need a patch for grunt-jenkins
+
+### Manage Jenkins configuration
 After each time you made changes to the global Jenkins configuration, plugins
 or jobs just do:
 
