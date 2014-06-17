@@ -18,12 +18,8 @@ After that you should clone this repo and have some customizations. See below fo
 Now you can build the vApp 'the Vagrant way':
 
 ```bash
-npm install
 vagrant up --provider=vcloud
-grunt jenkins-install
 ```
-
-The other commands will be explained below as the Jenkins server could be filled with some packer build jobs I'm currently working on.
 
 This will spin up an vApp with two VMs:
 
@@ -98,7 +94,7 @@ brew install node
 npm install -g grunt-cli
 ```
 
-### Install Node dependencies
+### Install grunt-jenkins
 On you host machine, you have to call 
 
 ```
@@ -126,7 +122,9 @@ grunt jenkins-backup
 This will backup all stuff to the jenkins-configuration folder. You may put it
 under version control, yay!
 
-You can install jenkins configuration using:
+### Install Jenkins jobs
+
+You can install my prebuilt Jenkins job configuration using:
 
 ```
 grunt jenkins-install
