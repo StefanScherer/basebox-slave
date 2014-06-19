@@ -128,8 +128,7 @@ When you added / removed plugins you must restart Jenkins:
 open http://10.100.50.4:2200/safeRestart
 ```
 
-Have a look at the Jenkins jobs, there you can see how I build the baseboxes and from with GitHub Repos they come from.
-
+Have a look at the Jenkins jobs, there you can see how I build the baseboxes and from with GitHub Repos they come from. See below for more details.
 
 ### Manage Jenkins configuration
 After each time you made changes to the global Jenkins configuration, plugins
@@ -137,10 +136,14 @@ or jobs just do:
 
 ```
 grunt jenkins-backup
+git add jenkins-configuration
+git commit
 ```
 
 This will backup all stuff to the jenkins-configuration folder. You may put it
 under version control, yay!
+
+So the whole Jenkins server could be destroyed and rebuilt with another `vagrant up --provider=vcloud`.
 
 ## View Jenkins Web Interface
 If you just want to view into Jenkins use this command:
@@ -148,6 +151,13 @@ If you just want to view into Jenkins use this command:
 ```
 open http://10.100.50.4:2200/
 ```     
+
+![jenkins jobs](pics/jenkins-jobs.png)
+
+You also can see the automatically added Jenkins node `basebox-slave` in the list of nodes:
+
+
+![jenkins nodes](pics/jenkins-nodes.png)
 
 # Licensing
 Copyright (c) 2014 Stefan Scherer
