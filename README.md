@@ -4,6 +4,8 @@ This is my work in progress to setup a build environment to build baseboxes for 
 to be used with Vagrant and the vagrant-vcloud plugin.
 The basebox build environment itself can be built with the same tools and created inside the vCloud, eating and creating its own dogfood.
 
+![basebox-slave network diagram](pics/basebox_slave-3.png)
+
 ## Installation
 On your host machine you will need the following tools installed:
 
@@ -111,16 +113,6 @@ In my case this is `10.100.50.4:2200` as you can see in the Gruntfile.js.
 
 You also need a patch for grunt-jenkins
 
-### Manage Jenkins configuration
-After each time you made changes to the global Jenkins configuration, plugins
-or jobs just do:
-
-```
-grunt jenkins-backup
-```
-
-This will backup all stuff to the jenkins-configuration folder. You may put it
-under version control, yay!
 
 ### Install Jenkins jobs
 
@@ -135,6 +127,20 @@ When you added / removed plugins you must restart Jenkins:
 ```
 open http://10.100.50.4:2200/safeRestart
 ```
+
+Have a look at the Jenkins jobs, there you can see how I build the baseboxes and from with GitHub Repos they come from.
+
+
+### Manage Jenkins configuration
+After each time you made changes to the global Jenkins configuration, plugins
+or jobs just do:
+
+```
+grunt jenkins-backup
+```
+
+This will backup all stuff to the jenkins-configuration folder. You may put it
+under version control, yay!
 
 ## View Jenkins Web Interface
 If you just want to view into Jenkins use this command:
