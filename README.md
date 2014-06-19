@@ -63,7 +63,7 @@ The software installed in the basebox-slave is:
 * [Chocolatey](http://chocolatey.org) - package like installations on Windows
 * [packer 0.6.0](http://www.packer.io/downloads.html)
 * [packer-post-processor-vagrant-vmware-ovf 0.1.2](https://github.com/gosddc/packer-post-processor-vagrant-vmware-ovf/releases)
-* VMWare Workstation 10
+* VMware Workstation 10
 * msysgit
 * wget
 
