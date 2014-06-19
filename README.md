@@ -1,7 +1,7 @@
 # basebox-slave
 
-This is my work in progress to setup a build environment to build baseboxes for VMware vCloud
-to be used with Vagrant and the vagrant-vcloud plugin.
+This is my work in progress to setup a build environment to build baseboxes with [Packer](http://www.packer.io) for VMware vCloud
+to be used with [Vagrant](http://www.vagrantup.com) and the [vagrant-vcloud](https://github.com/frapposelli/vagrant-vcloud) plugin.
 The basebox build environment itself can be built with the same tools and created inside the vCloud, eating and creating its own dogfood.
 
 ![basebox-slave network diagram](pics/basebox_slave-3.png)
@@ -26,7 +26,7 @@ vagrant up --provider=vcloud
 This will spin up an vApp with two VMs:
 
 ### basebox-jenkins
-The `basebox-jenkins` VM is an Ubuntu server with a Jenkins server installed. This server has the IP address `176.16.32.2` and the HTTP port of Jenkins web interface listens on port 80.
+The `basebox-jenkins` VM is an Ubuntu server with a [Jenkins server](http://jenkins-ci.org) installed. This server has the IP address `176.16.32.2` and the HTTP port of Jenkins web interface listens on port 80.
 A port forwarding is done even through your vCloud edge gateway if you have to use it.
 
 Check out for the forwarded port while spinning up the vApp, or check it later with
@@ -60,9 +60,9 @@ This is a good situation to test the `vagrant rdp basebox-slave` which works nic
 
 The software installed in the basebox-slave is:
 
-* Chocolatey - package like installations on Windows
-* packer 0.6.0
-* packer-post-processor-vagrant-vmware-ovf 0.1.2
+* [Chocolatey](http://chocolatey.org) - package like installations on Windows
+* [packer 0.6.0](http://www.packer.io/downloads.html)
+* [packer-post-processor-vagrant-vmware-ovf 0.1.2](https://github.com/gosddc/packer-post-processor-vagrant-vmware-ovf/releases)
 * VMWare Workstation 10
 * msysgit
 * wget
@@ -83,7 +83,7 @@ As VMware Workstation is not available with a anonymous download, you have to cu
 
 ## Jenkins
 
-I use `grunt-jenkins` to customize and backup the Jenkins configuration. So my Jenkins box is only a throw away product to be set up again with Jenkins job configurations from source control.
+I use [grunt-jenkins](https://www.npmjs.org/package/grunt-jenkins) to customize and backup the Jenkins configuration. So my Jenkins box is only a throw away product to be set up again with Jenkins job configurations from source control.
 
 My current Jenkins jobs are stored in this repo as well in the directory `jenkins-configuration`.
 
