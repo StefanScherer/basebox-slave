@@ -61,7 +61,7 @@ This is a good situation to test the `vagrant rdp basebox-slave` which works nic
 The software installed in the basebox-slave is:
 
 * [Chocolatey](http://chocolatey.org) - package like installations on Windows
-* [packer 0.6.0](http://www.packer.io/downloads.html)
+* [packer 0.6.1.dev](http://www.packer.io/downloads.html) - built from source until 0.6.1 is released
 * [packer-post-processor-vagrant-vmware-ovf 0.1.2](https://github.com/gosddc/packer-post-processor-vagrant-vmware-ovf/releases)
 * VMware Workstation 10
 * msysgit
