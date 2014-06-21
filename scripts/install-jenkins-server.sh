@@ -63,12 +63,12 @@ done
 
 # retrieve latest version of swarm-client
 swarmClientVersion=`curl -s  http://maven.jenkins-ci.org/content/repositories/releases/org/jenkins-ci/plugins/swarm-client/maven-metadata.xml | grep latest | sed 's/\s*[<>a-z/]//g'`
-wget -O /vagrant/resources/swarm-client.jar http://maven.jenkins-ci.org/content/repositories/releases/org/jenkins-ci/plugins/swarm-client/$swarmClientVersion/swarm-client-$swarmClientVersion-jar-with-dependencies.jar
+wget --no-verbose -O /vagrant/resources/swarm-client.jar http://maven.jenkins-ci.org/content/repositories/releases/org/jenkins-ci/plugins/swarm-client/$swarmClientVersion/swarm-client-$swarmClientVersion-jar-with-dependencies.jar
 
 while [ ! -f jenkins-cli.jar ]
 do
     sleep 10
-    wget http://localhost:8080/jnlpJars/jenkins-cli.jar
+    wget --no-verbose http://localhost:8080/jnlpJars/jenkins-cli.jar
 done
 set -x
 # force read update list

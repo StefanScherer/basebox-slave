@@ -29,7 +29,7 @@ if not exist c:\jenkins\swarm-client.jar (
   if exist c:\vagrant\resources\swarm-client.jar (
     copy c:\vagrant\resources\swarm-client.jar c:\jenkins\swarm-client.jar
   ) else (
-    call wget -O c:\jenkins\swarm-client.jar http://maven.jenkins-ci.org/content/repositories/releases/org/jenkins-ci/plugins/swarm-client/1.15/swarm-client-1.15-jar-with-dependencies.jar
+    call wget --no-verbose -O c:\jenkins\swarm-client.jar http://maven.jenkins-ci.org/content/repositories/releases/org/jenkins-ci/plugins/swarm-client/1.15/swarm-client-1.15-jar-with-dependencies.jar
   )
 )
 
