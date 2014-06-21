@@ -34,6 +34,9 @@ exit /b
 set ROECLOUDSRV001=roecloudsrv001.sealsystems.local
 set ROECLOUDSRV001=10.100.100.101
 
+call c:\vagrant\scripts\install-packer-from-source.bat
+goto packer_firewall
+
 call cinst packer
 where packer
 if ERRORLEVEL 1 call :addPackerToUserPath
@@ -46,6 +49,7 @@ exit /b
 :PACKER_DONE
 call cinst packer-post-processor-vagrant-vmware-ovf
 
+:packer_firewall
 netsh advfirewall firewall add rule name="packer-builder-vmware-iso" dir=in program="c:\HashiCorp\packer\packer-builder-vmware-iso.exe" action=allow
 netsh advfirewall firewall add rule name="packer-builder-virtualbox-iso" dir=in program="c:\HashiCorp\packer\packer-builder-virtualbox-iso.exe" action=allow
 netsh advfirewall firewall add rule name="packer-builder-vmware-iso" dir=in program="c:\Users\vagrant\go\bin\packer-builder-vmware-iso.exe" action=allow
