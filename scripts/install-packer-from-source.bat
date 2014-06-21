@@ -15,7 +15,15 @@ call cinst golang
 set PATH=%PATH%;c:\go\bin
 
 call cinst git
-set PATH=%PATH%;c:\program files (x86)\git\cmd
+where git
+if ERRORLEVEL 1 call :addGitToUserPath
+goto GIT_DONE
+:addGitToUserPath
+for /F "tokens=2* delims= " %%f IN ('reg query "HKCU\Environment" /v Path ^| findstr /i path') do set OLD_USER_PATH=%%g
+reg add HKCU\Environment /v Path /d "%OLD_USER_PATH%;C:\Program Files (x86)\Git\cmd" /f
+set PATH=%PATH%;C:\Program Files (x86)\Git\cmd
+exit /b
+:GIT_DONE
 
 call cinst bzr
 set PATH=%PATH%;c:\program files (x86)\Bazaar
