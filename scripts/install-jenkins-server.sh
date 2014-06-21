@@ -77,8 +77,9 @@ sed '1d;$d' default.js > default.json
 curl -X POST -H "Accept: application/json" -d @default.json http://localhost:8080/updateCenter/byId/default/postBack --verbose
 
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin git
-java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin checkstyle
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin swarm
+java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin ansicolor
+java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin timestamper
 
 # restart jenkins to activate all plugins
 java -jar jenkins-cli.jar -s http://localhost:8080 safe-restart
