@@ -35,9 +35,15 @@ set GOPATH=C:\users\vagrant\go
 setx GOPATH C:\users\vagrant\go
 
 mkdir %GOPATH%\bin
-for /F "tokens=2* delims= " %%f IN ('reg query "HKCU\Environment" /v Path ^| findstr /i path') do set OLD_USER_PATH=%%
+
+call :addGoPathToUserPath
+goto GOPATH_DONE
+:addGoPathToUserPath
+for /F "tokens=2* delims= " %%f IN ('reg query "HKCU\Environment" /v Path ^| findstr /i path') do set OLD_USER_PATH=%%g
 reg add HKCU\Environment /v Path /d "%OLD_USER_PATH%;%GOPATH%\bin" /f
 set PATH=%PATH%;%GOPATH%\bin
+exit /b
+:GOPATH_DONE
 
 
 echo Downloading and compiling packer
