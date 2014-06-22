@@ -4,7 +4,7 @@ This is my work in progress to setup a build environment to build baseboxes with
 to be used with [Vagrant](http://www.vagrantup.com) and the [vagrant-vcloud](https://github.com/frapposelli/vagrant-vcloud) plugin.
 The basebox build environment itself can be built with the same tools and created inside the vCloud, eating and creating its own dogfood.
 
-![basebox-slave network diagram](pics/basebox_slave-3.png)
+![basebox-slave network diagram](pics/basebox_slave.png)
 
 ## Installation
 On your host machine you will need the following tools installed:
@@ -44,7 +44,7 @@ vagrant ssh basebox-jenkins
 ```
 
 ### vmware-slave
-The `vmware-slave` VM is a Windows machine (I use a windows_2008_r2). This machine has the IP address `176.16.32.3` and has RDP, SSH and WinRM ports open.
+The `vmware-slave` VM is a Windows machine (I use a windows_2008_r2). This machine has the IP address `176.16.32.3` and has RDP, SSH and WinRM ports opened.
 
 You can login to your jenkins slave with RDP with the following command:
 
@@ -66,6 +66,23 @@ The software installed in the vmware-slave is:
 * VMware Workstation 10.0.2
 * msysgit
 * wget
+* Java + Jenkins Swarm Client (Node labels: windows + vmware)
+
+### virtualbox-slave
+The `virtualbox-slave` VM is a Ubuntu machine. This machine has the IP address `176.16.32.4` and has SSH port opened.
+
+You can login to your jenkins slave with SSH with the following command:
+
+```bash
+vagrant ssh virtualbox-slave
+```
+The software installed in the virtualbox-slave is:
+
+* [packer 0.6.0](http://www.packer.io/downloads.html)
+* [VirtualBox 4.3.12](https://www.virtualbox.org/wiki/Linux_Downloads)
+* [Vagrant 1.6.3](http://www.vagrantup.com/downloads.html) for later tests of the generated baseboxes
+* git
+* Java + Jenkins Swarm Client (Node labels: ubuntu + virtualbox)
 
 ## Customization
 As I have started the project much smaller with simple shell provisioning scripts, it still has its roots in plain shell scripts. Perhaps in the future there will be some higher level solution with Chef, Puppet, Ansible, ...
