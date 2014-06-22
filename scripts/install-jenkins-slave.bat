@@ -79,7 +79,7 @@ call :heredoc html >%TEMP%\JenkinsSwarmClient.xml && goto next2
   <Actions Context="Author">
     <Exec>
       <Command>java.exe</Command>
-      <Arguments>-jar c:\jenkins\swarm-client.jar -autoDiscoveryAddress 172.16.32.255 -executors 1 -labels windows -fsroot c:\jenkins</Arguments>
+      <Arguments>-jar c:\jenkins\swarm-client.jar -autoDiscoveryAddress 172.16.32.255 -executors 1 -labels windows vmware -fsroot c:\jenkins</Arguments>
     </Exec>
   </Actions>
 </Task>
