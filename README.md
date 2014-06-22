@@ -63,7 +63,7 @@ The software installed in the basebox-slave is:
 * [Chocolatey](http://chocolatey.org) - package like installations on Windows
 * [packer 0.6.1.dev](http://www.packer.io/downloads.html) - built from source until 0.6.1 is released
 * [packer-post-processor-vagrant-vmware-ovf 0.1.2](https://github.com/gosddc/packer-post-processor-vagrant-vmware-ovf/releases)
-* VMware Workstation 10
+* VMware Workstation 10.0.2
 * msysgit
 * wget
 
@@ -77,8 +77,8 @@ As I cannot make the Windows VM public, I will change at least the box_url of th
 ### Mail Server for Jenkins mails
 Edit the file `./scripts/install-jenkins-server.sh` to change the `smtpHost`
 
-### Download URL for VMware Workstation
-As VMware Workstation is not available with a anonymous download, you have to customize the download link into your intranet in the script `./scripts/provision-basebox-slave.bat`
+### License VMware Workstation
+Log into the basebox-slave machine and enter the license of VMware Workstation.
 
 
 ## Jenkins

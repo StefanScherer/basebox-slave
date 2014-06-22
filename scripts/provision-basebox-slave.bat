@@ -31,9 +31,6 @@ exit /b
 :GIT_DONE
 
 
-set ROECLOUDSRV001=roecloudsrv001.sealsystems.local
-set ROECLOUDSRV001=10.100.100.101
-
 call c:\vagrant\scripts\install-packer-from-source.bat
 goto packer_firewall
 
@@ -55,18 +52,15 @@ netsh advfirewall firewall add rule name="packer-builder-virtualbox-iso" dir=in 
 netsh advfirewall firewall add rule name="packer-builder-vmware-iso" dir=in program="c:\Users\vagrant\go\bin\packer-builder-vmware-iso.exe" action=allow
 netsh advfirewall firewall add rule name="packer-builder-virtualbox-iso" dir=in program="c:\Users\vagrant\go\bin\packer-builder-virtualbox-iso.exe" action=allow
 
-echo Install VMware Workstation...
 rem Install VMware Workstation
-if not exist "%USERPROFILE%\AppData\Roaming\VMWare\preferences.ini" (
-  if not exist "%USERPROFILE%\AppData\Roaming\VMWare" mkdir "%USERPROFILE%\AppData\Roaming\VMWare"
-  copy c:\vagrant\preferences.ini "%USERPROFILE%\AppData\Roaming\VMWare\preferences.ini"
-)
 if not exist "c:\Program Files (x86)\VMware\VMware Workstation" (
-  if not exist "%TEMP%\VMware-workstation-full-10.0.0-1295980.exe" (
-    call wget --no-verbose -O "%TEMP%\VMware-workstation-full-10.0.0-1295980.exe" http://%ROECLOUDSRV001%/vmware/workstation10/VMware-workstation-full-10.0.0-1295980.exe
+  if not exist "%TEMP%\VMware-workstation.exe" (
+    echo Downloading VMware Workstation...
+    call wget --no-verbose --no-check-certificate -O "%TEMP%\VMware-workstation.exe" http://www.vmware.com/go/tryworkstation-win
   )
-  rem "%TEMP%\VMware-workstation-full-10.0.0-1295980.exe" /s /nsr /v EULAS_AGREED=1 SERIALNUMBER="xxxxx-xxxxx-xxxxx-xxxxx-xxxxx"
-  "%TEMP%\VMware-workstation-full-10.0.0-1295980.exe" /s /nsr /v EULAS_AGREED=1 
-  del "%TEMP%\VMware-workstation-full-10.0.0-1295980.exe"
+  echo Install VMware Workstation...
+  rem "%TEMP%\VMware-workstation.exe" /s /nsr /v EULAS_AGREED=1 SERIALNUMBER="xxxxx-xxxxx-xxxxx-xxxxx-xxxxx"
+  "%TEMP%\VMware-workstation.exe" /s /nsr /v EULAS_AGREED=1
+  del "%TEMP%\VMware-workstation.exe"
 )
 
