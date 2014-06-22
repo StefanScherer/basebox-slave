@@ -62,7 +62,7 @@ Vagrant.configure("2") do |config|
 
 
   config.vm.define :"virtualbox-slave" do |slave|
-    slave.vm.box = "ubuntu1204"
+    slave.vm.box = "ubuntu1204-100gb"
     slave.vm.hostname = "virtualbox-slave"
 
     slave.vm.network :private_network, ip: "172.16.32.4" # VirtualBox
