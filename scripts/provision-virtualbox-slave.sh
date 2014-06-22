@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # install git
-sudo apt-get install -y git
+sudo apt-get install -y git unzip
 
 # install packer
 sudo mkdir /opt/packer
