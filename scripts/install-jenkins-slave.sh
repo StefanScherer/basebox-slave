@@ -110,7 +110,7 @@ case "\$1" in
 	fi
 	;;
   stop)
-	log_daemon_msg "Stopping OpenBSD Secure Shell server" "swarm-client" || true
+	log_daemon_msg "Stopping Jenkins Swarm client" "swarm-client" || true
         bashPID=`cat /var/run/swarm-client.pid`; [ -n "\$bashPID" ] && pkill -P "\$bashPID"
 	if start-stop-daemon --stop --quiet --oknodo --pidfile /var/run/swarm-client.pid; then
 	    log_end_msg 0 || true
@@ -120,7 +120,7 @@ case "\$1" in
 	;;
 
   reload|force-reload)
-	log_daemon_msg "Reloading OpenBSD Secure Shell server's configuration" "swarm-client" || true
+	log_daemon_msg "Reloading Jenkins Swarm client's configuration" "swarm-client" || true
         bashPID=`cat /var/run/swarm-client.pid`; [ -n "\$bashPID" ] && pkill -P "\$bashPID"
 	if start-stop-daemon --stop --signal 1 --quiet --oknodo --pidfile /var/run/swarm-client.pid; then
 	    log_end_msg 0 || true
@@ -130,7 +130,7 @@ case "\$1" in
 	;;
 
   restart)
-	log_daemon_msg "Restarting OpenBSD Secure Shell server" "swarm-client" || true
+	log_daemon_msg "Restarting Jenkins Swarm client" "swarm-client" || true
         bashPID=`cat /var/run/swarm-client.pid`; [ -n "\$bashPID" ] && pkill -P "\$bashPID"
 	start-stop-daemon --stop --quiet --oknodo --retry 30 --pidfile /var/run/swarm-client.pid
 	check_dev_null log_end_msg
@@ -142,7 +142,7 @@ case "\$1" in
 	;;
 
   try-restart)
-	log_daemon_msg "Restarting OpenBSD Secure Shell server" "swarm-client" || true
+	log_daemon_msg "Restarting Jenkins Swarm client" "swarm-client" || true
 	RET=0
         bashPID=`cat /var/run/swarm-client.pid`; [ -n "\$bashPID" ] && pkill -P "\$bashPID"
 	start-stop-daemon --stop --quiet --retry 30 --pidfile /var/run/swarm-client.pid || RET="\$?"
