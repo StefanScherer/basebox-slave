@@ -23,7 +23,7 @@ Now you can build the vApp 'the Vagrant way':
 vagrant up --provider=vcloud
 ```
 
-This will spin up an vApp with two VMs:
+This will spin up an vApp with three VMs:
 
 ### basebox-jenkins
 The `basebox-jenkins` VM is an Ubuntu server with a [Jenkins server](http://jenkins-ci.org) installed. This server has the IP address `176.16.32.2` and the HTTP port of Jenkins web interface listens on port 80.
@@ -44,7 +44,7 @@ vagrant ssh basebox-jenkins
 ```
 
 ### vmware-slave
-The `vmware-slave` VM is a Windows machine (I use a windows_2008_r2). This machine has the IP address `176.16.32.3` and has RDP, SSH and WinRM ports opened.
+The `vmware-slave` VM is a Windows machine (I use a windows_2008_r2). This machine has the IP address `176.16.32.3` and has RDP, SSH and WinRM ports opened. This VM will build baseboxes for the vCloud provider, but could also be used to build baseboxes for the VMware Workstation/Fusion provider
 
 You can login to your jenkins slave with RDP with the following command:
 
@@ -69,7 +69,7 @@ The software installed in the vmware-slave is:
 * Java + Jenkins Swarm Client (Node labels: windows + vmware)
 
 ### virtualbox-slave
-The `virtualbox-slave` VM is a Ubuntu machine. This machine has the IP address `176.16.32.4` and has SSH port opened.
+The `virtualbox-slave` VM is a Ubuntu machine. This machine has the IP address `176.16.32.4` and has SSH port opened. This VM will build baseboxes for the VirtualBox provider, eg. running machines on notebooks.
 
 You can login to your jenkins slave with SSH with the following command:
 
@@ -88,7 +88,7 @@ The software installed in the virtualbox-slave is:
 As I have started the project much smaller with simple shell provisioning scripts, it still has its roots in plain shell scripts. Perhaps in the future there will be some higher level solution with Chef, Puppet, Ansible, ...
 
 ### Choose the baseboxes
-In the `Vagrantfile` you may adjust the boxes and box_urls used for the two VMs.
+In the `Vagrantfile` you may adjust the boxes and box_urls used for the three VMs.
 As I cannot make the Windows VM public, I will change at least the box_url of the Ubuntu VM to one pointing to the vagrantcloud soon.
 
 ### Mail Server for Jenkins mails
