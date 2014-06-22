@@ -32,7 +32,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define :"vmware-slave" do |slave|
-    slave.vm.box = "windows_2008_r2"
+    slave.vm.box = "windows_2008_r2-100gb"
     slave.vm.hostname = "vmware-slave"
 
     slave.vm.communicator = "winrm"
