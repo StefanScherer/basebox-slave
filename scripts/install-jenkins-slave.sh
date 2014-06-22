@@ -78,7 +78,7 @@ fi
 
 . /lib/lsb/init-functions
 
-SWARM_OPTS="-jar /var/lib/jenkins/swarm-client.jar -autoDiscoveryAddress 172.16.32.255 -labels ubuntu -labels virtualbox -fsroot /var/lib/jenkins"
+SWARM_OPTS="-jar /var/lib/jenkins/swarm-client.jar -autoDiscoveryAddress 172.16.32.255 -executors 1 -labels ubuntu -labels virtualbox -fsroot /var/lib/jenkins"
 
 # Are we running from init?
 run_by_init() {
