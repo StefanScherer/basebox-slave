@@ -16,7 +16,7 @@ cd /usr/bin
 sudo ln -s /opt/packer/* .
 
 
-echo "Intalling VirtualBox 4.3.12 ..."
+echo "Installing VirtualBox 4.3.12 ..."
 sudo apt-get install -y dkms
 echo "deb http://download.virtualbox.org/virtualbox/debian precise contrib" | sudo tee -a /etc/apt/sources.list
 wget -q http://download.virtualbox.org/virtualbox/debian/oracle_vbox.asc -O- | sudo apt-key add -
