@@ -43,22 +43,22 @@ You can login to your jenkins server with just the following command:
 vagrant ssh basebox-jenkins
 ```
 
-### basebox-slave
-The `basebox-slave` VM is a Windows machine (I use a windows_2008_r2). This machine has the IP address `176.16.32.3` and has RDP, SSH and WinRM ports open.
+### vmware-slave
+The `vmware-slave` VM is a Windows machine (I use a windows_2008_r2). This machine has the IP address `176.16.32.3` and has RDP, SSH and WinRM ports open.
 
 You can login to your jenkins slave with RDP with the following command:
 
 ```bash
-vagrant rdp basebox-slave
+vagrant rdp vmware-slave
 ```
 
 Notice: Windows host users need Vagrant 1.6.4 or at least a patch for the bug in Vagrant 1.6.3 to make `vagrant rdp` work. There is a problem writing the rdp file for mstsc at the moment.
 
-After creating the basebox-slave VM you have to licsense the installed VMware Workstation manually. I have added a command in the `./scripts/provision-basebox-slave.bat` script to directly enter the VMware license, but I cannot put that into the repo.
+After creating the vmware-slave VM you have to licsense the installed VMware Workstation manually. I have added a command in the `./scripts/provision-vmware-slave.bat` script to directly enter the VMware license, but I cannot put that into the repo.
 
-This is a good situation to test the `vagrant rdp basebox-slave` which works nice.
+This is a good situation to test the `vagrant rdp vmware-slave` which works nice.
 
-The software installed in the basebox-slave is:
+The software installed in the vmware-slave is:
 
 * [Chocolatey](http://chocolatey.org) - package like installations on Windows
 * [packer 0.6.1.dev](http://www.packer.io/downloads.html) - built from source until 0.6.1 is released
@@ -78,7 +78,7 @@ As I cannot make the Windows VM public, I will change at least the box_url of th
 Edit the file `./scripts/install-jenkins-server.sh` to change the `smtpHost`
 
 ### License VMware Workstation
-Log into the basebox-slave machine and enter the license of VMware Workstation.
+Log into the vmware-slave machine and enter the license of VMware Workstation.
 
 
 ## Jenkins
@@ -154,14 +154,14 @@ open http://10.100.50.4:2200/
 
 ![jenkins jobs](pics/jenkins-jobs.png)
 
-You also can see the automatically added Jenkins node `basebox-slave` in the list of nodes:
+You also can see the automatically added Jenkins node `vmware-slave` in the list of nodes:
 
 
 ![jenkins nodes](pics/jenkins-nodes.png)
 
 ## Eat your own dogfood
 
-After successfully running some Jenkins jobs to build baseboxes, vagrant-vcloud even can eat its own dogfood. The workspace of the `basebox-slave` is accessible through the Jenkins server, as shown here:
+After successfully running some Jenkins jobs to build baseboxes, vagrant-vcloud even can eat its own dogfood. The workspace of the `vmware-slave` is accessible through the Jenkins server, as shown here:
 
 
 ![jenkins workspace with dogfood](pics/jenkins-dogfood.png)

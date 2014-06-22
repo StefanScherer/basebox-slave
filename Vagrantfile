@@ -31,9 +31,9 @@ Vagrant.configure("2") do |config|
     end
   end
 
-  config.vm.define :"basebox-slave" do |slave|
+  config.vm.define :"vmware-slave" do |slave|
     slave.vm.box = "windows_2008_r2"
-    slave.vm.hostname = "basebox-slave"
+    slave.vm.hostname = "vmware-slave"
 
     slave.vm.communicator = "winrm"
     slave.vm.network :forwarded_port, guest: 5985, host: 5985, id: "winrm", auto_correct: true
@@ -42,9 +42,9 @@ Vagrant.configure("2") do |config|
 
     slave.vm.network :private_network, ip: "172.16.32.3" # VirtualBox
 
-    slave.vm.provision "shell", path: "scripts/provision-basebox-slave.bat"
+    slave.vm.provision "shell", path: "scripts/provision-vmware-slave.bat"
     slave.vm.provision "shell", path: "scripts/install-jenkins-slave.bat"
-    # reboot the basebox-slave to have all tools in PATH and then start the swarm client 
+    # reboot the vmware-slave to have all tools in PATH and then start the swarm client
     slave.vm.provision "shell", path: "scripts/reboot-to-slave.bat"
     slave.vm.provider "vcloud" do |v|
       v.memory = 4096
@@ -58,7 +58,28 @@ Vagrant.configure("2") do |config|
       v.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
       v.customize ["modifyvm", :id, "--vram", "32"]
     end
+  end
 
+
+  config.vm.define :"virtualbox-slave" do |slave|
+    slave.vm.box = "ubuntu1204-100gb"
+    slave.vm.hostname = "virtualbox-slave"
+
+    slave.vm.network :private_network, ip: "172.16.32.4" # VirtualBox
+
+    slave.vm.provision "shell", path: "scripts/provision-virtualbox-slave.sh"
+    slave.vm.provision "shell", path: "scripts/install-jenkins-slave.sh"
+    slave.vm.provider "vcloud" do |v|
+      v.memory = 4096
+      v.cpus = 2
+      v.nested_hypervisor = true
+    end
+    slave.vm.provider :virtualbox do |v|
+      v.memory = 2048
+      v.cpus = 2
+      v.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
+      v.customize ["modifyvm", :id, "--vram", "32"]
+    end
   end
 
 end
