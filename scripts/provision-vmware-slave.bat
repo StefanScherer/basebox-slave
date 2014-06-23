@@ -1,5 +1,5 @@
 echo Extend drive C to maximum 
-echo select volume 2 >%TEMP%\extendC.txt
+echo select volume 0 >%TEMP%\extendC.txt
 echo extend >>%TEMP%\extendC.txt
 diskpart.exe /s %TEMP%\extendC.txt
 set WORKDRIVE=C:
