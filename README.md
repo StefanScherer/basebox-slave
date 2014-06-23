@@ -44,7 +44,7 @@ vagrant ssh basebox-jenkins
 ```
 
 ### vmware-slave
-The `vmware-slave` VM is a Windows machine (I use a windows_2008_r2). This machine has the IP address `176.16.32.3` and has RDP, SSH and WinRM ports opened. This VM will build baseboxes for the vCloud provider, but could also be used to build baseboxes for the VMware Workstation/Fusion provider
+The `vmware-slave` VM is a Windows machine (I use a windows_2008_r2). This machine has the IP address `176.16.32.3` and has RDP, SSH and WinRM ports opened. This VM will build baseboxes for the vCloud provider, but could also be used to build baseboxes for the VMware Workstation/Fusion provider.
 
 You can login to your jenkins slave with RDP with the following command:
 
@@ -69,7 +69,7 @@ The software installed in the vmware-slave is:
 * Java + Jenkins Swarm Client (Node labels: windows + vmware)
 
 ### virtualbox-slave
-The `virtualbox-slave` VM is a Windows machine (I use a windows_2008_r2). This machine has the IP address `176.16.32.4` and has RDP, SSH and WinRM ports opened. This VM will build baseboxes for the vCloud provider, but could also be used to build baseboxes for the VirtualBox provider
+The `virtualbox-slave` VM is a Windows machine (I use a windows_2008_r2). This machine has the IP address `176.16.32.4` and has RDP, SSH and WinRM ports opened. This VM will build baseboxes for the VirtualBox provider.
 
 You can login to your jenkins slave with RDP with the following command:
 
