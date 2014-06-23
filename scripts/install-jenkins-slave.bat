@@ -1,13 +1,17 @@
 rem @echo off
 if exist c:\jenkins\swarm-client.jar goto :EOF
+set hypervisor=%1
+if "%1x"=="x" set hypervisor=vmware
 
+if exist %WinDir%\microsoft.net\framework\v4.0.30319 goto :have_net
 echo Ensuring .NET 4.0 is installed
 @powershell -NoProfile -ExecutionPolicy unrestricted -Command "iex ((new-object net.webclient).DownloadString('https://raw.github.com/StefanScherer/arduino-ide/install/InstallNet4.ps1'))"
-where cinst
-if ERRORLEVEL 1 (
-  echo Installing Chocolatey
-  @powershell -NoProfile -ExecutionPolicy unrestricted -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%systemdrive%\chocolatey\bin
-)
+:have_net
+if "%ChocolateyInstall%x"=="x" set ChocolateyInstall=%SystemDrive%\Chocolatey
+if exist %ChocolateyInstall% goto :have_choc
+echo Installing Chocolatey
+@powershell -NoProfile -ExecutionPolicy unrestricted -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%systemdrive%\chocolatey\bin
+:have_choc
 
 where cinst
 if ERRORLEVEL 1 goto set_chocolatey
@@ -79,22 +83,18 @@ call :heredoc html >%TEMP%\JenkinsSwarmClient.xml && goto next2
   <Actions Context="Author">
     <Exec>
       <Command>java.exe</Command>
-      <Arguments>-jar c:\jenkins\swarm-client.jar -autoDiscoveryAddress 172.16.32.255 -executors 1 -labels windows -labels vmware -fsroot c:\jenkins</Arguments>
+      <Arguments>-jar c:\jenkins\swarm-client.jar -autoDiscoveryAddress 172.16.32.255 -executors 1 -labels windows -labels !hypervisor! -fsroot c:\jenkins</Arguments>
     </Exec>
   </Actions>
 </Task>
 :next2
-
-rem IF Jenkins has security set, use following Arguments for scheduled task:
-rem add options -username and -password to swarm-client:
-rem       <Arguments>-jar c:\jenkins\swarm-client.jar -autoDiscoveryAddress 172.16.32.255 -username vagrant -password vagrant -executors 1 -labels windows -fsroot c:\jenkins</Arguments>
 
 rem Schedule start of swarm client at start of the machine (after next reboot)
 rem
 
 schtasks /CREATE /TN JenkinsSwarmClient /RU vagrant /RP vagrant /XML "%TEMP%\JenkinsSwarmClient.xml"
 
-goto :EOF
+goto :done_jenkins_slave
 
 
 ::########################################
@@ -116,4 +116,5 @@ for /f "delims=" %%A in ('findstr /n "^" "%~f0"') do (
     )
   )
 )
-goto :EOF
+goto :done_jenkins_slave
+:done_jenkins_slave

@@ -2,7 +2,6 @@ echo Extend drive C to maximum
 echo select volume 0 >%TEMP%\extendC.txt
 echo extend >>%TEMP%\extendC.txt
 diskpart.exe /s %TEMP%\extendC.txt
-set WORKDRIVE=C:
 
 if exist %WinDir%\microsoft.net\framework\v4.0.30319 goto :have_net4
 echo Ensuring .NET 4.0 is installed
@@ -35,9 +34,6 @@ exit /b
 :GIT_DONE
 
 
-call c:\vagrant\scripts\install-packer-from-source.bat
-goto packer_firewall
-
 call cinst packer
 where packer
 if ERRORLEVEL 1 call :addPackerToUserPath
@@ -48,7 +44,7 @@ reg add HKCU\Environment /v Path /d "%OLD_USER_PATH%;C:\hashicorp\packer" /f
 set PATH=%PATH%;C:\hashicorp\packer
 exit /b
 :PACKER_DONE
-call cinst packer-post-processor-vagrant-vmware-ovf
+
 
 :packer_firewall
 netsh advfirewall firewall add rule name="packer-builder-vmware-iso" dir=in program="c:\HashiCorp\packer\packer-builder-vmware-iso.exe" action=allow
@@ -56,15 +52,10 @@ netsh advfirewall firewall add rule name="packer-builder-virtualbox-iso" dir=in 
 netsh advfirewall firewall add rule name="packer-builder-vmware-iso" dir=in program="c:\Users\vagrant\go\bin\packer-builder-vmware-iso.exe" action=allow
 netsh advfirewall firewall add rule name="packer-builder-virtualbox-iso" dir=in program="c:\Users\vagrant\go\bin\packer-builder-virtualbox-iso.exe" action=allow
 
-rem Install VMware Workstation
-if not exist "c:\Program Files (x86)\VMware\VMware Workstation" (
-  if not exist "%TEMP%\VMware-workstation.exe" (
-    echo Downloading VMware Workstation...
-    call wget --no-verbose --no-check-certificate -O "%TEMP%\VMware-workstation.exe" http://www.vmware.com/go/tryworkstation-win
-  )
-  echo Install VMware Workstation...
-  rem "%TEMP%\VMware-workstation.exe" /s /nsr /v EULAS_AGREED=1 SERIALNUMBER="xxxxx-xxxxx-xxxxx-xxxxx-xxxxx"
-  "%TEMP%\VMware-workstation.exe" /s /nsr /v EULAS_AGREED=1
-  del "%TEMP%\VMware-workstation.exe"
-)
+echo "Installing Jenkins Swarm Client"
+call c:\vagrant\scripts\install-jenkins-slave.bat virtualbox
 
+if exist "c:\Program Files\Oracle\VirtualBox" goto :have_vbox
+echo Installing VirtualBox - delayed - guest will reboot
+start c:\vagrant\scripts\install-virtualbox-and-reboot.bat
+:have_vbox

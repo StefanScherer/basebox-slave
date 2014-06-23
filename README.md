@@ -69,20 +69,24 @@ The software installed in the vmware-slave is:
 * Java + Jenkins Swarm Client (Node labels: windows + vmware)
 
 ### virtualbox-slave
-The `virtualbox-slave` VM is a Ubuntu machine. This machine has the IP address `176.16.32.4` and has SSH port opened. This VM will build baseboxes for the VirtualBox provider, eg. running machines on notebooks.
+The `virtualbox-slave` VM is a Windows machine (I use a windows_2008_r2). This machine has the IP address `176.16.32.4` and has RDP, SSH and WinRM ports opened. This VM will build baseboxes for the vCloud provider, but could also be used to build baseboxes for the VirtualBox provider
 
-You can login to your jenkins slave with SSH with the following command:
+You can login to your jenkins slave with RDP with the following command:
 
 ```bash
-vagrant ssh virtualbox-slave
+vagrant rdp virtualbox-slave
 ```
+
+Notice: Windows host users need Vagrant 1.6.4 or at least a patch for the bug in Vagrant 1.6.3 to make `vagrant rdp` work. There is a problem writing the rdp file for mstsc at the moment.
+
 The software installed in the virtualbox-slave is:
 
+* [Chocolatey](http://chocolatey.org) - package like installations on Windows
 * [packer 0.6.0](http://www.packer.io/downloads.html)
 * [VirtualBox 4.3.12](https://www.virtualbox.org/wiki/Linux_Downloads)
-* [Vagrant 1.6.3](http://www.vagrantup.com/downloads.html) for later tests of the generated baseboxes
-* git
-* Java + Jenkins Swarm Client (Node labels: ubuntu + virtualbox)
+* msysgit
+* wget
+* Java + Jenkins Swarm Client (Node labels: windows + virtualbox)
 
 ## Customization
 As I have started the project much smaller with simple shell provisioning scripts, it still has its roots in plain shell scripts. Perhaps in the future there will be some higher level solution with Chef, Puppet, Ansible, ...
