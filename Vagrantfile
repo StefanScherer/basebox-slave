@@ -61,9 +61,9 @@ Vagrant.configure("2") do |config|
   end
 
 
-  config.vm.define :"virtualbox-slave" do |slave|
+  config.vm.define :"vbox-slave" do |slave|
     slave.vm.box = "windows_2008_r2-100gb"
-    slave.vm.hostname = "virtualbox-slave"
+    slave.vm.hostname = "vbox-slave"
 
     slave.vm.communicator = "winrm"
     slave.vm.network :forwarded_port, guest: 5985, host: 5985, id: "winrm", auto_correct: true
