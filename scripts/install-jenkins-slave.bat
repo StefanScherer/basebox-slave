@@ -1,4 +1,8 @@
 rem @echo off
+
+rem set timezone to German timezone
+tzutil /s "W. Europe Standard Time"
+
 if exist c:\jenkins\swarm-client.jar goto :EOF
 set hypervisor=%1
 if "%1x"=="x" set hypervisor=vmware

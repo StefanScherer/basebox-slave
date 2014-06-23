@@ -3,11 +3,6 @@ sudo sed -i 's,http://us.archive.ubuntu.com/ubuntu/,http://ftp.fau.de/ubuntu/,' 
 sudo sed -i 's,http://security.ubuntu.com/ubuntu,http://ftp.fau.de/ubuntu,' /etc/apt/sources.list
 sudo apt-get update -y
 
-# switch to German keyboard layout
-sudo sed -i 's/"us"/"de"/g' /etc/default/keyboard
-sudo DEBIAN_FRONTEND=noninteractive apt-get install -y console-common
-sudo install-keymap de
-
 # set timezone to German timezone
 echo "Europe/Berlin" | sudo tee /etc/timezone
 sudo dpkg-reconfigure -f noninteractive tzdata
