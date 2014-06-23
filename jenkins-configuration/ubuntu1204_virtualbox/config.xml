@@ -28,13 +28,12 @@
   <triggers/>
   <concurrentBuild>false</concurrentBuild>
   <builders>
-    <hudson.tasks.Shell>
-      <command>if [ -d output-virtualbox-iso ]; then
-  rm -rf output-virtualbox-iso
-fi
-packer build --only=virtualbox-iso ubuntu1204.json
-</command>
-    </hudson.tasks.Shell>
+    <hudson.tasks.BatchFile>
+      <command>if exist output-virtualbox-iso (
+  rmdir /S /Q output-virtualbox-iso
+)
+packer build --only=virtualbox-iso ubuntu1204.json</command>
+    </hudson.tasks.BatchFile>
   </builders>
   <publishers>
     <hudson.tasks.Mailer plugin="mailer@1.8">
