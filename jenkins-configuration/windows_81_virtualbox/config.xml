@@ -32,6 +32,9 @@
       <command>if exist output-virtualbox-iso (
   rmdir /S /Q output-virtualbox-iso
 )
+if exist &quot;C:\Windows\system32\config\systemprofile\VirtualBox VMs\packer-virtualbox-iso&quot; (
+  rmdir /S /Q &quot;C:\Windows\system32\config\systemprofile\VirtualBox VMs\packer-virtualbox-iso&quot;
+)
 packer build --only=virtualbox-iso windows_81.json</command>
     </hudson.tasks.BatchFile>
   </builders>

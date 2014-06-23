@@ -32,6 +32,9 @@
       <command>if exist output-virtualbox-iso (
   rmdir /S /Q output-virtualbox-iso
 )
+if exist &quot;C:\Windows\system32\config\systemprofile\VirtualBox VMs\ubuntu1204-desktop&quot; (
+  rmdir /S /Q &quot;C:\Windows\system32\config\systemprofile\VirtualBox VMs\ubuntu1204-desktop&quot;
+)
 packer build --only=vmware-iso ubuntu1204-desktop.json</command>
     </hudson.tasks.BatchFile>
   </builders>
