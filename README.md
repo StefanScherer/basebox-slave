@@ -64,6 +64,9 @@ The software installed in the vmware-slave is:
 * [packer 0.6.1.dev](http://www.packer.io/downloads.html) - built from source until 0.6.1 is released
 * [packer-post-processor-vagrant-vmware-ovf 0.1.2](https://github.com/gosddc/packer-post-processor-vagrant-vmware-ovf/releases)
 * VMware Workstation 10.0.2
+* [Vagrant 1.6.3](http://www.vagrantup.com/downloads.html)
+* [vagrant-vcloud 0.4.0](https://github.com/frapposelli/vagrant-vcloud/releases)
+* optional global Vagrantfile from host (`./resources/Vagrantfile-global`)
 * msysgit
 * wget
 * Java + Jenkins Swarm Client (Node labels: windows + vmware)
@@ -95,6 +98,38 @@ As I have started the project much smaller with simple shell provisioning script
 ### Choose the baseboxes
 In the `Vagrantfile` you may adjust the boxes and box_urls used for the three VMs.
 As I cannot make the Windows VM public, I will change at least the box_url of the Ubuntu VM to one pointing to the vagrantcloud soon.
+
+### Optional global Vagrantfile
+In the `vmware-slave` box also Vagrant will be installed to test and upload the generated vcloud boxes.
+Your user credentials to access the vCloud org could be passed with an optional global Vagrantfile.
+This file must be placed at `./resources/Vagrantfile-global` and will be copied on provisioning into `%USERPROFILE%\.vagrant.d\Vagrantfile`.
+
+A sample Vagrantfile-global looks like this:
+
+```ruby
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+
+  if Vagrant.has_plugin?("vagrant-vcloud")
+    # vCloud Director provider settings
+    config.vm.provider :vcloud do |vcloud|
+      vcloud.hostname = "https://YOUR-VCLOUD"
+      vcloud.username = "vagrant"
+      vcloud.password = 'S@perS$cretP1ass'
+      vcloud.org_name = "YOUR-ORG"
+      vcloud.vdc_name = "YOUR-VDC"
+      vcloud.catalog_name = "Vagrant"
+      vcloud.vdc_network_name = "YOUR-NETWORK"
+
+      # we do not need a edge gateway as the vmware-slave already is inside the vCloud
+      # vcloud.vdc_edge_gateway = "SS-EDGE"
+      # vcloud.vdc_edge_gateway_ip = "10.100.50.4"
+    end
+  end
+end
+```
 
 ### Mail Server for Jenkins mails
 Edit the file `./scripts/install-jenkins-server.sh` to change the `smtpHost`
