@@ -35,7 +35,7 @@ exit /b
 :GIT_DONE
 
 
-call c:\vagrant\scripts\install-packer-from-source.bat
+call C:\vagrant\scripts\install-packer-from-source.bat
 goto packer_firewall
 
 call cinst packer
@@ -63,11 +63,15 @@ set PATH=%PATH%;C:\hashicorp\vagrant\bin
 :have_vagrant
 echo Installing vagrant-vcloud plugin ...
 vagrant plugin install vagrant-vcloud
-if exist c:\Users\vagrant\.vagrant.d\Vagrantfile goto :have_vagrantfile
-if exist c:\vagrant\resources\Vagrantfile-global (
-  copy c:\vagrant\resources\Vagrantfile-global c:\Users\vagrant\.vagrant.d\Vagrantfile
+if exist C:\Users\vagrant\.vagrant.d\Vagrantfile goto :have_vagrantfile
+if exist C:\vagrant\resources\Vagrantfile-global (
+  copy C:\vagrant\resources\Vagrantfile-global C:\Users\vagrant\.vagrant.d\Vagrantfile
 )
 :have_vagrantfile
+if exist C:\HashiCorp\Vagrant\embedded\gems\gems\vagrant-1.6.3\plugins\hosts\windows\cap\rdp.rb (
+  echo Patching Vagrant 1.6.3
+  copy /Y C:\vagrant\scripts\rdp.rb C:\HashiCorp\Vagrant\embedded\gems\gems\vagrant-1.6.3\plugins\hosts\windows\cap\rdp.rb
+)
 
 rem Install VMware Workstation
 if not exist "c:\Program Files (x86)\VMware\VMware Workstation" (
