@@ -130,10 +130,7 @@ to install grunt-jenkins and other Node dependencies.
 ### Customize Jenkins URL
 In the `Gruntfile.js` you have to enter the Jenkins IP address and port to connect from your host to the Jenkins VM.
 
-In my case this is `10.100.50.4:2200` as you can see in the Gruntfile.js.
-
-You also need a patch for grunt-jenkins
-
+In my case this is `10.100.50.4:2200` as you can see in the Gruntfile.js. With grunt-jenkins 0.5.0 or above you can backup and restore through your vCloud Edge Gateway.
 
 ### Install Jenkins jobs
 
@@ -199,4 +196,4 @@ But Jenkins could also be used to test the basebox and upload it to your basebox
 Copyright (c) 2014 Stefan Scherer
 
 MIT License, see LICENSE for more details.
-    
+
