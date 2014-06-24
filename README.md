@@ -68,18 +68,19 @@ The software installed in the vmware-slave is:
 * wget
 * Java + Jenkins Swarm Client (Node labels: windows + vmware)
 
-### virtualbox-slave
-The `virtualbox-slave` VM is a Windows machine (I use a windows_2008_r2). This machine has the IP address `176.16.32.4` and has RDP, SSH and WinRM ports opened. This VM will build baseboxes for the VirtualBox provider.
+### vbox-slave
+The `vbox-slave` VM is a Windows machine (I use a windows_2008_r2). This machine has the IP address `176.16.32.4` and has RDP, SSH and WinRM ports opened. This VM will build baseboxes for the VirtualBox provider.
+Notice: My intended hostname was virtualbox-slave, but that is too long for windows, and guest customizations of vCloud aborts with an error.
 
 You can login to your jenkins slave with RDP with the following command:
 
 ```bash
-vagrant rdp virtualbox-slave
+vagrant rdp vbox-slave
 ```
 
 Notice: Windows host users need Vagrant 1.6.4 or at least a patch for the bug in Vagrant 1.6.3 to make `vagrant rdp` work. There is a problem writing the rdp file for mstsc at the moment.
 
-The software installed in the virtualbox-slave is:
+The software installed in the vbox-slave is:
 
 * [Chocolatey](http://chocolatey.org) - package like installations on Windows
 * [packer 0.6.0](http://www.packer.io/downloads.html)

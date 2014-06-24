@@ -8,12 +8,12 @@
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
-        <url>https://github.com/StefanScherer/packer-windows</url>
+        <url>https://github.com/StefanScherer/ubuntu-vm</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>*/my_vagrant_vcloud</name>
+        <name>*/my</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
@@ -32,10 +32,10 @@
       <command>if exist output-virtualbox-iso (
   rmdir /S /Q output-virtualbox-iso
 )
-if exist &quot;C:\Windows\system32\config\systemprofile\VirtualBox VMs\packer-virtualbox-iso&quot; (
-  rmdir /S /Q &quot;C:\Windows\system32\config\systemprofile\VirtualBox VMs\packer-virtualbox-iso&quot;
+if exist &quot;C:\Windows\system32\config\systemprofile\VirtualBox VMs\ubuntu1204-100gb&quot; (
+  rmdir /S /Q &quot;C:\Windows\system32\config\systemprofile\VirtualBox VMs\ubuntu1204-100gb&quot;
 )
-packer build --only=virtualbox-iso windows_2008_r2.json</command>
+packer build --only=vmware-iso ubuntu1204-100gb.json</command>
     </hudson.tasks.BatchFile>
   </builders>
   <publishers>
