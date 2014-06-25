@@ -18,8 +18,10 @@ set PATH=%PATH%;%ChocolateyInstall%\bin
 
 :install_packer
 
+if exist c:\go\bin goto :have_golang
 call cinst golang
 set PATH=%PATH%;c:\go\bin
+:have_golang
 
 call cinst git
 where git
@@ -53,6 +55,7 @@ exit /b
 :GOPATH_DONE
 
 
+if exist %GOPATH%\bin\packer.exe goto :packer_compiled
 echo Downloading and compiling packer
 go get github.com/mitchellh/packer
 cd /D %GOPATH%\src\github.com\mitchellh\packer
@@ -60,6 +63,7 @@ go get ./...
 cd /D %GOPATH%\bin
 for /f "tokens=1" %%i in ('dir /b builder* command* post* provision*') DO if exist packer-%%i del packer-%%i
 for /f "tokens=1" %%i in ('dir /b builder* command* post* provision*') DO ren %%i packer-%%i
+:packer_compiled
 
 echo Downloading and compiling packer-post-processor-vagrant-vmware-ovf
 go get github.com/gosddc/packer-post-processor-vagrant-vmware-ovf
