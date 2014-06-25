@@ -35,7 +35,7 @@
 if exist &quot;C:\Windows\system32\config\systemprofile\VirtualBox VMs\ubuntu1204-100gb&quot; (
   rmdir /S /Q &quot;C:\Windows\system32\config\systemprofile\VirtualBox VMs\ubuntu1204-100gb&quot;
 )
-packer build --only=vmware-iso ubuntu1204-100gb.json</command>
+packer build --only=virtualbox-iso ubuntu1204-100gb.json</command>
     </hudson.tasks.BatchFile>
   </builders>
   <publishers>
