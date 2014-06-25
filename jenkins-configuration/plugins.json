@@ -98,5 +98,9 @@
   {
     "id": "checkstyle",
     "version": "3.39"
+  },
+  {
+    "id": "greenballs",
+    "version": "1.14"
   }
 ]
