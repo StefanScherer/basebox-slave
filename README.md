@@ -99,7 +99,16 @@ As I have started the project much smaller with simple shell provisioning script
 In the `Vagrantfile` you may adjust the boxes and box_urls used for the three VMs.
 As I cannot make the Windows VM public, I will change at least the box_url of the Ubuntu VM to one pointing to the vagrantcloud soon.
 
-### Optional global Vagrantfile
+### Mail Server for Jenkins mails
+Edit the file `./scripts/install-jenkins-server.sh` to change the `smtpHost`
+
+### License VMware Workstation
+Log into the vmware-slave machine and enter the license of VMware Workstation.
+
+
+## Resources
+
+### Vagrantfile-global
 In the `vmware-slave` box also Vagrant will be installed to test and upload the generated vcloud boxes.
 Your user credentials to access the vCloud org could be passed with an optional global Vagrantfile.
 This file must be placed at `./resources/Vagrantfile-global` and will be copied on provisioning into `%USERPROFILE%\.vagrant.d\Vagrantfile`.
@@ -124,20 +133,32 @@ Vagrant.configure("2") do |config|
       vcloud.vdc_network_name = "YOUR-NETWORK"
 
       # we do not need a edge gateway as the vmware-slave already is inside the vCloud
-      # vcloud.vdc_edge_gateway = "SS-EDGE"
+      # vcloud.vdc_edge_gateway = "YOUR-EDGE"
       # vcloud.vdc_edge_gateway_ip = "10.100.50.4"
     end
   end
 end
 ```
 
-### Mail Server for Jenkins mails
-Edit the file `./scripts/install-jenkins-server.sh` to change the `smtpHost`
+### test-box-vcloud-credentials.bat
+In the `vmware-slave` the upload of the generated basebox will be done with ovftool. The script for the upload also needs your connection data and credentials to connect to your vCloud org.
+This file must be placed at `./resources/test-box-vcloud-credentials.bat` and will be used in the Jenkins jobs in the script [bin/test-box-vcloud.bat](https://github.com/StefanScherer/ubuntu-vm/blob/my/bin/test-box-vcloud.bat) (see my [ubuntu-vm Repo](https://github.com/StefanScherer/ubuntu-vm/tree/my)).
 
-### License VMware Workstation
-Log into the vmware-slave machine and enter the license of VMware Workstation.
+A sample test-box-vcloud-credentials.bat looks like this:
+
+```cmd
+@set vcloud_hostname=YOUR-VCLOUD
+@set vcloud_username=vagrant
+@set vcloud_password=S@perS$cretP1ass
+@set vcloud_org=YOUR-ORG
+@set vcloud_catalog=BASEBOX-TESTING
+@set vcloud_vdc=YOUR-VDC
+```
+
+I use the @ sign in the script to hide it in Jenkins console logs.
 
 
+This is done with the file `./resources/test-box-vcloud-credentials.bat` provided from the host 
 ## Jenkins
 
 I use [grunt-jenkins](https://www.npmjs.org/package/grunt-jenkins) to customize and backup the Jenkins configuration. So my Jenkins box is only a throw away product to be set up again with Jenkins job configurations from source control.
@@ -179,7 +200,7 @@ grunt jenkins-install
 When you added / removed plugins you must restart Jenkins:
 
 ```
-open http://10.100.50.4:2200/safeRestart
+curl http://10.100.50.4:2200/safeRestart
 ```
 
 Have a look at the Jenkins jobs, there you can see how I build the baseboxes and from with GitHub Repos they come from. See below for more details.
