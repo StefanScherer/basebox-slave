@@ -85,3 +85,13 @@ if not exist "c:\Program Files (x86)\VMware\VMware Workstation" (
   del "%TEMP%\VMware-workstation.exe"
 )
 
+rem put ovftool in path (not necessary for packer, but for jenkins test-box-vcloud.bat)
+where ovftool
+if ERRORLEVEL 1 call :addOvfToolToUserPath
+goto OVFTOOL_DONE
+:addOvfToolToUserPath
+for /F "tokens=2* delims= " %%f IN ('reg query "HKCU\Environment" /v Path ^| findstr /i path') do set OLD_USER_PATH=%%g
+reg add HKCU\Environment /v Path /d "%OLD_USER_PATH%;C:\Program Files (x86)\VMware\VMware Workstation\OVFTool" /f
+set PATH=%PATH%;C:\Program Files (x86)\VMware\VMware Workstation\OVFTool
+exit /b
+:OVFTOOL_DONE
