@@ -32,7 +32,9 @@
       <command>if exist output-vmware-iso (
   rmdir /S /Q output-vmware-iso
 )
-packer build --only=vmware-iso ubuntu1204-vcloud.json</command>
+packer build --only=vmware-iso ubuntu1204-vcloud.json
+bin\test-box-vcloud.bat ubuntu1204_vcloud.box ubuntu1204 vcloud vcloud
+</command>
     </hudson.tasks.BatchFile>
   </builders>
   <publishers>
@@ -43,9 +45,9 @@ packer build --only=vmware-iso ubuntu1204-vcloud.json</command>
     </hudson.tasks.Mailer>
   </publishers>
   <buildWrappers>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.12"/>
     <hudson.plugins.ansicolor.AnsiColorBuildWrapper plugin="ansicolor@0.4.0">
       <colorMapName>xterm</colorMapName>
     </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
-    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.12"/>
   </buildWrappers>
 </project>
