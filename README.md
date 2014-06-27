@@ -224,9 +224,9 @@ under version control, yay!
 So the whole Jenkins server could be destroyed and rebuilt with another `vagrant up --provider=vcloud`.
 
 ## Tested baseboxes with Serverspec
-If you build packer baseboxes you propably know, that a successful build is one thing, but a tested basebox would be even better.
+If you build packer baseboxes you propably know that a successful build is one thing, but a tested basebox would be even better.
 
-All of my Jenkins jobs you can find in this repo do some tests within the vCloud.
+All of my Jenkins jobs you can find in this repo do some tests within the vCloud. Each Jenkins job looks like this:
 
 * Build the Linux/Windows basebox with packer for the vcloud provider
 * Add the basebox to vagrant with `vagrant add box`
