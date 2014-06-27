@@ -13,7 +13,7 @@
     </userRemoteConfigs>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>*/my</name>
+        <name>*/my_vagrant_vcloud</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
@@ -32,7 +32,10 @@
       <command>if exist output-vmware-iso (
   rmdir /S /Q output-vmware-iso
 )
-packer build --only=vmware-iso windows_2012_r2_vcloud.json</command>
+packer build --only=vmware-iso windows_2012_r2_vcloud.json
+
+del /y %USERPROFILE%\.ssh\known_hosts
+bin\test-box-vcloud.bat windows_2012_r2_vcloud.box windows_2012_r2 vcloud vcloud</command>
     </hudson.tasks.BatchFile>
   </builders>
   <publishers>
@@ -43,9 +46,9 @@ packer build --only=vmware-iso windows_2012_r2_vcloud.json</command>
     </hudson.tasks.Mailer>
   </publishers>
   <buildWrappers>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.12"/>
     <hudson.plugins.ansicolor.AnsiColorBuildWrapper plugin="ansicolor@0.4.0">
       <colorMapName>xterm</colorMapName>
     </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
-    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.12"/>
   </buildWrappers>
 </project>
