@@ -223,6 +223,21 @@ under version control, yay!
 
 So the whole Jenkins server could be destroyed and rebuilt with another `vagrant up --provider=vcloud`.
 
+## Tested baseboxes with Serverspec
+If you build packer baseboxes you propably know, that a successful build is one thing, but a tested basebox would be even better.
+
+All of my Jenkins jobs you can find in this repo do some tests within the vCloud.
+
+* Build the Linux/Windows basebox with packer for the vcloud provider
+* Add the basebox to vagrant with `vagrant add box`
+* Upload the basebox with ovftool into a `BASEBOX-TESTING` catalog in vCloud
+* Create a test vApp with the new Linux/Windows box with a minimal Vagrantfile and `vagrant up --provider=vcloud`
+* Run some [Serverspec](http://serverspec.org) tests for both Linux/Windows with the [vagrant-serverspec](https://github.com/jvoorhis/vagrant-serverspec) plugin.
+* Windows serverspec tests are in [vcloud_spec.rb](https://github.com/StefanScherer/packer-windows/blob/my_vagrant_vcloud/test/vcloud_spec.rb)
+* Linux serverspec tests are in [vcloud_spec.rb](https://github.com/StefanScherer/ubuntu-vm/blob/my/test/vcloud_spec.rb)
+* Destroy the vApp again with `vagrant destroy -f`
+* Remove the basebox from vagrant with `vagrant box remove`
+
 ## View Jenkins Web Interface
 If you just want to view into Jenkins use this command:
 
