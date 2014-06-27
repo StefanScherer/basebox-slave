@@ -103,7 +103,8 @@ As I cannot make the Windows VM public, I will change at least the box_url of th
 Edit the file `./scripts/install-jenkins-server.sh` to change the `smtpHost`
 
 ### License VMware Workstation
-Log into the vmware-slave machine and enter the license of VMware Workstation.
+**Notice: Manual step:** Log into the vmware-slave machine and enter the license of VMware Workstation.
+If you start jobs from Jenkins without entering a license or the trial, the vmware-slave will hang.
 
 
 ## Resources
@@ -129,7 +130,7 @@ Vagrant.configure("2") do |config|
       vcloud.password = 'S@perS$cretP1ass'
       vcloud.org_name = "YOUR-ORG"
       vcloud.vdc_name = "YOUR-VDC"
-      vcloud.catalog_name = "Vagrant"
+      vcloud.catalog_name = "BASEBOX-TESTING"
       vcloud.vdc_network_name = "YOUR-NETWORK"
 
       # we do not need a edge gateway as the vmware-slave already is inside the vCloud
@@ -139,6 +140,8 @@ Vagrant.configure("2") do |config|
   end
 end
 ```
+
+I suggest a `BASEBOX-TESTING` catalog for test uploads in the Jenkins build jobs.
 
 ### test-box-vcloud-credentials.bat
 In the `vmware-slave` the upload of the generated basebox will be done with ovftool. The script for the upload also needs your connection data and credentials to connect to your vCloud org.
@@ -156,7 +159,7 @@ A sample test-box-vcloud-credentials.bat looks like this:
 ```
 
 I use the @ sign in the script to hide it in Jenkins console logs.
-
+I suggest a `BASEBOX-TESTING` catalog for test uploads in the Jenkins build jobs.
 
 This is done with the file `./resources/test-box-vcloud-credentials.bat` provided from the host 
 ## Jenkins
