@@ -34,8 +34,7 @@
 )
 packer build --only=vmware-iso windows_81_vcloud.json
 
-del /y %USERPROFILE%\.ssh\known_hosts
-bin\test-box-vcloud.bat windows_81_vcloud.box windows_81 vcloud vcloud
+bin\test-box-vcloud.bat windows_81_vcloud.box windows_81
 </command>
     </hudson.tasks.BatchFile>
   </builders>

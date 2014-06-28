@@ -34,9 +34,8 @@
 )
 packer build --only=vmware-iso ubuntu1204-desktop-vcloud.json
 
-
-del /y %USERPROFILE%\.ssh\known_hosts
-bin\test-box-vcloud.bat ubuntu1204-desktop_vcloud.box ubuntu1204-desktop vcloud vcloud</command>
+bin\test-box-vcloud.bat ubuntu1204-desktop_vcloud.box ubuntu1204-desktop
+</command>
     </hudson.tasks.BatchFile>
   </builders>
   <publishers>

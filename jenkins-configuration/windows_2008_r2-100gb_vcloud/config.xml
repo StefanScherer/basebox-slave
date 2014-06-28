@@ -33,6 +33,8 @@
   rmdir /S /Q output-vmware-iso
 )
 packer build --only=vmware-iso windows_2008_r2-100gb_vcloud.json</command>
+
+bin\test-box-vcloud.bat windows_2008_r2-100gb_vcloud.box windows_2008_r2-100gb
     </hudson.tasks.BatchFile>
   </builders>
   <publishers>
