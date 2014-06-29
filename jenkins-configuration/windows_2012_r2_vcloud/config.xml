@@ -39,6 +39,12 @@ bin\test-box-vcloud.bat windows_2012_r2_vcloud.box windows_2012_r2
     </hudson.tasks.BatchFile>
   </builders>
   <publishers>
+    <hudson.plugins.textfinder.TextFinderPublisher plugin="text-finder@1.10">
+      <regexp>examples, 0 failures</regexp>
+      <succeedIfFound>true</succeedIfFound>
+      <unstableIfFound>false</unstableIfFound>
+      <alsoCheckConsoleOutput>true</alsoCheckConsoleOutput>
+    </hudson.plugins.textfinder.TextFinderPublisher>
     <hudson.tasks.Mailer plugin="mailer@1.8">
       <recipients>scherer_stefan@icloud.com</recipients>
       <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>

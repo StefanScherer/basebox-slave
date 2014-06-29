@@ -32,12 +32,19 @@
       <command>if exist output-vmware-iso (
   rmdir /S /Q output-vmware-iso
 )
-packer build --only=vmware-iso windows_2008_r2-100gb_vcloud.json</command>
+packer build --only=vmware-iso windows_2008_r2-100gb_vcloud.json
 
 bin\test-box-vcloud.bat windows_2008_r2-100gb_vcloud.box windows_2008_r2-100gb
+</command>
     </hudson.tasks.BatchFile>
   </builders>
   <publishers>
+    <hudson.plugins.textfinder.TextFinderPublisher plugin="text-finder@1.10">
+      <regexp>examples, 0 failures</regexp>
+      <succeedIfFound>true</succeedIfFound>
+      <unstableIfFound>false</unstableIfFound>
+      <alsoCheckConsoleOutput>true</alsoCheckConsoleOutput>
+    </hudson.plugins.textfinder.TextFinderPublisher>
     <hudson.tasks.Mailer plugin="mailer@1.8">
       <recipients>scherer_stefan@icloud.com</recipients>
       <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>

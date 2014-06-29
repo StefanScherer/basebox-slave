@@ -102,5 +102,9 @@
   {
     "id": "greenballs",
     "version": "1.14"
+  },
+  {
+    "id": "text-finder",
+    "version": "1.10"
   }
 ]
