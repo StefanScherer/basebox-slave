@@ -75,6 +75,7 @@ java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin git
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin swarm
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin ansicolor
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin timestamper
+java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin textfinder
 
 # restart jenkins to activate all plugins
 java -jar jenkins-cli.jar -s http://localhost:8080 safe-restart
