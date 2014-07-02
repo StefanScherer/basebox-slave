@@ -203,7 +203,7 @@ grunt jenkins-install
 When you added / removed plugins you must restart Jenkins:
 
 ```
-curl http://10.100.50.4:2200/safeRestart
+curl -X POST http://10.100.50.4:2200/safeRestart
 ```
 
 Have a look at the Jenkins jobs, there you can see how I build the baseboxes and from with GitHub Repos they come from. See below for more details.
