@@ -8,12 +8,12 @@
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
-        <url>https://github.com/StefanScherer/packer-windows</url>
+        <url>https://github.com/StefanScherer/sles-vm</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>*/my_vagrant_vcloud</name>
+        <name>*/master</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
@@ -32,19 +32,11 @@
       <command>if exist output-vmware-iso (
   rmdir /S /Q output-vmware-iso
 )
-packer build --only=vmware-iso windows_81_vcloud.json
-
-bin\test-box-vcloud.bat windows_81_vcloud.box windows_81
+packer build --only=vmware-iso sles11sp3.json
 </command>
     </hudson.tasks.BatchFile>
   </builders>
   <publishers>
-    <hudson.plugins.textfinder.TextFinderPublisher plugin="text-finder@1.10">
-      <regexp>examples, 0 failures</regexp>
-      <succeedIfFound>true</succeedIfFound>
-      <unstableIfFound>false</unstableIfFound>
-      <alsoCheckConsoleOutput>true</alsoCheckConsoleOutput>
-    </hudson.plugins.textfinder.TextFinderPublisher>
     <hudson.tasks.Mailer plugin="mailer@1.8">
       <recipients>scherer_stefan@icloud.com</recipients>
       <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>

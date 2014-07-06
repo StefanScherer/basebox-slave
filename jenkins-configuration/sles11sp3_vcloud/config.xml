@@ -8,12 +8,12 @@
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
-        <url>https://github.com/StefanScherer/packer-windows</url>
+        <url>https://github.com/StefanScherer/sles-vm</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
       <hudson.plugins.git.BranchSpec>
-        <name>*/my_vagrant_vcloud</name>
+        <name>*/master</name>
       </hudson.plugins.git.BranchSpec>
     </branches>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
@@ -32,9 +32,9 @@
       <command>if exist output-vmware-iso (
   rmdir /S /Q output-vmware-iso
 )
-packer build --only=vmware-iso windows_81_vcloud.json
+packer build --only=vmware-iso sles11sp3_vcloud.json
 
-bin\test-box-vcloud.bat windows_81_vcloud.box windows_81
+bin\test-box-vcloud.bat sles11sp3_vcloud.box sles11sp3
 </command>
     </hudson.tasks.BatchFile>
   </builders>

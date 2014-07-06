@@ -1,9 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?><project>
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
   <actions/>
-  <description/>
+  <description></description>
   <keepDependencies>false</keepDependencies>
   <properties/>
-  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.2.1">
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.2.2">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
@@ -31,8 +32,8 @@
       <command>if exist output-virtualbox-iso (
   rmdir /S /Q output-virtualbox-iso
 )
-if exist "C:\Windows\system32\config\systemprofile\VirtualBox VMs\ubuntu1204-desktop" (
-  rmdir /S /Q "C:\Windows\system32\config\systemprofile\VirtualBox VMs\ubuntu1204-desktop"
+if exist &quot;C:\Windows\system32\config\systemprofile\VirtualBox VMs\ubuntu1204-desktop&quot; (
+  rmdir /S /Q &quot;C:\Windows\system32\config\systemprofile\VirtualBox VMs\ubuntu1204-desktop&quot;
 )
 packer build --only=virtualbox-iso ubuntu1204-desktop.json</command>
     </hudson.tasks.BatchFile>
@@ -43,6 +44,24 @@ packer build --only=virtualbox-iso ubuntu1204-desktop.json</command>
       <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
       <sendToIndividuals>false</sendToIndividuals>
     </hudson.tasks.Mailer>
+    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.21">
+      <patterns>
+        <hudson.plugins.ws__cleanup.Pattern>
+          <pattern>packer_cache</pattern>
+          <type>INCLUDE</type>
+        </hudson.plugins.ws__cleanup.Pattern>
+      </patterns>
+      <deleteDirs>true</deleteDirs>
+      <skipWhenFailed>false</skipWhenFailed>
+      <cleanWhenSuccess>true</cleanWhenSuccess>
+      <cleanWhenUnstable>true</cleanWhenUnstable>
+      <cleanWhenFailure>true</cleanWhenFailure>
+      <cleanWhenNotBuilt>true</cleanWhenNotBuilt>
+      <cleanWhenAborted>true</cleanWhenAborted>
+      <notFailBuild>false</notFailBuild>
+      <cleanupMatrixParent>false</cleanupMatrixParent>
+      <externalDelete></externalDelete>
+    </hudson.plugins.ws__cleanup.WsCleanup>
   </publishers>
   <buildWrappers>
     <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.12"/>

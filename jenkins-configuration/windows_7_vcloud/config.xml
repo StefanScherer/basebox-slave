@@ -4,7 +4,7 @@
   <description></description>
   <keepDependencies>false</keepDependencies>
   <properties/>
-  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.2.1">
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.2.2">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
@@ -50,6 +50,24 @@ bin\test-box-vcloud.bat windows_7_vcloud.box windows_7
       <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
       <sendToIndividuals>false</sendToIndividuals>
     </hudson.tasks.Mailer>
+    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.21">
+      <patterns>
+        <hudson.plugins.ws__cleanup.Pattern>
+          <pattern>packer_cache</pattern>
+          <type>INCLUDE</type>
+        </hudson.plugins.ws__cleanup.Pattern>
+      </patterns>
+      <deleteDirs>true</deleteDirs>
+      <skipWhenFailed>false</skipWhenFailed>
+      <cleanWhenSuccess>true</cleanWhenSuccess>
+      <cleanWhenUnstable>true</cleanWhenUnstable>
+      <cleanWhenFailure>true</cleanWhenFailure>
+      <cleanWhenNotBuilt>true</cleanWhenNotBuilt>
+      <cleanWhenAborted>true</cleanWhenAborted>
+      <notFailBuild>false</notFailBuild>
+      <cleanupMatrixParent>false</cleanupMatrixParent>
+      <externalDelete></externalDelete>
+    </hudson.plugins.ws__cleanup.WsCleanup>
   </publishers>
   <buildWrappers>
     <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.12"/>
