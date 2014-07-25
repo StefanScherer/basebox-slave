@@ -157,3 +157,5 @@ $RECYCLE.BIN/
 
 resources
 node_modules
+
+jenkins-configuration/upload*/
