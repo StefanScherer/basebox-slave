@@ -1,4 +1,5 @@
-rem @echo off
+@echo off
+rem this echo off is essential for the heredoc code below
 
 rem set timezone to German timezone
 tzutil /s "W. Europe Standard Time"
