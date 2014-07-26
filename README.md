@@ -162,6 +162,27 @@ I use the @ sign in the script to hide it in Jenkins console logs.
 I suggest a `BASEBOX-TESTING` catalog for test uploads in the Jenkins build jobs.
 
 This is done with the file `./resources/test-box-vcloud-credentials.bat` provided from the host 
+
+### upload-vcloud-credentials.bat
+In the `vmware-slave` the upload of the tested basebox will be done with ovftool. The script for the upload also needs your connection data and credentials to connect to your global vCloud org.
+This file must be placed at `./resources/upload-vcloud-credentials.bat` and will be used in the `upload *`Jenkins jobs in the inlined script.
+
+A sample upload-vcloud-credentials.bat looks like this:
+
+```cmd
+@set vcloud_hostname=YOUR-VCLOUD
+@set vcloud_username=YOUR-UPLOAD-USER
+@set vcloud_password=S@perS$cretP1ass
+@set vcloud_org=YOUR-GLOBAL-ORG
+@set vcloud_catalog=YOUR-GLOBAL-CATALOG
+@set vcloud_vdc=YOUR-GLOBAL-VDC
+```
+
+I use the @ sign in the script to hide it in Jenkins console logs.
+I suggest a `COM-BUILD-CATATLOG` catalog for test uploads in the Jenkins build jobs.
+
+This is done with the file `./resources/upload-vcloud-credentials.bat` provided from the host.
+
 ## Jenkins
 
 I use [grunt-jenkins](https://www.npmjs.org/package/grunt-jenkins) to customize and backup the Jenkins configuration. So my Jenkins box is only a throw away product to be set up again with Jenkins job configurations from source control.

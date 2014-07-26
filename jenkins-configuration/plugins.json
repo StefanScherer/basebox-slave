@@ -108,6 +108,10 @@
     "version": "2.2.2"
   },
   {
+    "id": "bulk-builder",
+    "version": "1.5"
+  },
+  {
     "id": "ws-cleanup",
     "version": "0.21"
   }

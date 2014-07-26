@@ -14,3 +14,9 @@ if [ ! -f resources/test-box-vcloud-credentials.bat ]; then
     cp /vagrant/resources/basebox-slave/test-box-vcloud-credentials.bat resources/test-box-vcloud-credentials.bat
   fi
 fi
+if [ ! -f resources/upload-vcloud-credentials.bat ]; then
+  if [ -f /vagrant/resources/basebox-slave/upload-vcloud-credentials.bat ]; then
+    echo "Deploying upload-vcloud-credentials.bat from Host to vApp sync folder"
+    cp /vagrant/resources/basebox-slave/upload-vcloud-credentials.bat resources/upload-vcloud-credentials.bat
+  fi
+fi
