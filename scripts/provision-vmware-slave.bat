@@ -95,3 +95,8 @@ reg add HKCU\Environment /v Path /d "%OLD_USER_PATH%;C:\Program Files (x86)\VMwa
 set PATH=%PATH%;C:\Program Files (x86)\VMware\VMware Workstation\OVFTool
 exit /b
 :OVFTOOL_DONE
+
+if exist C:\vagrant\resources\hosts (
+  echo Appending additional hosts entries
+  copy C:\Windows\System32\drivers\etc\hosts + C:\vagrant\resources\hosts C:\Windows\System32\drivers\etc\hosts
+)
