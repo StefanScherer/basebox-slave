@@ -59,3 +59,8 @@ if exist "c:\Program Files\Oracle\VirtualBox" goto :have_vbox
 echo Installing VirtualBox - delayed - guest will reboot
 start c:\vagrant\scripts\install-virtualbox-and-reboot.bat
 :have_vbox
+
+if exist C:\vagrant\resources\hosts (
+  echo Appending additional hosts entries
+  copy C:\Windows\System32\drivers\etc\hosts + C:\vagrant\resources\hosts C:\Windows\System32\drivers\etc\hosts
+)

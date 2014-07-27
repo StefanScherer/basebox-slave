@@ -20,3 +20,9 @@ if [ ! -f resources/upload-vcloud-credentials.bat ]; then
     cp /vagrant/resources/basebox-slave/upload-vcloud-credentials.bat resources/upload-vcloud-credentials.bat
   fi
 fi
+if [ ! -f resources/hosts ]; then
+  if [ -f /vagrant/resources/basebox-slave/hosts ]; then
+    echo "Deploying additional hosts entries"
+    cp /vagrant/resources/basebox-slave/hosts resources/hosts
+  fi
+fi
