@@ -258,6 +258,10 @@ All of my Jenkins jobs you can find in this repo do some tests within the vCloud
 * Linux serverspec tests are in [vcloud_spec.rb](https://github.com/StefanScherer/ubuntu-vm/blob/my/test/vcloud_spec.rb)
 * Destroy the vApp again with `vagrant destroy -f`
 * Remove the basebox from vagrant with `vagrant box remove`
+* Upload the tested basebox into a global catalog.
+
+![basebox tests in vCloud](pics/basebox-tests.png)
+
 
 ## View Jenkins Web Interface
 If you just want to view into Jenkins use this command:
