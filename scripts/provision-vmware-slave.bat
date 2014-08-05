@@ -35,8 +35,9 @@ exit /b
 :GIT_DONE
 
 
-call C:\vagrant\scripts\install-packer-from-source.bat
-goto packer_firewall
+rem Install unreleased packer from GitHub sources
+rem call C:\vagrant\scripts\install-packer-from-source.bat
+rem goto packer_firewall
 
 call cinst packer
 where packer
