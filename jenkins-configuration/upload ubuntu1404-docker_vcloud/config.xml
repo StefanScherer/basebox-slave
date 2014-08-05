@@ -15,7 +15,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.BatchFile>
-      <command>set box_name=windows_7
+      <command>set box_name=ubuntu1404-docker
 set box_path=%box_name%_vcloud.box
 set box_provider=vcloud
 
@@ -46,7 +46,6 @@ goto :uploaded
 :first_upload
 @ovftool --acceptAllEulas --vCloudTemplate %VAGRANT_HOME%\boxes\%box_name%\0\%box_provider%\%box_name%.ovf &quot;vcloud://%vcloud_username%:%vcloud_password%@%vcloud_hostname%:443?org=%vcloud_org%&amp;vappTemplate=%box_name%&amp;catalog=%vcloud_catalog%&amp;vdc=%vcloud_vdc%&quot;
 if ERRORLEVEL 1 goto :error_vcloud_upload
-
 :uploaded
 vagrant box remove %box_name% --provider=%box_provider%
 if ERRORLEVEL 1 set result=%ERRORLEVEL%

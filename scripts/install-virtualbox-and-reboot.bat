@@ -4,7 +4,7 @@ rem all network connections. An so a vagrant provision would hang.
 rem As we also want to reboot the machine to have updated PATH in all
 rem services this is a working workaround.
 
-if "%ChocolateyInstall%x"=="x" set ChocolateyInstall=%SystemDrive%\Chocolatey
+if "%ChocolateyInstall%x"=="x" set ChocolateyInstall=%ALLUSERSPROFILE%\Chocolatey
 where cinst
 if ERRORLEVEL 1 goto set_chocolatey
 goto inst

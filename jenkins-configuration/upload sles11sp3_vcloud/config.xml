@@ -42,11 +42,12 @@ if exist c:\vagrant\resources\upload-vcloud-credentials.bat call c:\vagrant\reso
 echo Uploading %box_name%.ovf to vCloud %vcloud_hostname% / %vcloud_org% / %vcloud_catalog% / %box_name%
 @ovftool --acceptAllEulas --vCloudTemplate --overwrite %VAGRANT_HOME%\boxes\%box_name%\0\%box_provider%\%box_name%.ovf &quot;vcloud://%vcloud_username%:%vcloud_password%@%vcloud_hostname%:443?org=%vcloud_org%&amp;vappTemplate=%box_name%&amp;catalog=%vcloud_catalog%&amp;vdc=%vcloud_vdc%&quot;
 if ERRORLEVEL 1 goto :first_upload
-goto :test_vagrant_box
+goto :uploaded
 :first_upload
 @ovftool --acceptAllEulas --vCloudTemplate %VAGRANT_HOME%\boxes\%box_name%\0\%box_provider%\%box_name%.ovf &quot;vcloud://%vcloud_username%:%vcloud_password%@%vcloud_hostname%:443?org=%vcloud_org%&amp;vappTemplate=%box_name%&amp;catalog=%vcloud_catalog%&amp;vdc=%vcloud_vdc%&quot;
 if ERRORLEVEL 1 goto :error_vcloud_upload
 
+:uploaded
 vagrant box remove %box_name% --provider=%box_provider%
 if ERRORLEVEL 1 set result=%ERRORLEVEL%
 

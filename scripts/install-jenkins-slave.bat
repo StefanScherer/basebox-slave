@@ -12,17 +12,17 @@ if exist %WinDir%\microsoft.net\framework\v4.0.30319 goto :have_net
 echo Ensuring .NET 4.0 is installed
 @powershell -NoProfile -ExecutionPolicy unrestricted -Command "iex ((new-object net.webclient).DownloadString('https://raw.github.com/StefanScherer/arduino-ide/install/InstallNet4.ps1'))"
 :have_net
-if "%ChocolateyInstall%x"=="x" set ChocolateyInstall=%SystemDrive%\Chocolatey
+if "%ChocolateyInstall%x"=="x" set ChocolateyInstall=%ALLUSERSPROFILE%\Chocolatey
 if exist %ChocolateyInstall% goto :have_choc
 echo Installing Chocolatey
-@powershell -NoProfile -ExecutionPolicy unrestricted -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%systemdrive%\chocolatey\bin
+@powershell -NoProfile -ExecutionPolicy unrestricted -Command "iex ((new-object net.webclient).DownloadString('https://chocolatey.org/install.ps1'))" && SET PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin
 :have_choc
 
 where cinst
 if ERRORLEVEL 1 goto set_chocolatey
 goto inst
 :set_chocolatey
-set ChocolateyInstall=%SystemDrive%\Chocolatey
+set ChocolateyInstall=%ALLUSERSPROFILE%\Chocolatey
 set PATH=%PATH%;%ChocolateyInstall%\bin
 :inst
 
