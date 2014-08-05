@@ -13,12 +13,13 @@ Vagrant.configure("2") do |config|
 
   # the Jenkins CI server
   config.vm.define "basebox-jenkins", primary: true do |ci|
-    ci.vm.box = "ubuntu1204"
+    ci.vm.box = "ubuntu1404"
   
     ci.vm.hostname = "basebox-jenkins"
     ci.vm.network :private_network, ip: "172.16.32.2" # VirtualBox
     ci.vm.network :forwarded_port, guest: 80, host: 80, id: "http", auto_correct: true
   
+    ci.vm.provision "shell", path: "scripts/fix-resolv-conf.sh" # vcloud bug workaround for ubuntu1404
     ci.vm.provision "shell", privileged: false, path: "scripts/install-jenkins-server.sh"
   
     ci.vm.provider "vcloud" do |v|
@@ -32,7 +33,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define :"vmware-slave" do |slave|
-    slave.vm.box = "windows_2008_r2-100gb"
+    slave.vm.box = "windows_2012_r2"
     slave.vm.hostname = "vmware-slave"
 
     slave.vm.communicator = "winrm"
@@ -62,7 +63,7 @@ Vagrant.configure("2") do |config|
 
 
   config.vm.define :"vbox-slave" do |slave|
-    slave.vm.box = "windows_2008_r2-100gb"
+    slave.vm.box = "windows_2012_r2"
     slave.vm.hostname = "vbox-slave"
 
     slave.vm.communicator = "winrm"
