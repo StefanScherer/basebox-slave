@@ -26,7 +26,7 @@ vagrant up --provider=vcloud
 This will spin up an vApp with three VMs:
 
 ### basebox-jenkins
-The `basebox-jenkins` VM is an Ubuntu server with a [Jenkins server](http://jenkins-ci.org) installed. This server has the IP address `176.16.32.2` and the HTTP port of Jenkins web interface listens on port 80.
+The `basebox-jenkins` VM is an Ubuntu 14.04 server with a [Jenkins server](http://jenkins-ci.org) installed. This server has the IP address `176.16.32.2` and the HTTP port of Jenkins web interface listens on port 80.
 A port forwarding is done even through your vCloud edge gateway if you have to use it.
 
 Check out for the forwarded port while spinning up the vApp, or check it later with
@@ -44,7 +44,7 @@ vagrant ssh basebox-jenkins
 ```
 
 ### vmware-slave
-The `vmware-slave` VM is a Windows machine (I use a windows_2008_r2). This machine has the IP address `176.16.32.3` and has RDP, SSH and WinRM ports opened. This VM will build baseboxes for the vCloud provider, but could also be used to build baseboxes for the VMware Workstation/Fusion provider.
+The `vmware-slave` VM is a Windows machine (I use a windows_2012_r2). This machine has the IP address `176.16.32.3` and has RDP, SSH and WinRM ports opened. This VM will build baseboxes for the vCloud provider, but could also be used to build baseboxes for the VMware Workstation/Fusion provider.
 
 You can login to your jenkins slave with RDP with the following command:
 
@@ -72,7 +72,7 @@ The software installed in the vmware-slave is:
 * Java + Jenkins Swarm Client (Node labels: windows + vmware)
 
 ### vbox-slave
-The `vbox-slave` VM is a Windows machine (I use a windows_2008_r2). This machine has the IP address `176.16.32.4` and has RDP, SSH and WinRM ports opened. This VM will build baseboxes for the VirtualBox provider.
+The `vbox-slave` VM is a Windows machine (I use a windows_2012_r2). This machine has the IP address `176.16.32.4` and has RDP, SSH and WinRM ports opened. This VM will build baseboxes for the VirtualBox provider.
 Notice: My intended hostname was virtualbox-slave, but that is too long for windows, and guest customizations of vCloud aborts with an error.
 
 You can login to your jenkins slave with RDP with the following command:
