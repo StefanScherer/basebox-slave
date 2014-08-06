@@ -1,35 +1,71 @@
 [
   {
+    "id": "checkstyle",
+    "version": "3.39"
+  },
+  {
+    "id": "bulk-builder",
+    "version": "1.5"
+  },
+  {
+    "id": "credentials",
+    "version": "1.15"
+  },
+  {
+    "id": "antisamy-markup-formatter",
+    "version": "1.1"
+  },
+  {
+    "id": "ssh-credentials",
+    "version": "1.7.1"
+  },
+  {
+    "id": "external-monitor-job",
+    "version": "1.2"
+  },
+  {
+    "id": "matrix-project",
+    "version": "1.2"
+  },
+  {
+    "id": "analysis-core",
+    "version": "1.57"
+  },
+  {
     "id": "scm-api",
     "version": "0.2"
   },
   {
-    "id": "translation",
-    "version": "1.10"
+    "id": "git",
+    "version": "2.2.4"
   },
   {
-    "id": "credentials",
-    "version": "1.14"
-  },
-  {
-    "id": "greenballs",
-    "version": "1.14"
-  },
-  {
-    "id": "ansicolor",
-    "version": "0.4.0"
-  },
-  {
-    "id": "checkstyle",
-    "version": "3.39"
+    "id": "pam-auth",
+    "version": "1.1"
   },
   {
     "id": "matrix-auth",
     "version": "1.1"
   },
   {
-    "id": "ssh-credentials",
-    "version": "1.7.1"
+    "id": "mailer",
+    "version": "1.8"
+  },
+  {
+    "id": "ws-cleanup",
+    "version": "0.22"
+  },
+  {
+    "id": "git-client",
+    "version": "1.10.1"
+  },
+  {
+    "id": "ansicolor",
+    "version": "0.4.0"
+  },
+  {
+    "id": "cvs",
+    "version": "2.11"
   },
   {
     "id": "swarm",
@@ -40,79 +76,43 @@
     "version": "1.6"
   },
   {
-    "id": "text-finder",
+    "id": "greenballs",
+    "version": "1.14"
+  },
+  {
+    "id": "translation",
     "version": "1.10"
-  },
-  {
-    "id": "analysis-core",
-    "version": "1.57"
-  },
-  {
-    "id": "matrix-project",
-    "version": "1.2"
-  },
-  {
-    "id": "ssh-slaves",
-    "version": "1.5"
-  },
-  {
-    "id": "git-client",
-    "version": "1.9.1"
-  },
-  {
-    "id": "subversion",
-    "version": "1.54"
-  },
-  {
-    "id": "javadoc",
-    "version": "1.1"
-  },
-  {
-    "id": "pam-auth",
-    "version": "1.1"
   },
   {
     "id": "windows-slaves",
     "version": "1.0"
   },
   {
-    "id": "cvs",
-    "version": "2.11"
-  },
-  {
-    "id": "antisamy-markup-formatter",
-    "version": "1.1"
+    "id": "text-finder",
+    "version": "1.10"
   },
   {
     "id": "ant",
     "version": "1.2"
   },
   {
-    "id": "timestamper",
-    "version": "1.5.12"
+    "id": "subversion",
+    "version": "1.54"
   },
   {
     "id": "maven-plugin",
-    "version": "2.3"
+    "version": "2.5"
   },
   {
-    "id": "mailer",
-    "version": "1.8"
+    "id": "javadoc",
+    "version": "1.1"
   },
   {
-    "id": "external-monitor-job",
-    "version": "1.2"
+    "id": "timestamper",
+    "version": "1.5.14"
   },
   {
-    "id": "git",
-    "version": "2.2.2"
-  },
-  {
-    "id": "bulk-builder",
+    "id": "ssh-slaves",
     "version": "1.5"
-  },
-  {
-    "id": "ws-cleanup",
-    "version": "0.21"
   }
 ]
