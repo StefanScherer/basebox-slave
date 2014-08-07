@@ -74,6 +74,10 @@ vagrant plugin install vagrant-vcloud
 if exist C:\Users\vagrant\.vagrant.d\Vagrantfile goto :have_vagrantfile
 if exist C:\vagrant\resources\Vagrantfile-global (
   copy C:\vagrant\resources\Vagrantfile-global C:\Users\vagrant\.vagrant.d\Vagrantfile
+  if exist C:\Users\Default (
+    mkdir C:\Users\Default\.vagrant.d
+    copy C:\vagrant\resources\Vagrantfile-global C:\Users\Default\.vagrant.d\Vagrantfile
+  )
 )
 :have_vagrantfile
 if exist C:\HashiCorp\Vagrant\embedded\gems\gems\vagrant-1.6.3\plugins\hosts\windows\cap\rdp.rb (
