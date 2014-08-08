@@ -13,12 +13,13 @@ Vagrant.configure("2") do |config|
 
   # the Jenkins CI server
   config.vm.define "basebox-jenkins", primary: true do |ci|
-    ci.vm.box = "ubuntu1204"
+    ci.vm.box = "ubuntu1404"
   
     ci.vm.hostname = "basebox-jenkins"
     ci.vm.network :private_network, ip: "172.16.32.2" # VirtualBox
     ci.vm.network :forwarded_port, guest: 80, host: 80, id: "http", auto_correct: true
   
+    ci.vm.provision "shell", path: "scripts/fix-resolv-conf.sh" # vcloud bug workaround for ubuntu1404
     ci.vm.provision "shell", privileged: false, path: "scripts/install-jenkins-server.sh"
   
     ci.vm.provider "vcloud" do |v|
@@ -31,7 +32,7 @@ Vagrant.configure("2") do |config|
     end
   end
 
-  config.vm.define :"vmware-slave" do |slave|
+  config.vm.define "vmware-slave" do |slave|
     slave.vm.box = "windows_2008_r2-100gb"
     slave.vm.hostname = "vmware-slave"
 
@@ -43,9 +44,6 @@ Vagrant.configure("2") do |config|
     slave.vm.network :private_network, ip: "172.16.32.3" # VirtualBox
 
     slave.vm.provision "shell", path: "scripts/provision-vmware-slave.bat"
-    slave.vm.provision "shell", path: "scripts/install-jenkins-slave.bat"
-    # reboot the vmware-slave to have all tools in PATH and then start the swarm client
-    slave.vm.provision "shell", path: "scripts/reboot-to-slave.bat"
     slave.vm.provider "vcloud" do |v|
       v.memory = 4096
       v.cpus = 2
@@ -60,8 +58,7 @@ Vagrant.configure("2") do |config|
     end
   end
 
-
-  config.vm.define :"vbox-slave" do |slave|
+  config.vm.define "vbox-slave" do |slave|
     slave.vm.box = "windows_2008_r2-100gb"
     slave.vm.hostname = "vbox-slave"
 
@@ -84,6 +81,27 @@ Vagrant.configure("2") do |config|
       v.cpus = 2
       v.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
       v.customize ["modifyvm", :id, "--vram", "32"]
+    end
+  end
+
+  # disabled: slow packer / virtualbox performance on ubuntu in vcloud
+  config.vm.define "vbox-slave-lin", autostart: false do |slave|
+    slave.vm.box = "ubuntu1404"
+    slave.vm.hostname = "vbox-slave"
+
+    slave.vm.network :private_network, ip: "172.16.32.5" # VirtualBox
+
+    slave.vm.provision "shell", path: "scripts/fix-resolv-conf.sh" # vcloud bug workaround for ubuntu1404
+    slave.vm.provision "shell", path: "scripts/install-jenkins-slave.sh"
+    slave.vm.provision "shell", path: "scripts/provision-virtualbox-slave.sh"
+    slave.vm.provider "vcloud" do |v|
+      v.memory = 4096
+      v.cpus = 2
+      v.nested_hypervisor = true
+    end
+    slave.vm.provider :virtualbox do |v|
+      v.memory = 2048
+      v.cpus = 2
     end
   end
 

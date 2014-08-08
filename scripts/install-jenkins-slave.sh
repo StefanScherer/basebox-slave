@@ -1,11 +1,11 @@
 # switch Ubuntu download mirror to German server
 sudo sed -i 's,http://us.archive.ubuntu.com/ubuntu/,http://ftp.fau.de/ubuntu/,' /etc/apt/sources.list
 sudo sed -i 's,http://security.ubuntu.com/ubuntu,http://ftp.fau.de/ubuntu,' /etc/apt/sources.list
-sudo apt-get update -y
+sudo apt-get update -qq
 
 # switch to German keyboard layout
 sudo sed -i 's/"us"/"de"/g' /etc/default/keyboard
-sudo DEBIAN_FRONTEND=noninteractive apt-get install -y console-common
+sudo DEBIAN_FRONTEND=noninteractive apt-get install -qq console-common
 sudo install-keymap de
 
 # set timezone to German timezone
@@ -13,27 +13,20 @@ echo "Europe/Berlin" | sudo tee /etc/timezone
 sudo dpkg-reconfigure -f noninteractive tzdata
 
 # install development: 
-sudo apt-get install -y curl git vim
+sudo apt-get install -qq curl git vim
 
 if [ ! -d /vagrant/resources ]
 then
   mkdir /vagrant/resources
 fi
 
-# install Oracle JDK 7
-sudo apt-get purge openjdk*
-sudo apt-get install -y python-software-properties
-sudo add-apt-repository ppa:webupd8team/java
-sudo apt-get update -y
-echo debconf shared/accepted-oracle-license-v1-1 select true | sudo /usr/bin/debconf-set-selections
-echo debconf shared/accepted-oracle-license-v1-1 seen true | sudo /usr/bin/debconf-set-selections
-sudo DEBIAN_FRONTEND=noninteractive apt-get install -y oracle-java7-installer
-sudo apt-get install -y oracle-java7-set-default
+# Install Java
+sudo apt-get install -qq default-jre
 
 # install jenkins
 wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -
 echo "deb http://pkg.jenkins-ci.org/debian binary/" | sudo tee /etc/apt/sources.list.d/jenkins.list
-sudo apt-get update -y
+sudo apt-get update -qq
 
 sudo useradd jenkins
 sudo groupadd jenkins
@@ -184,5 +177,5 @@ INITD
 sudo chmod +x /etc/init.d/swarm-client
 sudo update-rc.d swarm-client defaults
 sudo update-rc.d swarm-client enable
-sudo service swarm-client start
+# sudo service swarm-client start
 

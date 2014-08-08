@@ -15,7 +15,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.BatchFile>
-      <command>set box_name=windows_7
+      <command>set box_name=windows_2012_r2-100gb
 set box_path=%box_name%_vcloud.box
 set box_provider=vcloud
 
