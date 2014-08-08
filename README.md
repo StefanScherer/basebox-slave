@@ -10,7 +10,7 @@ The basebox build environment itself can be built with the same tools and create
 On your host machine you will need the following tools installed:
 
 * Vagrant 1.6.3
-* vagrant-vcloud plugin 0.4.0 with the command `vagrant plugin install vagrant-vcloud`
+* vagrant-vcloud plugin 0.4.1 with the command `vagrant plugin install vagrant-vcloud`
 * Your vCloud access informations in your global `~/.vagrant.d/Vagrantfile`
 
 After that you should clone this repo and have some customizations. See below for more details.
@@ -61,11 +61,11 @@ This is a good situation to test the `vagrant rdp vmware-slave` which works nice
 The software installed in the vmware-slave is:
 
 * [Chocolatey](http://chocolatey.org) - package like installations on Windows
-* [packer 0.6.1.dev](http://www.packer.io/downloads.html) - built from source until 0.6.1 is released
+* [packer 0.6.1](http://www.packer.io/downloads.html)
 * [packer-post-processor-vagrant-vmware-ovf 0.1.2](https://github.com/gosddc/packer-post-processor-vagrant-vmware-ovf/releases)
 * VMware Workstation 10.0.2
 * [Vagrant 1.6.3](http://www.vagrantup.com/downloads.html)
-* [vagrant-vcloud 0.4.0](https://github.com/frapposelli/vagrant-vcloud/releases)
+* [vagrant-vcloud 0.4.1](https://github.com/frapposelli/vagrant-vcloud/releases)
 * optional global Vagrantfile from host (`./resources/Vagrantfile-global`)
 * msysgit
 * wget
