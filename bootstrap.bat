@@ -25,3 +25,9 @@ if not exist resources\hosts (
     copy /Y C:\vagrant\resources\basebox-slave\hosts resources\hosts
   )
 )
+if not exist resources\license.lic (
+  if exist C:\vagrant\resources\basebox-slave\license.lic (
+    echo Deploying Vagrant VMware Workstation license.lic
+    copy /Y C:\vagrant\resources\basebox-slave\license.lic resources\license.lic
+  )
+)

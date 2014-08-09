@@ -26,3 +26,9 @@ if [ ! -f resources/hosts ]; then
     cp /vagrant/resources/basebox-slave/hosts resources/hosts
   fi
 fi
+if [ ! -f resources/license.lic ]; then
+  if [ -f /vagrant/resources/basebox-slave/license.lic ]; then
+    echo "Deploying Vagrant VMware Workstation license.lic"
+    cp /vagrant/resources/basebox-slave/license.lic resources/license.lic
+  fi
+fi
