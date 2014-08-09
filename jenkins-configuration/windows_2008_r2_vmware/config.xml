@@ -4,7 +4,7 @@
   <description></description>
   <keepDependencies>false</keepDependencies>
   <properties/>
-  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.2.2">
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.2.4">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
@@ -29,10 +29,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.BatchFile>
-      <command>if exist output-vmware-iso (
-  rmdir /S /Q output-vmware-iso
-)
-packer build --only=vmware-iso windows_2008_r2.json
+      <command>bin\build.bat %JOB_NAME%
 </command>
     </hudson.tasks.BatchFile>
   </builders>
@@ -42,7 +39,7 @@ packer build --only=vmware-iso windows_2008_r2.json
       <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
       <sendToIndividuals>false</sendToIndividuals>
     </hudson.tasks.Mailer>
-    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.21">
+    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.22">
       <patterns>
         <hudson.plugins.ws__cleanup.Pattern>
           <pattern>packer_cache</pattern>
@@ -62,9 +59,9 @@ packer build --only=vmware-iso windows_2008_r2.json
     </hudson.plugins.ws__cleanup.WsCleanup>
   </publishers>
   <buildWrappers>
-    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.12"/>
     <hudson.plugins.ansicolor.AnsiColorBuildWrapper plugin="ansicolor@0.4.0">
       <colorMapName>xterm</colorMapName>
     </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.14"/>
   </buildWrappers>
 </project>

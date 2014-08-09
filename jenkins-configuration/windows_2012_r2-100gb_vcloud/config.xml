@@ -29,13 +29,7 @@
   <concurrentBuild>false</concurrentBuild>
   <builders>
     <hudson.tasks.BatchFile>
-      <command>if exist output-vmware-iso (
-  rmdir /S /Q output-vmware-iso
-)
-packer build --only=vmware-iso windows_2012_r2-100gb_vcloud.json
-
-bin\test-box-vcloud.bat windows_2012_r2-100gb_vcloud.box windows_2012_r2-100gb
-</command>
+      <command>bin\build.bat %JOB_NAME%</command>
     </hudson.tasks.BatchFile>
   </builders>
   <publishers>
