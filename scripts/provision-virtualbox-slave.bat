@@ -50,6 +50,16 @@ netsh advfirewall firewall add rule name="packer-builder-virtualbox-iso" dir=in 
 netsh advfirewall firewall add rule name="packer-builder-vmware-iso" dir=in program="c:\Users\vagrant\go\bin\packer-builder-vmware-iso.exe" action=allow
 netsh advfirewall firewall add rule name="packer-builder-virtualbox-iso" dir=in program="c:\Users\vagrant\go\bin\packer-builder-virtualbox-iso.exe" action=allow
 
+if exist c:\hashicorp\vagrant goto :have_vagrant
+echo Installing Vagrant ...
+call cinst vagrant
+set PATH=%PATH%;C:\hashicorp\vagrant\bin
+:have_vagrant
+if exist C:\HashiCorp\Vagrant\embedded\gems\gems\vagrant-1.6.3\plugins\hosts\windows\cap\rdp.rb (
+  echo Patching Vagrant 1.6.3
+  copy /Y C:\vagrant\scripts\rdp.rb C:\HashiCorp\Vagrant\embedded\gems\gems\vagrant-1.6.3\plugins\hosts\windows\cap\rdp.rb
+)
+
 echo "Installing Jenkins Swarm Client"
 call c:\vagrant\scripts\install-jenkins-slave.bat virtualbox
 
