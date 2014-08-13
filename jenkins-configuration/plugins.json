@@ -114,5 +114,13 @@
   {
     "id": "ssh-slaves",
     "version": "1.5"
+  },
+  {
+    "id": "postbuild-task",
+    "version": "1.8"
+  },
+  {
+    "id": "publish-over-ssh",
+    "version": "1.11"
   }
 ]
