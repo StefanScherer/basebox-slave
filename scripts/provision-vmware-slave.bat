@@ -35,10 +35,11 @@ exit /b
 :GIT_DONE
 
 
-rem Install unreleased packer from GitHub sources
-rem call C:\vagrant\scripts\install-packer-from-source.bat
-rem goto packer_firewall
+echo Install unreleased packer from GitHub sources
+call C:\vagrant\scripts\install-packer-from-source.bat
+goto packer_firewall
 
+echo Installing official packer version from Chocolatey Package
 call cinst packer
 where packer
 if ERRORLEVEL 1 call :addPackerToSystemPath
