@@ -77,6 +77,13 @@ java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin ansicolor
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin timestamper
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin text-finder
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin ws-cleanup
+java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin publish-over-ssh
+
+if [ -f /vagrant/resources/jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin.xml ]; then
+  if [ ! -f /var/lib/jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin.xml ]; then
+    cp /vagrant/resources/jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin.xml /var/lib/jenkins/
+  fi
+fi
 
 # restart jenkins to activate all plugins
 java -jar jenkins-cli.jar -s http://localhost:8080 safe-restart

@@ -32,3 +32,9 @@ if [ ! -f resources/license.lic ]; then
     cp /vagrant/resources/basebox-slave/license.lic resources/license.lic
   fi
 fi
+if [ ! -f resources/jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin.xml ]; then
+  if [ -f /vagrant/resources/basebox-slave/jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin.xml ]; then
+    echo "Deploying Publish Over SSH Configuration jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin.xml"
+    cp /vagrant/resources/basebox-slave/jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin.xml resources/jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin.xml
+  fi
+fi
