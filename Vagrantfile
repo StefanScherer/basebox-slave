@@ -4,7 +4,7 @@
 Vagrant.configure("2") do |config|
 
   if Vagrant.has_plugin?("vagrant-vcloud")
-    config.vm.provider :vcloud do |vcloud|
+    config.vm.provider "vcloud" do |vcloud|
       vcloud.vapp_prefix = "basebox"
       vcloud.ip_subnet = "172.16.32.1/255.255.255.0" # our test subnet with fixed IP adresses for everyone      
       vcloud.ip_dns = ["10.100.20.2", "8.8.8.8"]  # dc + Google
@@ -26,7 +26,7 @@ Vagrant.configure("2") do |config|
       v.memory = 1024
       v.cpus = 1
     end
-    ci.vm.provider :virtualbox do |v|
+    ci.vm.provider "virtualbox" do |v|
       v.memory = 1024
       v.cpus = 1
     end
@@ -49,7 +49,7 @@ Vagrant.configure("2") do |config|
       v.cpus = 3
       v.nested_hypervisor = true
     end
-    slave.vm.provider :virtualbox do |v|
+    slave.vm.provider "virtualbox" do |v|
       v.gui = true
       v.memory = 2048
       v.cpus = 2
@@ -75,7 +75,7 @@ Vagrant.configure("2") do |config|
       v.cpus = 3
       v.nested_hypervisor = true
     end
-    slave.vm.provider :virtualbox do |v|
+    slave.vm.provider "virtualbox" do |v|
       v.gui = true
       v.memory = 2048
       v.cpus = 2
@@ -99,7 +99,7 @@ Vagrant.configure("2") do |config|
       v.cpus = 3
       v.nested_hypervisor = true
     end
-    slave.vm.provider :virtualbox do |v|
+    slave.vm.provider "virtualbox" do |v|
       v.memory = 2048
       v.cpus = 2
     end
