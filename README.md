@@ -61,9 +61,9 @@ This is a good situation to test the `vagrant rdp vmware-slave` which works nice
 The software installed in the vmware-slave is:
 
 * [Chocolatey](http://chocolatey.org) - package like installations on Windows
-* [packer 0.6.1](http://www.packer.io/downloads.html)
+* [packer 0.6.1](http://www.packer.io/downloads.html) or optional packer from source
 * [packer-post-processor-vagrant-vmware-ovf 0.1.2](https://github.com/gosddc/packer-post-processor-vagrant-vmware-ovf/releases)
-* VMware Workstation 10.0.2
+* VMware Workstation 10.0.3
 * [Vagrant 1.6.3](http://www.vagrantup.com/downloads.html)
 * [vagrant-vcloud 0.4.1](https://github.com/frapposelli/vagrant-vcloud/releases)
 * optional global Vagrantfile from host (`./resources/Vagrantfile-global`)
@@ -86,8 +86,8 @@ Notice: Windows host users need Vagrant 1.6.4 or at least a patch for the bug in
 The software installed in the vbox-slave is:
 
 * [Chocolatey](http://chocolatey.org) - package like installations on Windows
-* [packer 0.6.0](http://www.packer.io/downloads.html)
-* [VirtualBox 4.3.12](https://www.virtualbox.org/wiki/Linux_Downloads)
+* [packer 0.6.1](http://www.packer.io/downloads.html)
+* [VirtualBox 4.3.14](https://www.virtualbox.org/wiki/Linux_Downloads)
 * msysgit
 * wget
 * Java + Jenkins Swarm Client (Node labels: windows + virtualbox)
@@ -254,8 +254,8 @@ All of my Jenkins jobs you can find in this repo do some tests within the vCloud
 * Upload the basebox with ovftool into a `BASEBOX-TESTING` catalog in vCloud
 * Create a test vApp with the new Linux/Windows box with a minimal Vagrantfile and `vagrant up --provider=vcloud`
 * Run some [Serverspec](http://serverspec.org) tests for both Linux/Windows with the [vagrant-serverspec](https://github.com/jvoorhis/vagrant-serverspec) plugin.
-* Windows serverspec tests are in [vcloud_spec.rb](https://github.com/StefanScherer/packer-windows/blob/my_vagrant_vcloud/test/vcloud_spec.rb)
-* Linux serverspec tests are in [vcloud_spec.rb](https://github.com/StefanScherer/ubuntu-vm/blob/my/test/vcloud_spec.rb)
+* Windows serverspec tests are in [windows_vcloud.rb](https://github.com/StefanScherer/packer-windows/blob/my_vagrant_vcloud/test/windows_vcloud.rb)
+* Linux serverspec tests are in [ubuntu_vcloud.rb](https://github.com/StefanScherer/ubuntu-vm/blob/my/test/ubuntu_vcloud.rb)
 * Destroy the vApp again with `vagrant destroy -f`
 * Remove the basebox from vagrant with `vagrant box remove`
 * Upload the tested basebox into a global catalog.
@@ -296,4 +296,3 @@ But Jenkins could also be used to test the basebox and upload it to your basebox
 Copyright (c) 2014 Stefan Scherer
 
 MIT License, see LICENSE for more details.
-
