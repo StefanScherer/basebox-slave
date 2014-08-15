@@ -122,5 +122,9 @@
   {
     "id": "publish-over-ssh",
     "version": "1.11"
+  },
+  {
+    "id": "pegdown-formatter",
+    "version": "1.3"
   }
 ]
