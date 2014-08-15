@@ -20,7 +20,8 @@ The tests can be found in the [tests/*.rb](https://github.com/StefanScherer/vagr
 &#xd;
 ## GitHub&#xd;
 &#xd;
-This Jenkins job is built with the [StefanScherer/vagrant-vcloud-box](https://github.com/StefanScherer/vagrant-vcloud-box) GitHub Repo. See the README for more details.&#xd;
+* [StefanScherer/vagrant-vcloud-box](https://github.com/StefanScherer/vagrant-vcloud-box)&#xd;
+See the README for more details.&#xd;
 &#xd;
 ## Screenshot&#xd;
 &#xd;
@@ -67,6 +68,40 @@ The Desktop of the latest Jenkins build looks like this:&#xd;
       <unstableIfFound>false</unstableIfFound>
       <alsoCheckConsoleOutput>true</alsoCheckConsoleOutput>
     </hudson.plugins.textfinder.TextFinderPublisher>
+    <jenkins.plugins.publish__over__ssh.BapSshPublisherPlugin plugin="publish-over-ssh@1.11">
+      <consolePrefix>SSH: </consolePrefix>
+      <delegate>
+        <publishers>
+          <jenkins.plugins.publish__over__ssh.BapSshPublisher>
+            <configName>roecloudsrv001</configName>
+            <verbose>false</verbose>
+            <transfers>
+              <jenkins.plugins.publish__over__ssh.BapSshTransfer>
+                <remoteDirectory></remoteDirectory>
+                <sourceFiles>*.ova</sourceFiles>
+                <excludes></excludes>
+                <removePrefix></removePrefix>
+                <remoteDirectorySDF>false</remoteDirectorySDF>
+                <flatten>false</flatten>
+                <cleanRemote>false</cleanRemote>
+                <noDefaultExcludes>false</noDefaultExcludes>
+                <makeEmptyDirs>false</makeEmptyDirs>
+                <patternSeparator>[, ]+</patternSeparator>
+                <execCommand></execCommand>
+                <execTimeout>120000</execTimeout>
+                <usePty>false</usePty>
+              </jenkins.plugins.publish__over__ssh.BapSshTransfer>
+            </transfers>
+            <useWorkspaceInPromotion>false</useWorkspaceInPromotion>
+            <usePromotionTimestamp>false</usePromotionTimestamp>
+          </jenkins.plugins.publish__over__ssh.BapSshPublisher>
+        </publishers>
+        <continueOnError>false</continueOnError>
+        <failOnError>false</failOnError>
+        <alwaysPublishFromMaster>false</alwaysPublishFromMaster>
+        <hostConfigurationAccess class="jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin" reference="../.."/>
+      </delegate>
+    </jenkins.plugins.publish__over__ssh.BapSshPublisherPlugin>
     <hudson.tasks.Mailer plugin="mailer@1.8">
       <recipients>scherer_stefan@icloud.com</recipients>
       <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
