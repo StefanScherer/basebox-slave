@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description>Create an Ubuntu Desktop OVA for VMware Workstation/Fusion to get started with Vagrant in vCloud.&#xd;
+&#xd;
+## Tools installed&#xd;
+&#xd;
+* Ubuntu 14.04 Desktop&#xd;
+* [Vagrant](http://vagrantup.com)&#xd;
+* [vagrant-vcloud](https://github.com/frapposelli/vagrant-vcloud) Plugin to work with Vagrant in vCloud&#xd;
+* rdesktop for the [`vagrant rdp`](https://docs.vagrantup.com/v2/cli/rdp.html) command&#xd;
+* git to clone GitHub repos&#xd;
+* rsync to use the synced folder feature of Vagrant to transfer files into the vCloud guests.&#xd;
+* nodejs + npm to work with [grunt-jenkins](http://documentup.com/sghill/grunt-jenkins)&#xd;
+&#xd;
+## Tests&#xd;
+&#xd;
+The VM will be tested with [Serverspec](http://serverspec.org/) to check if all tools are installed correctly.&#xd;
+The tests can be found in the [tests/*.rb](https://github.com/StefanScherer/vagrant-vcloud-box/tree/master/test) files.&#xd;
+&#xd;
+## GitHub&#xd;
+&#xd;
+This Jenkins job is built with the [StefanScherer/vagrant-vcloud-box](https://github.com/StefanScherer/vagrant-vcloud-box) GitHub Repo. See the README for more details.&#xd;
+&#xd;
+## Screenshot&#xd;
+&#xd;
+The Desktop of the latest Jenkins build looks like this:&#xd;
+&#xd;
+![Screenshot of latest Jenkins build](ws/screenshot.png)&#xd;
+&#xd;
+</description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.2.4">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <url>https://github.com/StefanScherer/vagrant-vcloud-box</url>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>*/master</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <submoduleCfg class="list"/>
+    <extensions/>
+  </scm>
+  <assignedNode>vmware</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.BatchFile>
+      <command>bin\build.bat %JOB_NAME%
+</command>
+    </hudson.tasks.BatchFile>
+  </builders>
+  <publishers>
+    <hudson.plugins.textfinder.TextFinderPublisher plugin="text-finder@1.10">
+      <regexp>examples, 0 failures</regexp>
+      <succeedIfFound>true</succeedIfFound>
+      <unstableIfFound>false</unstableIfFound>
+      <alsoCheckConsoleOutput>true</alsoCheckConsoleOutput>
+    </hudson.plugins.textfinder.TextFinderPublisher>
+    <hudson.tasks.Mailer plugin="mailer@1.8">
+      <recipients>scherer_stefan@icloud.com</recipients>
+      <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
+      <sendToIndividuals>false</sendToIndividuals>
+    </hudson.tasks.Mailer>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.14"/>
+    <hudson.plugins.ansicolor.AnsiColorBuildWrapper plugin="ansicolor@0.4.0">
+      <colorMapName>xterm</colorMapName>
+    </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
+  </buildWrappers>
+</project>
