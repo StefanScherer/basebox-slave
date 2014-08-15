@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jenkins.model.JenkinsLocationConfiguration>
+  <adminAddress>jenkins@basebox</adminAddress>
+  <jenkinsUrl>http://172.16.32.2/</jenkinsUrl>
+</jenkins.model.JenkinsLocationConfiguration>
