@@ -71,6 +71,13 @@ echo      "vagrant-vmware-ovf": "packer-post-processor-vagrant-vmware-ovf" >> %p
 echo  } >> %packerconfig%
 echo } >> %packerconfig%
 
+rem Windows 2012 R2 will start jenkins slave as user vagrant, but with USERPROFILE=C:\Users\Default, so write it there, too.
+if not exist C:\Users\Default\AppData\Roaming\packer.config (
+  if exist C:\Users\vagrant\AppData\Roaming\packer.config (
+    copy C:\Users\vagrant\AppData\Roaming\packer.config C:\Users\Default\AppData\Roaming\packer.config
+  )
+)
+
 cd /D %USERPROFILE%
 where packer
 packer --version
