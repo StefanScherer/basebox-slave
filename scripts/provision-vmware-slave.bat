@@ -4,6 +4,10 @@ echo extend >>%TEMP%\extendC.txt
 diskpart.exe /s %TEMP%\extendC.txt
 set WORKDRIVE=C:
 
+if exist %WinDir%\microsoft.net\framework\v4.0.30319 goto :have_net4
+echo Ensuring .NET 4.0 is installed
+@powershell -NoProfile -ExecutionPolicy unrestricted -Command "iex ((new-object net.webclient).DownloadString('https://raw.github.com/StefanScherer/arduino-ide/install/InstallNet4.ps1'))"
+:have_net4
 if "%ChocolateyInstall%x"=="x" set ChocolateyInstall=%ALLUSERSPROFILE%\Chocolatey
 if exist %ChocolateyInstall% goto :have_chocolatey
 echo Installing Chocolatey

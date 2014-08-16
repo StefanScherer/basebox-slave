@@ -8,6 +8,10 @@ if exist c:\jenkins\swarm-client.jar goto :EOF
 set hypervisor=%1
 if "%1x"=="x" set hypervisor=vmware
 
+if exist %WinDir%\microsoft.net\framework\v4.0.30319 goto :have_net
+echo Ensuring .NET 4.0 is installed
+@powershell -NoProfile -ExecutionPolicy unrestricted -Command "iex ((new-object net.webclient).DownloadString('https://raw.github.com/StefanScherer/arduino-ide/install/InstallNet4.ps1'))"
+:have_net
 if "%ChocolateyInstall%x"=="x" set ChocolateyInstall=%ALLUSERSPROFILE%\Chocolatey
 if exist %ChocolateyInstall% goto :have_choc
 echo Installing Chocolatey
