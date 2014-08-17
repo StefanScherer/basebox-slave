@@ -45,11 +45,11 @@ setx GOPATH C:\users\vagrant\go
 
 mkdir %GOPATH%\bin
 
-call :addGoPathToUserPath
+call :addGoPathToSystemPath
 goto GOPATH_DONE
-:addGoPathToUserPath
-for /F "tokens=2* delims= " %%f IN ('reg query "HKCU\Environment" /v Path ^| findstr /i path') do set OLD_USER_PATH=%%g
-reg add HKCU\Environment /v Path /d "%OLD_USER_PATH%;%GOPATH%\bin" /f
+:addGoPathToSystemPath
+for /F "tokens=2* delims= " %%f IN ('reg query "HKLM\System\CurrentControlSet\Control\Session Manager\Environment" /v Path ^| findstr /i path') do set OLD_SYSTEM_PATH=%%g
+reg add "HKLM\System\CurrentControlSet\Control\Session Manager\Environment" /v Path /d "%OLD_SYSTEM_PATH%;%GOPATH%\bin" /f
 set PATH=%PATH%;%GOPATH%\bin
 exit /b
 :GOPATH_DONE
@@ -74,6 +74,13 @@ echo  "post-processors": { >> %packerconfig%
 echo      "vagrant-vmware-ovf": "packer-post-processor-vagrant-vmware-ovf" >> %packerconfig%
 echo  } >> %packerconfig%
 echo } >> %packerconfig%
+
+rem Windows 2012 R2 will start jenkins slave as user vagrant, but with USERPROFILE=C:\Users\Default, so write it there, too.
+if not exist C:\Users\Default\AppData\Roaming\packer.config (
+  if exist C:\Users\vagrant\AppData\Roaming\packer.config (
+    copy C:\Users\vagrant\AppData\Roaming\packer.config C:\Users\Default\AppData\Roaming\packer.config
+  )
+)
 
 cd /D %USERPROFILE%
 where packer
