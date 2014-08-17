@@ -1,4 +1,5 @@
 if exist c:\jenkins\swarm-client.jar goto :startslave
+
 if not exist c:\jenkins mkdir c:\jenkins
 
 if not exist c:\jenkins\swarm-client.jar (
@@ -10,13 +11,13 @@ if not exist c:\jenkins\swarm-client.jar (
 )
 
 :startslave
-set labels="windows"
+set labels=windows
 
 if exist "c:\Program Files (x86)\VMware\VMware Workstation\vmrun.exe" (
-  set labels="%labels%,vmware"
+  set labels=%labels% vmware
 )
 if exist "c:\Program Files\Oracle\VirtualBox\VBoxManage.exe" (
-  set labels="%labels%,virtualbox"
+  set labels=%labels% virtualbox
 )
 
-start java -jar c:\jenkins\swarm-client.jar -autoDiscoveryAddress 172.16.32.255 -executors 1 -labels %labels% -fsroot c:\jenkins
+start java -jar c:\jenkins\swarm-client.jar -autoDiscoveryAddress 172.16.32.255 -executors 1 -labels "%labels%" -fsroot c:\jenkins
