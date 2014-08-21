@@ -20,8 +20,12 @@ The tests can be found in the [tests/*.rb](https://github.com/StefanScherer/vagr
 &#xd;
 ## GitHub&#xd;
 &#xd;
-* [StefanScherer/vagrant-vcloud-box](https://github.com/StefanScherer/vagrant-vcloud-box)&#xd;
-See the README for more details.&#xd;
+Built with Vagrantfile from [StefanScherer/vagrant-vcloud-box](https://github.com/StefanScherer/vagrant-vcloud-box)&#xd;
+&#xd;
+## Final OVA&#xd;
+&#xd;
+The tested OVA will be uploaded in intranet and is available at&#xd;
+[roecloudsrv001/vagrant/vagrant-vcloud-box_vmware.ova](http://roecloudsrv001/vagrant/vagrant-vcloud-box_vmware.ova)&#xd;
 &#xd;
 ## Screenshot&#xd;
 &#xd;
