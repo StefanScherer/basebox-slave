@@ -67,6 +67,14 @@
           <pattern>packer_cache</pattern>
           <type>INCLUDE</type>
         </hudson.plugins.ws__cleanup.Pattern>
+        <hudson.plugins.ws__cleanup.Pattern>
+          <pattern>*.box</pattern>
+          <type>INCLUDE</type>
+        </hudson.plugins.ws__cleanup.Pattern>
+        <hudson.plugins.ws__cleanup.Pattern>
+          <pattern>boxtest</pattern>
+          <type>INCLUDE</type>
+        </hudson.plugins.ws__cleanup.Pattern>
       </patterns>
       <deleteDirs>true</deleteDirs>
       <skipWhenFailed>false</skipWhenFailed>
