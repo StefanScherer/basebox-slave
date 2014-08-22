@@ -84,12 +84,42 @@ Vagrant.configure("2") do |config|
     end
   end
 
+  config.vm.define "wsus", autostart: false do |wsus|
+    wsus.vm.box = "windows_2012_r2"
+    wsus.vm.hostname = "wsus"
+
+    wsus.vm.communicator = "winrm"
+    wsus.vm.network :forwarded_port, guest: 5985, host: 5985, id: "winrm", auto_correct: true
+    wsus.vm.network :forwarded_port, guest: 22, host: 2222, id: "ssh", auto_correct: true
+    wsus.vm.network :forwarded_port, guest: 3389, host: 3389, id: "rdp", auto_correct: true
+    wsus.vm.network :forwarded_port, guest: 8530, host: 8530, id: "wsus-http", auto_correct: true
+    wsus.vm.network :forwarded_port, guest: 8531, host: 8531, id: "wsus-https", auto_correct: true
+
+    wsus.vm.network :private_network, ip: "172.16.32.5" # VirtualBox
+
+    wsus.vm.provision "shell", path: "scripts/provision-wsus.ps1"
+
+    wsus.vm.provider "vcloud" do |vb, override|
+      vb.memory = 2048
+      vb.cpus = 2
+    end
+
+    wsus.vm.provider :virtualbox do |vb, override|
+      vb.gui = true
+      vb.memory = 2048
+      vb.cpus = 2
+      vb.customize ["modifyvm", :id, "--vram", "32"]
+      vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
+      vb.customize ["setextradata", "global", "GUI/SuppressMessages", "all" ]
+    end
+  end
+
   # disabled: slow packer / virtualbox performance on ubuntu in vcloud
   config.vm.define "vbox-slave-lin", autostart: false do |slave|
     slave.vm.box = "ubuntu1404"
     slave.vm.hostname = "vbox-slave"
 
-    slave.vm.network :private_network, ip: "172.16.32.5" # VirtualBox
+    slave.vm.network :private_network, ip: "172.16.32.6" # VirtualBox
 
     slave.vm.provision "shell", path: "scripts/fix-resolv-conf.sh" # vcloud bug workaround for ubuntu1404
     slave.vm.provision "shell", path: "scripts/install-jenkins-slave.sh"
