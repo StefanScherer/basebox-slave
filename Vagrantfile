@@ -114,16 +114,43 @@ Vagrant.configure("2") do |config|
     end
   end
 
+  config.vm.define "vmware-slave-lin", autostart: false do |slave|
+    slave.vm.box = "ubuntu1404"
+    slave.vm.hostname = "vmware-slave"
+
+    slave.vm.network :private_network, ip: "172.16.32.6" # VirtualBox
+
+    slave.vm.provision "shell", path: "scripts/fix-resolv-conf.sh" # vcloud bug workaround for ubuntu1404
+    slave.vm.provision "shell", path: "scripts/provision-vmware-slave.sh"
+    slave.vm.provision "shell", path: "scripts/install-jenkins-slave.sh"
+    slave.vm.provider "vcloud" do |v|
+      v.memory = 4096
+      v.cpus = 3
+      v.nested_hypervisor = true
+    end
+    slave.vm.provider "virtualbox" do |v|
+      v.memory = 2048
+      v.cpus = 2
+    end
+    ["vmware_fusion", "vmware_workstation"].each do |provider|
+      config.vm.provider provider do |v, override|
+        v.vmx["memsize"] = "2048"
+        v.vmx["numvcpus"] = "2"
+        v.vmx["vhv.enable"] = "TRUE"
+      end
+    end
+  end
+
   # disabled: slow packer / virtualbox performance on ubuntu in vcloud
   config.vm.define "vbox-slave-lin", autostart: false do |slave|
     slave.vm.box = "ubuntu1404"
     slave.vm.hostname = "vbox-slave"
 
-    slave.vm.network :private_network, ip: "172.16.32.6" # VirtualBox
+    slave.vm.network :private_network, ip: "172.16.32.7" # VirtualBox
 
     slave.vm.provision "shell", path: "scripts/fix-resolv-conf.sh" # vcloud bug workaround for ubuntu1404
-    slave.vm.provision "shell", path: "scripts/install-jenkins-slave.sh"
     slave.vm.provision "shell", path: "scripts/provision-virtualbox-slave.sh"
+    slave.vm.provision "shell", path: "scripts/install-jenkins-slave.sh"
     slave.vm.provider "vcloud" do |v|
       v.memory = 4096
       v.cpus = 3

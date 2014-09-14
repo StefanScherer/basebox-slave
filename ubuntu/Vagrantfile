@@ -10,12 +10,12 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # please see the online documentation at vagrantup.com.
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "ubuntu1204-desktop"
+  config.vm.box = "ubuntu1404-desktop"
 
   config.vm.provision "shell", path: "scripts/install-git.sh"
-  config.vm.provision "shell", path: "scripts/install-packer.sh"
-  config.vm.provision "shell", path: "scripts/install-vagrant.sh"
-  config.vm.provision "shell", path: "scripts/install-virtualbox.sh"
+#  config.vm.provision "shell", path: "scripts/install-packer.sh"
+#  config.vm.provision "shell", path: "scripts/install-vagrant.sh"
+#  config.vm.provision "shell", path: "scripts/install-virtualbox.sh"
 
   config.vm.provider "vcloud" do |v|
     v.memory = 4096
