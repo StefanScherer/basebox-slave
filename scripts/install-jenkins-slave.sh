@@ -71,7 +71,13 @@ fi
 
 . /lib/lsb/init-functions
 
-SWARM_OPTS="-jar /var/lib/jenkins/swarm-client.jar -autoDiscoveryAddress 172.16.32.255 -executors 1 -labels ubuntu -labels virtualbox -fsroot /var/lib/jenkins"
+SWARM_OPTS="-jar /var/lib/jenkins/swarm-client.jar -autoDiscoveryAddress 172.16.32.255 -executors 1 -labels ubuntu -fsroot /var/lib/jenkins"
+if test -f /usr/bin/vboxmanage; then
+	SWARM_OPTS="\$SWARM_OPTS -labels virtualbox"
+fi
+if test -f /usr/bin/vmrun; then
+	SWARM_OPTS="\$SWARM_OPTS -labels vmware"
+fi
 
 # Are we running from init?
 run_by_init() {

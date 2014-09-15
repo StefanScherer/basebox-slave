@@ -30,6 +30,12 @@ Vagrant.configure("2") do |config|
       v.memory = 1024
       v.cpus = 1
     end
+    ["vmware_fusion", "vmware_workstation"].each do |provider|
+      ci.vm.provider provider do |v, override|
+        v.vmx["memsize"] = "1024"
+        v.vmx["numvcpus"] = "1"
+      end
+    end
   end
 
   config.vm.define "vmware-slave" do |slave|
@@ -56,6 +62,13 @@ Vagrant.configure("2") do |config|
       v.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
       v.customize ["modifyvm", :id, "--vram", "32"]
     end
+    ["vmware_fusion", "vmware_workstation"].each do |provider|
+      slave.vm.provider provider do |v, override|
+        v.gui = true
+        v.vmx["memsize"] = "2048"
+        v.vmx["numvcpus"] = "2"
+      end
+    end
   end
 
   config.vm.define "vbox-slave" do |slave|
@@ -81,6 +94,13 @@ Vagrant.configure("2") do |config|
       v.cpus = 2
       v.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
       v.customize ["modifyvm", :id, "--vram", "32"]
+    end
+    ["vmware_fusion", "vmware_workstation"].each do |provider|
+      slave.vm.provider provider do |v, override|
+        v.gui = true
+        v.vmx["memsize"] = "2048"
+        v.vmx["numvcpus"] = "2"
+      end
     end
   end
 
@@ -112,6 +132,13 @@ Vagrant.configure("2") do |config|
       vb.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
       vb.customize ["setextradata", "global", "GUI/SuppressMessages", "all" ]
     end
+    ["vmware_fusion", "vmware_workstation"].each do |provider|
+      wsus.vm.provider provider do |v, override|
+        v.gui = true
+        v.vmx["memsize"] = "2048"
+        v.vmx["numvcpus"] = "2"
+      end
+    end
   end
 
   config.vm.define "vmware-slave-lin", autostart: false do |slave|
@@ -133,7 +160,7 @@ Vagrant.configure("2") do |config|
       v.cpus = 2
     end
     ["vmware_fusion", "vmware_workstation"].each do |provider|
-      config.vm.provider provider do |v, override|
+      slave.vm.provider provider do |v, override|
         v.vmx["memsize"] = "2048"
         v.vmx["numvcpus"] = "2"
         v.vmx["vhv.enable"] = "TRUE"
@@ -159,6 +186,13 @@ Vagrant.configure("2") do |config|
     slave.vm.provider "virtualbox" do |v|
       v.memory = 2048
       v.cpus = 2
+    end
+    ["vmware_fusion", "vmware_workstation"].each do |provider|
+      slave.vm.provider provider do |v, override|
+        v.vmx["memsize"] = "2048"
+        v.vmx["numvcpus"] = "2"
+        v.vmx["vhv.enable"] = "TRUE"
+      end
     end
   end
 

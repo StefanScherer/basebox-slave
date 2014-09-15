@@ -15,11 +15,11 @@ sudo apt-get install -qq git unzip
 # install packer
 sudo mkdir /opt/packer
 pushd /opt/packer
-echo "Downloading packer 0.7.1..."
-sudo wget --no-verbose https://dl.bintray.com/mitchellh/packer/0.7.1_linux_amd64.zip
-echo "Installing packer 0.7.1..."
-sudo unzip 0.7.1_linux_amd64.zip
-sudo rm 0.7.1_linux_amd64.zip
+echo "Downloading packer 0.6.1..."
+sudo wget --no-verbose https://dl.bintray.com/mitchellh/packer/0.6.1_linux_amd64.zip
+echo "Installing packer 0.6.1..."
+sudo unzip 0.6.1_linux_amd64.zip
+sudo rm 0.6.1_linux_amd64.zip
 pushd /usr/bin
 sudo ln -s /opt/packer/* .
 popd
@@ -39,6 +39,13 @@ rm /tmp/vagrant.deb
 
 echo "Installing vagrant-vcloud plugin"
 vagrant plugin install vagrant-vcloud
+
+# workaround in box-cutter/ubuntu1404's minimize.sh removes /usr/src/* but does not remove packages
+sudo apt-get remove -qq linux-headers-3.13.0-32-generic
+sudo apt-get remove -qq linux-headers-3.13.0-32
+# sudo apt-get install -qq linux-headers-3.13.0-32
+sudo apt-get install -qq linux-headers-$(uname -r)
+sudo apt-get install -qq dkms
 
 echo "Downloading VMware Workstation 10 ..."
 wget --no-verbose  -O VMware-Workstation.bundle --no-check-certificate http://www.vmware.com/go/tryworkstation-linux-64

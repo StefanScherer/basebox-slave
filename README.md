@@ -9,8 +9,8 @@ The basebox build environment itself can be built with the same tools and create
 ## Installation
 On your host machine you will need the following tools installed:
 
-* Vagrant 1.6.3
-* vagrant-vcloud plugin 0.4.1 with the command `vagrant plugin install vagrant-vcloud`
+* Vagrant 1.6.5
+* vagrant-vcloud plugin 0.4.2 with the command `vagrant plugin install vagrant-vcloud`
 * Your vCloud access informations in your global `~/.vagrant.d/Vagrantfile`
 
 After that you should clone this repo and have some customizations. See below for more details.
@@ -52,8 +52,6 @@ You can login to your jenkins slave with RDP with the following command:
 vagrant rdp vmware-slave
 ```
 
-Notice: Windows host users need Vagrant 1.6.4 or at least a patch for the bug in Vagrant 1.6.3 to make `vagrant rdp` work. There is a problem writing the rdp file for mstsc at the moment.
-
 After creating the vmware-slave VM you have to licsense the installed VMware Workstation manually. I have added a command in the `./scripts/provision-vmware-slave.bat` script to directly enter the VMware license, but I cannot put that into the repo.
 
 This is a good situation to test the `vagrant rdp vmware-slave` which works nice.
@@ -62,10 +60,10 @@ The software installed in the vmware-slave is:
 
 * [Chocolatey](http://chocolatey.org) - package like installations on Windows
 * [packer 0.6.1](http://www.packer.io/downloads.html) or optional packer from source
-* [packer-post-processor-vagrant-vmware-ovf 0.1.2](https://github.com/gosddc/packer-post-processor-vagrant-vmware-ovf/releases)
+* [packer-post-processor-vagrant-vmware-ovf 0.2.0](https://github.com/gosddc/packer-post-processor-vagrant-vmware-ovf/releases)
 * VMware Workstation 10.0.3
-* [Vagrant 1.6.3](http://www.vagrantup.com/downloads.html)
-* [vagrant-vcloud 0.4.1](https://github.com/frapposelli/vagrant-vcloud/releases)
+* [Vagrant 1.6.5](http://www.vagrantup.com/downloads.html)
+* [vagrant-vcloud 0.4.2](https://github.com/frapposelli/vagrant-vcloud/releases)
 * optional global Vagrantfile from host (`./resources/Vagrantfile-global`)
 * msysgit
 * wget
@@ -81,13 +79,11 @@ You can login to your jenkins slave with RDP with the following command:
 vagrant rdp vbox-slave
 ```
 
-Notice: Windows host users need Vagrant 1.6.4 or at least a patch for the bug in Vagrant 1.6.3 to make `vagrant rdp` work. There is a problem writing the rdp file for mstsc at the moment.
-
 The software installed in the vbox-slave is:
 
 * [Chocolatey](http://chocolatey.org) - package like installations on Windows
 * [packer 0.6.1](http://www.packer.io/downloads.html)
-* [VirtualBox 4.3.14](https://www.virtualbox.org/wiki/Linux_Downloads)
+* [VirtualBox 4.3.16](https://www.virtualbox.org/wiki/Linux_Downloads)
 * msysgit
 * wget
 * Java + Jenkins Swarm Client (Node labels: windows + virtualbox)

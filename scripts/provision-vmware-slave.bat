@@ -40,7 +40,7 @@ call C:\vagrant\scripts\install-packer-from-source.bat
 goto packer_firewall
 
 echo Installing official packer version from Chocolatey Package
-call cinst packer
+call cinst packer -version 0.6.1
 where packer
 if ERRORLEVEL 1 call :addPackerToSystemPath
 goto PACKER_DONE
