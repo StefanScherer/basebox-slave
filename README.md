@@ -9,7 +9,7 @@ The basebox build environment itself can be built with the same tools and create
 ## Installation
 On your host machine you will need the following tools installed:
 
-* Vagrant 1.6.5
+* Vagrant 1.6.3
 * vagrant-vcloud plugin 0.4.2 with the command `vagrant plugin install vagrant-vcloud`
 * Your vCloud access informations in your global `~/.vagrant.d/Vagrantfile`
 
@@ -62,7 +62,7 @@ The software installed in the vmware-slave is:
 * [packer 0.6.1](http://www.packer.io/downloads.html) or optional packer from source
 * [packer-post-processor-vagrant-vmware-ovf 0.2.0](https://github.com/gosddc/packer-post-processor-vagrant-vmware-ovf/releases)
 * VMware Workstation 10.0.3
-* [Vagrant 1.6.5](http://www.vagrantup.com/downloads.html)
+* [Vagrant 1.6.3](http://www.vagrantup.com/downloads.html)
 * [vagrant-vcloud 0.4.2](https://github.com/frapposelli/vagrant-vcloud/releases)
 * optional global Vagrantfile from host (`./resources/Vagrantfile-global`)
 * msysgit

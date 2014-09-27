@@ -31,9 +31,9 @@ sudo ln -s /opt/packer/packer-post-processor-vagrant-vmware-ovf /usr/bin/packer-
 rm packer-post-processor-vagrant-vmware-ovf.linux-amd64.tar.gz
 popd
 
-echo "Downloading Vagrant 1.6.5 ..."
-wget --no-verbose -O /tmp/vagrant.deb https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.5_x86_64.deb
-echo "Installing Vagrant 1.6.5 ..."
+echo "Downloading Vagrant 1.6.3 ..."
+wget --no-verbose -O /tmp/vagrant.deb https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.3_x86_64.deb
+echo "Installing Vagrant 1.6.3 ..."
 sudo dpkg -i /tmp/vagrant.deb
 rm /tmp/vagrant.deb
 
