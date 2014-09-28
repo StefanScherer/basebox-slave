@@ -37,8 +37,8 @@ echo "Installing Vagrant 1.6.3 ..."
 sudo dpkg -i /tmp/vagrant.deb
 rm /tmp/vagrant.deb
 
-echo "Installing vagrant-vcloud plugin"
-vagrant plugin install vagrant-vcloud
+echo "Installing vagrant-vcloud plugin 0.4.2 ..."
+vagrant plugin install vagrant-vcloud --plugin-version 0.4.2
 
 # workaround in box-cutter/ubuntu1404's minimize.sh removes /usr/src/* but does not remove packages
 sudo apt-get remove -qq linux-headers-3.13.0-32-generic

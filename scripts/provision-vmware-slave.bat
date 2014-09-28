@@ -70,8 +70,8 @@ echo Installing Vagrant ...
 call cinst vagrant -version 1.6.3
 set PATH=%PATH%;C:\hashicorp\vagrant\bin
 :have_vagrant
-echo Installing vagrant-vcloud plugin ...
-vagrant plugin install vagrant-vcloud
+echo Installing vagrant-vcloud plugin 0.4.2 ...
+vagrant plugin install vagrant-vcloud  --plugin-version 0.4.2
 if exist C:\Users\vagrant\.vagrant.d\Vagrantfile goto :have_vagrantfile
 if exist C:\vagrant\resources\Vagrantfile-global (
   copy C:\vagrant\resources\Vagrantfile-global C:\Users\vagrant\.vagrant.d\Vagrantfile

@@ -52,7 +52,7 @@ netsh advfirewall firewall add rule name="packer-builder-virtualbox-iso" dir=in 
 
 if exist c:\hashicorp\vagrant goto :have_vagrant
 echo Installing Vagrant ...
-call cinst vagrant -version 1.6.3
+call cinst vagrant
 set PATH=%PATH%;C:\hashicorp\vagrant\bin
 :have_vagrant
 if exist C:\HashiCorp\Vagrant\embedded\gems\gems\vagrant-1.6.3\plugins\hosts\windows\cap\rdp.rb (

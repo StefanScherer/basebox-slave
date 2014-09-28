@@ -15,22 +15,22 @@ sudo apt-get install -qq git unzip
 # install packer
 sudo mkdir /opt/packer
 cd /opt/packer
-echo "Downloading packer 0.6.1..."
-sudo wget --no-verbose https://dl.bintray.com/mitchellh/packer/0.6.1_linux_amd64.zip
-echo "Installing packer 0.6.1..."
-sudo unzip 0.6.1_linux_amd64.zip
-sudo rm 0.6.1_linux_amd64.zip
+echo "Downloading packer 0.7.1..."
+sudo wget --no-verbose https://dl.bintray.com/mitchellh/packer/0.7.1_linux_amd64.zip
+echo "Installing packer 0.7.1..."
+sudo unzip 0.7.1_linux_amd64.zip
+sudo rm 0.7.1_linux_amd64.zip
 cd /usr/bin
 sudo ln -s /opt/packer/* .
 
 
-echo "Downloading Vagrant 1.6.3 ..."
-wget --no-verbose -O /tmp/vagrant.deb https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.3_x86_64.deb
-echo "Installing Vagrant 1.6.3 ..."
+echo "Downloading Vagrant 1.6.5 ..."
+wget --no-verbose -O /tmp/vagrant.deb https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.5_x86_64.deb
+echo "Installing Vagrant 1.6.5 ..."
 sudo dpkg -i /tmp/vagrant.deb
 rm /tmp/vagrant.deb
 
-echo "Installing VirtualBox 4.3.14 ..."
+echo "Installing VirtualBox 4.3.16 ..."
 # workaround in box-cutter/ubuntu1404's minimize.sh removes /usr/src/* but does not remove packages
 sudo apt-get remove -qq linux-headers-3.13.0-32-generic
 sudo apt-get remove -qq linux-headers-3.13.0-32
