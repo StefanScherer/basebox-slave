@@ -84,7 +84,7 @@ Vagrant.configure("2") do |config|
 
     slave.vm.provision "shell", path: "scripts/provision-virtualbox-slave.bat"
     slave.vm.provider "vcloud" do |v|
-      v.memory = 4096
+      v.memory = 6144
       v.cpus = 3
       v.nested_hypervisor = true
     end
