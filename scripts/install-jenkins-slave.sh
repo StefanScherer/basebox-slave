@@ -12,7 +12,7 @@ sudo install-keymap de
 echo "Europe/Berlin" | sudo tee /etc/timezone
 sudo dpkg-reconfigure -f noninteractive tzdata
 
-# install development: 
+# install development:
 sudo apt-get install -qq curl git vim
 
 if [ ! -d /vagrant/resources ]
@@ -43,7 +43,7 @@ sudo mkdir -p /var/lock/subsys
 
 # retrieve latest version of swarm-client
 swarmClientVersion=`curl -s  http://maven.jenkins-ci.org/content/repositories/releases/org/jenkins-ci/plugins/swarm-client/maven-metadata.xml | grep latest | sed 's/\s*[<>a-z/]//g'`
-sudo wget -O /var/lib/jenkins/swarm-client.jar http://maven.jenkins-ci.org/content/repositories/releases/org/jenkins-ci/plugins/swarm-client/$swarmClientVersion/swarm-client-$swarmClientVersion-jar-with-dependencies.jar
+sudo wget -nv -O /var/lib/jenkins/swarm-client.jar http://maven.jenkins-ci.org/content/repositories/releases/org/jenkins-ci/plugins/swarm-client/$swarmClientVersion/swarm-client-$swarmClientVersion-jar-with-dependencies.jar
 
 cat <<INITD | sudo tee /etc/init.d/swarm-client
 #! /bin/sh
@@ -184,4 +184,3 @@ sudo chmod +x /etc/init.d/swarm-client
 sudo update-rc.d swarm-client defaults
 sudo update-rc.d swarm-client enable
 # sudo service swarm-client start
-
