@@ -143,12 +143,14 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "vmware-slave-lin", autostart: false do |slave|
-    slave.vm.box = "box-cutter/ubuntu1404-desktop"
+    slave.vm.box = "ubuntu1404"
     slave.vm.hostname = "vmware-slave"
 
     slave.vm.network :private_network, ip: "172.16.32.6" # VirtualBox
+    slave.vm.network :forwarded_port, guest: 3389, host: 3389, id: "rdp", auto_correct: true
 
     slave.vm.provision "shell", path: "scripts/provision-vmware-slave.sh"
+    slave.vm.provision "shell", path: "scripts/install-xrdp.sh"
     slave.vm.provision "shell", path: "scripts/install-jenkins-slave.sh"
     slave.vm.provider "vcloud" do |v|
       v.memory = 4096
@@ -175,8 +177,10 @@ Vagrant.configure("2") do |config|
     slave.vm.hostname = "vbox-slave"
 
     slave.vm.network :private_network, ip: "172.16.32.7" # VirtualBox
+    slave.vm.network :forwarded_port, guest: 3389, host: 3389, id: "rdp", auto_correct: true
 
     slave.vm.provision "shell", path: "scripts/provision-virtualbox-slave.sh"
+    slave.vm.provision "shell", path: "scripts/install-xrdp.sh"
     slave.vm.provision "shell", path: "scripts/install-jenkins-slave.sh"
     slave.vm.provider "vcloud" do |v|
       v.memory = 4096
