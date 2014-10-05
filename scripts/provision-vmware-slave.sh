@@ -51,3 +51,10 @@ echo "Downloading VMware Workstation 10 ..."
 wget --no-verbose  -O VMware-Workstation.bundle --no-check-certificate http://www.vmware.com/go/tryworkstation-linux-64
 sudo sh ./VMware-Workstation.bundle --console --required --eulas-agreed
 rm ./VMware-Workstation.bundle
+
+# from http://c-nergy.be/blog/?p=5305
+echo "Installing RDP server ..."
+sudo apt-get install -y xrdp
+sudo apt-get install -y xfce4
+echo xfce4-session >~/.xsession
+sudo service xrdp restart
