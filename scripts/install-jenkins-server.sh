@@ -66,8 +66,8 @@ java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin publish-over-s
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin peg-formatter
 
 if [ -f /vagrant/resources/jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin.xml ]; then
-  if [ ! -f /var/lib/jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin.xml ]; then
-    cp /vagrant/resources/jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin.xml /var/lib/jenkins/
+  if [ ! -f /var/lib/jenkins/jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin.xml ]; then
+    sudo -u jenkins cp /vagrant/resources/jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin.xml /var/lib/jenkins/
   fi
 fi
 
