@@ -31,14 +31,14 @@ sudo ln -s /opt/packer/packer-post-processor-vagrant-vmware-ovf /usr/bin/packer-
 rm packer-post-processor-vagrant-vmware-ovf.linux-amd64.tar.gz
 popd
 
-echo "Downloading Vagrant 1.6.3 ..."
-wget --no-verbose -O /tmp/vagrant.deb https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.3_x86_64.deb
-echo "Installing Vagrant 1.6.3 ..."
+echo "Downloading Vagrant 1.6.5 ..."
+wget --no-verbose -O /tmp/vagrant.deb https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.5_x86_64.deb
+echo "Installing Vagrant 1.6.5 ..."
 sudo dpkg -i /tmp/vagrant.deb
 rm /tmp/vagrant.deb
 
-echo "Installing vagrant-vcloud plugin 0.4.2 ..."
-vagrant plugin install vagrant-vcloud --plugin-version 0.4.2
+echo "Installing vagrant-vcloud plugin 0.4.3 ..."
+vagrant plugin install vagrant-vcloud --plugin-version 0.4.3
 
 # workaround in box-cutter/ubuntu1404's minimize.sh removes /usr/src/* but does not remove packages
 sudo apt-get remove -qq linux-headers-3.13.0-32-generic

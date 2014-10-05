@@ -1,4 +1,4 @@
-echo Extend drive C to maximum 
+echo Extend drive C to maximum
 echo select volume 0 >%TEMP%\extendC.txt
 echo extend >>%TEMP%\extendC.txt
 diskpart.exe /s %TEMP%\extendC.txt
@@ -67,11 +67,11 @@ netsh advfirewall firewall add rule name="packer-builder-virtualbox-iso" dir=in 
 
 if exist c:\hashicorp\vagrant goto :have_vagrant
 echo Installing Vagrant ...
-call cinst vagrant -version 1.6.3
+call cinst vagrant
 set PATH=%PATH%;C:\hashicorp\vagrant\bin
 :have_vagrant
-echo Installing vagrant-vcloud plugin 0.4.2 ...
-vagrant plugin install vagrant-vcloud  --plugin-version 0.4.2
+echo Installing vagrant-vcloud plugin 0.4.3 ...
+vagrant plugin install vagrant-vcloud  --plugin-version 0.4.3
 if exist C:\Users\vagrant\.vagrant.d\Vagrantfile goto :have_vagrantfile
 if exist C:\vagrant\resources\Vagrantfile-global (
   copy C:\vagrant\resources\Vagrantfile-global C:\Users\vagrant\.vagrant.d\Vagrantfile
@@ -113,6 +113,9 @@ if exist C:\vagrant\resources\hosts (
   echo Appending additional hosts entries
   copy C:\Windows\System32\drivers\etc\hosts + C:\vagrant\resources\hosts C:\Windows\System32\drivers\etc\hosts
 )
+
+echo Installing TightVNC to watch headless VMs
+call cinst tightvnc
 
 call C:\vagrant\scripts\install-jenkins-slave.bat
 

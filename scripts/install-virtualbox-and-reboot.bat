@@ -13,6 +13,7 @@ set PATH=%PATH%;%ChocolateyInstall%\bin
 :inst
 
 call cinst VirtualBox
+call cinst VirtualBox.ExtensionPack
 where vboxmanage
 if ERRORLEVEL 1 call :addVBoxToSystemPath
 goto VBOX_DONE
