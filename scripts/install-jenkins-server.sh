@@ -7,7 +7,7 @@ sudo apt-get update -y
 echo "Europe/Berlin" | sudo tee /etc/timezone
 sudo dpkg-reconfigure -f noninteractive tzdata
 
-# install development: 
+# install development:
 sudo apt-get install -y curl git vim
 
 if [ ! -d /vagrant/resources ]
@@ -23,7 +23,7 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install -y iptables-persistent
 sudo iptables-save | sudo tee /etc/iptables/rules.v4
 
 # install jenkins
-wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -
+wget --no-verbose -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -
 echo "deb http://pkg.jenkins-ci.org/debian binary/" | sudo tee /etc/apt/sources.list.d/jenkins.list
 sudo apt-get update -y
 sudo apt-get install -y jenkins
@@ -52,7 +52,7 @@ do
 done
 set -x
 # force read update list
-wget -O default.js http://updates.jenkins-ci.org/update-center.json
+wget --no-verbose -O default.js http://updates.jenkins-ci.org/update-center.json
 sed '1d;$d' default.js > default.json
 curl -X POST -H "Accept: application/json" -d @default.json http://localhost:8080/updateCenter/byId/default/postBack --verbose
 
