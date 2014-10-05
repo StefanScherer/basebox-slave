@@ -114,6 +114,9 @@ if exist C:\vagrant\resources\hosts (
   copy C:\Windows\System32\drivers\etc\hosts + C:\vagrant\resources\hosts C:\Windows\System32\drivers\etc\hosts
 )
 
+echo Installing TightVNC to watch headless VMs
+call cinst tightvnc
+
 call C:\vagrant\scripts\install-jenkins-slave.bat
 
 echo Reboot the vmware-slave to have all tools in PATH and then start the swarm client
