@@ -67,6 +67,7 @@ Vagrant.configure("2") do |config|
         v.gui = true
         v.vmx["memsize"] = "2048"
         v.vmx["numvcpus"] = "2"
+        v.vmx["vhv.enable"] = "TRUE"
       end
     end
   end
@@ -100,6 +101,7 @@ Vagrant.configure("2") do |config|
         v.gui = true
         v.vmx["memsize"] = "2048"
         v.vmx["numvcpus"] = "2"
+        v.vmx["vhv.enable"] = "TRUE"
       end
     end
   end
