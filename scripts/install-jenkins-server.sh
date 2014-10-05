@@ -36,6 +36,10 @@ sudo -u jenkins cp /vagrant/conf/jenkins/* /var/lib/jenkins/
 sudo service jenkins restart
 
 echo "Waiting until Jenkins server is up"
+while [ ! -f /var/log/jenkins/jenkins.log ]
+do
+  sleep 5
+done
 tail -f /var/log/jenkins/jenkins.log | while read LOGLINE
 do
   [[ "${LOGLINE}" == *"Jenkins is fully up and running"* ]] && pkill -P $$ tail
@@ -47,8 +51,8 @@ wget --no-verbose -O /vagrant/resources/swarm-client.jar http://maven.jenkins-ci
 
 while [ ! -f jenkins-cli.jar ]
 do
-    sleep 10
-    wget --no-verbose http://localhost:8080/jnlpJars/jenkins-cli.jar
+  sleep 10
+  wget --no-verbose http://localhost:8080/jnlpJars/jenkins-cli.jar
 done
 set -x
 # force read update list
