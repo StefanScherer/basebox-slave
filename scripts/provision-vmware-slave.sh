@@ -37,6 +37,9 @@ echo "Installing Vagrant 1.6.5 ..."
 sudo dpkg -i /tmp/vagrant.deb
 rm /tmp/vagrant.deb
 
+echo "Installing varant-serverspec plugin ..."
+vagrant plugin install vagrant-serverspec
+
 echo "Installing vagrant-vcloud plugin 0.4.3 ..."
 vagrant plugin install vagrant-vcloud
 

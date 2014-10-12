@@ -30,6 +30,9 @@ echo "Installing Vagrant 1.6.5 ..."
 sudo dpkg -i /tmp/vagrant.deb
 rm /tmp/vagrant.deb
 
+echo "Installing varant-serverspec plugin ..."
+vagrant plugin install vagrant-serverspec
+
 echo "Installing VirtualBox 4.3.16 ..."
 # workaround in box-cutter/ubuntu1404's minimize.sh removes /usr/src/* but does not remove packages
 sudo apt-get remove -qq linux-headers-3.13.0-32-generic
