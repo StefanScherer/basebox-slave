@@ -70,6 +70,12 @@ echo Installing Vagrant ...
 call cinst vagrant
 set PATH=%PATH%;C:\hashicorp\vagrant\bin
 :have_vagrant
+
+echo Installing vagrant-serverspec
+rem Workaround for half released ffi 1.9.6
+vagrant plugin install ffi --plugin-version 1.9.5
+vagrant plugin install vagrant-serverspec
+
 echo Installing vagrant-vcloud plugin 0.4.3 ...
 vagrant plugin install vagrant-vcloud  --plugin-version 0.4.3
 if exist C:\Users\vagrant\.vagrant.d\Vagrantfile goto :have_vagrantfile

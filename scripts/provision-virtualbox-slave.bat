@@ -1,4 +1,4 @@
-echo Extend drive C to maximum 
+echo Extend drive C to maximum
 echo select volume 0 >%TEMP%\extendC.txt
 echo extend >>%TEMP%\extendC.txt
 diskpart.exe /s %TEMP%\extendC.txt
@@ -59,6 +59,11 @@ if exist C:\HashiCorp\Vagrant\embedded\gems\gems\vagrant-1.6.3\plugins\hosts\win
   echo Patching Vagrant 1.6.3
   copy /Y C:\vagrant\scripts\rdp.rb C:\HashiCorp\Vagrant\embedded\gems\gems\vagrant-1.6.3\plugins\hosts\windows\cap\rdp.rb
 )
+
+echo Installing vagrant-serverspec
+rem Workaround for half released ffi 1.9.6
+vagrant plugin install ffi --plugin-version 1.9.5
+vagrant plugin install vagrant-serverspec
 
 echo "Installing Jenkins Swarm Client"
 call c:\vagrant\scripts\install-jenkins-slave.bat virtualbox
