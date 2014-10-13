@@ -61,8 +61,6 @@ if exist C:\HashiCorp\Vagrant\embedded\gems\gems\vagrant-1.6.3\plugins\hosts\win
 )
 
 echo Installing vagrant-serverspec
-rem Workaround for half released ffi 1.9.6
-vagrant plugin install ffi --plugin-version 1.9.5
 vagrant plugin install vagrant-serverspec
 
 echo "Installing Jenkins Swarm Client"
