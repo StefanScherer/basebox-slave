@@ -40,7 +40,7 @@ call C:\vagrant\scripts\install-packer-from-source.bat
 goto packer_firewall
 
 echo Installing official packer version from Chocolatey Package
-call cinst packer -version 0.6.1
+call cinst packer
 where packer
 if ERRORLEVEL 1 call :addPackerToSystemPath
 goto PACKER_DONE
@@ -85,10 +85,6 @@ if exist C:\vagrant\resources\Vagrantfile-global (
   )
 )
 :have_vagrantfile
-if exist C:\HashiCorp\Vagrant\embedded\gems\gems\vagrant-1.6.3\plugins\hosts\windows\cap\rdp.rb (
-  echo Patching Vagrant 1.6.3
-  copy /Y C:\vagrant\scripts\rdp.rb C:\HashiCorp\Vagrant\embedded\gems\gems\vagrant-1.6.3\plugins\hosts\windows\cap\rdp.rb
-)
 
 rem Install VMware Workstation
 if not exist "c:\Program Files (x86)\VMware\VMware Workstation" (

@@ -59,7 +59,7 @@ This is a good situation to test the `vagrant rdp vmware-slave` which works nice
 The software installed in the vmware-slave is:
 
 * [Chocolatey](http://chocolatey.org) - package like installations on Windows
-* [packer 0.6.1](http://www.packer.io/downloads.html) or optional packer from source
+* [packer 0.7.1](http://www.packer.io/downloads.html) or optional packer from source
 * [packer-post-processor-vagrant-vmware-ovf 0.2.0](https://github.com/gosddc/packer-post-processor-vagrant-vmware-ovf/releases)
 * VMware Workstation 10.0.3
 * [Vagrant 1.6.5](http://www.vagrantup.com/downloads.html)
@@ -82,7 +82,7 @@ vagrant rdp vbox-slave
 The software installed in the vbox-slave is:
 
 * [Chocolatey](http://chocolatey.org) - package like installations on Windows
-* [packer 0.6.1](http://www.packer.io/downloads.html)
+* [packer 0.7.1](http://www.packer.io/downloads.html)
 * [VirtualBox 4.3.16](https://www.virtualbox.org/wiki/Linux_Downloads)
 * msysgit
 * wget
@@ -157,7 +157,7 @@ A sample test-box-vcloud-credentials.bat looks like this:
 I use the @ sign in the script to hide it in Jenkins console logs.
 I suggest a `BASEBOX-TESTING` catalog for test uploads in the Jenkins build jobs.
 
-This is done with the file `./resources/test-box-vcloud-credentials.bat` provided from the host 
+This is done with the file `./resources/test-box-vcloud-credentials.bat` provided from the host
 
 ### upload-vcloud-credentials.bat
 In the `vmware-slave` the upload of the tested basebox will be done with ovftool. The script for the upload also needs your connection data and credentials to connect to your global vCloud org.
@@ -195,7 +195,7 @@ npm install -g grunt-cli
 ```
 
 ### Install grunt-jenkins
-On you host machine, you have to call 
+On you host machine, you have to call
 
 ```
 npm install
@@ -264,7 +264,7 @@ If you just want to view into Jenkins use this command:
 
 ```
 open http://10.100.50.4:2200/
-```     
+```
 
 ![jenkins jobs](pics/jenkins-jobs.png)
 
