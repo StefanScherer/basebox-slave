@@ -84,13 +84,13 @@ Vagrant.configure("2") do |config|
 
     slave.vm.provision "shell", path: "scripts/provision-virtualbox-slave.bat"
     slave.vm.provider "vcloud" do |v|
-      v.memory = 6144
+      v.memory = 4096
       v.cpus = 2
       v.nested_hypervisor = true
     end
     slave.vm.provider "virtualbox" do |v|
       v.gui = true
-      v.memory = 6144
+      v.memory = 4096
       v.cpus = 2
       v.customize ["modifyvm", :id, "--clipboard", "bidirectional"]
       v.customize ["modifyvm", :id, "--vram", "32"]
@@ -98,7 +98,7 @@ Vagrant.configure("2") do |config|
     ["vmware_fusion", "vmware_workstation"].each do |provider|
       slave.vm.provider provider do |v, override|
         v.gui = true
-        v.vmx["memsize"] = "6144"
+        v.vmx["memsize"] = "4096"
         v.vmx["numvcpus"] = "2"
         v.vmx["vhv.enable"] = "TRUE"
       end
