@@ -1,7 +1,7 @@
 module.exports = function(grunt) {
   grunt.initConfig({
     jenkins: {
-      serverAddress: 'http://10.100.50.4:2200',
+      serverAddress: 'http://10.100.50.4',
       // username: 'vagrant',
       // password: 'vagrant',
       pipelineDirectory: 'jenkins-configuration'

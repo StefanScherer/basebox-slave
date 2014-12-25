@@ -207,7 +207,7 @@ to install grunt-jenkins and other Node dependencies.
 ### Customize Jenkins URL
 In the `Gruntfile.js` you have to enter the Jenkins IP address and port to connect from your host to the Jenkins VM.
 
-In my case this is `10.100.50.4:2200` as you can see in the Gruntfile.js. With grunt-jenkins 0.5.0 or above you can backup and restore through your vCloud Edge Gateway.
+In my case this is `10.100.50.4` as you can see in the Gruntfile.js. With grunt-jenkins 0.5.0 or above you can backup and restore through your vCloud Edge Gateway.
 
 ### Install Jenkins jobs
 
@@ -220,7 +220,7 @@ grunt jenkins-install
 When you added / removed plugins you must restart Jenkins:
 
 ```
-curl -X POST http://10.100.50.4:2200/safeRestart
+curl -X POST http://10.100.50.4/safeRestart
 ```
 
 Have a look at the Jenkins jobs, there you can see how I build the baseboxes and from with GitHub Repos they come from. See below for more details.
@@ -263,7 +263,7 @@ All of my Jenkins jobs you can find in this repo do some tests within the vCloud
 If you just want to view into Jenkins use this command:
 
 ```
-open http://10.100.50.4:2200/
+open http://10.100.50.4/
 ```
 
 ![jenkins jobs](pics/jenkins-jobs.png)
@@ -283,7 +283,7 @@ After successfully running some Jenkins jobs to build baseboxes, vagrant-vcloud 
 So pick up the URL of the generated box file and feed vagrant on your host:
 
 ```bash
-vagrant box add windows_2012_r2 http://10.100.50.4:2200/job/windows_2012_r2_vcloud/ws/windows_2012_r2_vcloud.box
+vagrant box add windows_2012_r2 http://10.100.50.4/job/windows_2012_r2_vcloud/ws/windows_2012_r2_vcloud.box
 ```
 
 But Jenkins could also be used to test the basebox and upload it to your basebox repo or to the [Vagrant Cloud](https://vagrantcloud.com).
