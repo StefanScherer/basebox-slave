@@ -27,7 +27,7 @@ set PATH=%PATH%;%ChocolateyInstall%\bin
 :inst
 
 where java
-if ERRORLEVEL 1 cinst java.jdk
+if ERRORLEVEL 1 cinst javaruntime
 
 where wget
 if ERRORLEVEL 1 cinst wget
