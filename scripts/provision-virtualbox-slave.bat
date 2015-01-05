@@ -1,9 +1,4 @@
-echo Extend drive C to maximum
-echo select volume 0 >%TEMP%\extendC.txt
-echo extend >>%TEMP%\extendC.txt
-diskpart.exe /s %TEMP%\extendC.txt
-
-if exist c:\vagrant\resources\activate.bat call c:\vagrant\resources\activate.bat
+if exist c:\vagrant\resources\provisionfirst.bat call c:\vagrant\resources\provisionfirst.bat
 
 if exist %WinDir%\microsoft.net\framework\v4.0.30319 goto :have_net
 echo Ensuring .NET 4.0 is installed
