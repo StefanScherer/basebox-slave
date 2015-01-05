@@ -71,11 +71,14 @@ cinst vagrant
 set PATH=%PATH%;C:\hashicorp\vagrant\bin
 :have_vagrant
 
-echo Installing vagrant-serverspec
-vagrant plugin install vagrant-serverspec
+echo Installing Stefan's vagrant-serverspec 0.5.0 ...
+wget --no-verbose --no-check-certificate -O vagrant-serverspec-0.5.0.gem https://github.com/StefanScherer/vagrant-serverspec/releases/download/v0.5.0/vagrant-serverspec-0.5.0.gem
+vagrant plugin install vagrant-serverspec-0.5.0.gem
 
-echo Installing vagrant-vcloud plugin 0.4.3 ...
-vagrant plugin install vagrant-vcloud  --plugin-version 0.4.3
+echo Installing Stefan's vagrant-vcloud plugin 0.4.4 ...
+wget --no-verbose --no-check-certificate -O vagrant-vcloud-0.4.4.gem https://github.com/StefanScherer/vagrant-vcloud/releases/download/v0.4.4/vagrant-vcloud-0.4.4.gem
+vagrant plugin install vagrant-vcloud-0.4.4.gem
+
 if exist C:\Users\vagrant\.vagrant.d\Vagrantfile goto :have_vagrantfile
 if exist C:\vagrant\resources\Vagrantfile-global (
   copy C:\vagrant\resources\Vagrantfile-global C:\Users\vagrant\.vagrant.d\Vagrantfile

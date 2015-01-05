@@ -3,6 +3,8 @@ echo select volume 0 >%TEMP%\extendC.txt
 echo extend >>%TEMP%\extendC.txt
 diskpart.exe /s %TEMP%\extendC.txt
 
+if exist c:\vagrant\resources\activate.bat call c:\vagrant\resources\activate.bat
+
 if exist %WinDir%\microsoft.net\framework\v4.0.30319 goto :have_net
 echo Ensuring .NET 4.0 is installed
 @powershell -NoProfile -ExecutionPolicy unrestricted -Command "iex ((new-object net.webclient).DownloadString('https://raw.github.com/StefanScherer/arduino-ide/install/InstallNet4.ps1'))"
@@ -56,8 +58,9 @@ cinst vagrant
 set PATH=%PATH%;C:\hashicorp\vagrant\bin
 :have_vagrant
 
-echo Installing vagrant-serverspec
-vagrant plugin install vagrant-serverspec
+echo Installing Stefan's vagrant-serverspec 0.5.0 ...
+wget --no-verbose --no-check-certificate -O vagrant-serverspec-0.5.0.gem https://github.com/StefanScherer/vagrant-serverspec/releases/download/v0.5.0/vagrant-serverspec-0.5.0.gem
+vagrant plugin install vagrant-serverspec-0.5.0.gem
 
 echo "Installing Jenkins Swarm Client"
 call c:\vagrant\scripts\install-jenkins-slave.bat virtualbox

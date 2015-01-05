@@ -30,8 +30,9 @@ echo "Installing Vagrant 1.6.5 ..."
 sudo dpkg -i /tmp/vagrant.deb
 rm /tmp/vagrant.deb
 
-echo "Installing varant-serverspec plugin ..."
-vagrant plugin install vagrant-serverspec
+echo "Installing Stefan's varant-serverspec plugin 0.5.0 ..."
+wget --no-verbose --no-check-certificate -O vagrant-serverspec-0.5.0.gem https://github.com/StefanScherer/vagrant-serverspec/releases/download/v0.5.0/vagrant-serverspec-0.5.0.gem
+vagrant plugin install vagrant-serverspec-0.5.0.gem
 
 echo "Installing VirtualBox 4.3.16 ..."
 # workaround in box-cutter/ubuntu1404's minimize.sh removes /usr/src/* but does not remove packages

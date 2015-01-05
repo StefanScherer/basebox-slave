@@ -37,11 +37,13 @@ echo "Installing Vagrant 1.6.5 ..."
 sudo dpkg -i /tmp/vagrant.deb
 rm /tmp/vagrant.deb
 
-echo "Installing varant-serverspec plugin ..."
-vagrant plugin install vagrant-serverspec
+echo "Installing Stefan's varant-serverspec plugin 0.5.0 ..."
+wget --no-verbose --no-check-certificate -O vagrant-serverspec-0.5.0.gem https://github.com/StefanScherer/vagrant-serverspec/releases/download/v0.5.0/vagrant-serverspec-0.5.0.gem
+vagrant plugin install vagrant-serverspec-0.5.0.gem
 
-echo "Installing vagrant-vcloud plugin 0.4.3 ..."
-vagrant plugin install vagrant-vcloud
+echo "Installing Stefan's vagrant-vcloud plugin 0.4.4 ..."
+wget --no-verbose --no-check-certificate -O vagrant-vcloud-0.4.4.gem https://github.com/StefanScherer/vagrant-vcloud/releases/download/v0.4.4/vagrant-vcloud-0.4.4.gem
+vagrant plugin install vagrant-vcloud-0.4.4.gem
 
 # workaround in box-cutter/ubuntu1404's minimize.sh removes /usr/src/* but does not remove packages
 sudo apt-get remove -qq linux-headers-3.13.0-32-generic
