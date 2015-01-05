@@ -20,9 +20,9 @@ goto inst
 set PATH=%PATH%;%ChocolateyInstall%\bin
 :inst
 
-call cinst wget
+cinst wget
 
-call cinst msysgit
+cinst msysgit
 where git
 if ERRORLEVEL 1 call :addGitToUserPath
 goto GIT_DONE
@@ -33,7 +33,7 @@ set PATH=%PATH%;C:\Program Files (x86)\Git\cmd
 exit /b
 :GIT_DONE
 
-call cinst packer
+cinst packer
 where packer
 if ERRORLEVEL 1 call :addPackerToSystemPath
 goto PACKER_DONE
@@ -52,7 +52,7 @@ netsh advfirewall firewall add rule name="packer-builder-virtualbox-iso" dir=in 
 
 if exist c:\hashicorp\vagrant goto :have_vagrant
 echo Installing Vagrant ...
-call cinst vagrant
+cinst vagrant
 set PATH=%PATH%;C:\hashicorp\vagrant\bin
 :have_vagrant
 

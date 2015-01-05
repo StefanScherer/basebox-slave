@@ -21,9 +21,9 @@ goto inst
 set PATH=%PATH%;%ChocolateyInstall%\bin
 :inst
 
-call cinst wget
+cinst wget
 
-call cinst msysgit
+cinst msysgit
 where git
 if ERRORLEVEL 1 call :addGitToUserPath
 goto GIT_DONE
@@ -40,7 +40,7 @@ rem call C:\vagrant\scripts\install-packer-from-source.bat
 rem goto packer_firewall
 
 echo Installing official packer version from Chocolatey Package
-call cinst packer
+cinst packer
 where packer
 if ERRORLEVEL 1 call :addPackerToSystemPath
 goto PACKER_DONE
@@ -50,7 +50,7 @@ reg add "HKLM\System\CurrentControlSet\Control\Session Manager\Environment" /v P
 set PATH=%PATH%;C:\hashicorp\packer
 exit /b
 :PACKER_DONE
-call cinst packer-post-processor-vagrant-vmware-ovf
+cinst packer-post-processor-vagrant-vmware-ovf
 
 rem Windows 2012 R2 will start jenkins slave as user vagrant, but with USERPROFILE=C:\Users\Default, so write it there, too.
 if not exist C:\Users\Default\AppData\Roaming\packer.config (
@@ -67,7 +67,7 @@ netsh advfirewall firewall add rule name="packer-builder-virtualbox-iso" dir=in 
 
 if exist c:\hashicorp\vagrant goto :have_vagrant
 echo Installing Vagrant ...
-call cinst vagrant
+cinst vagrant
 set PATH=%PATH%;C:\hashicorp\vagrant\bin
 :have_vagrant
 
@@ -115,7 +115,7 @@ if exist C:\vagrant\resources\hosts (
 )
 
 echo Installing TightVNC to watch headless VMs
-call cinst tightvnc
+cinst tightvnc
 
 call C:\vagrant\scripts\install-jenkins-slave.bat
 

@@ -27,10 +27,10 @@ set PATH=%PATH%;%ChocolateyInstall%\bin
 :inst
 
 where java
-if ERRORLEVEL 1 call cinst java.jdk
+if ERRORLEVEL 1 cinst java.jdk
 
 where wget
-if ERRORLEVEL 1 call cinst wget
+if ERRORLEVEL 1 cinst wget
 
 if not exist c:\jenkins mkdir c:\jenkins
 

@@ -19,11 +19,11 @@ set PATH=%PATH%;%ChocolateyInstall%\bin
 :install_packer
 
 if exist c:\go\bin goto :have_golang
-call cinst golang
+cinst golang
 set PATH=%PATH%;c:\go\bin
 :have_golang
 
-call cinst git
+cinst git
 where git
 if ERRORLEVEL 1 call :addGitToUserPath
 goto GIT_DONE
@@ -34,10 +34,10 @@ set PATH=%PATH%;C:\Program Files (x86)\Git\cmd
 exit /b
 :GIT_DONE
 
-call cinst bzr
+cinst bzr
 set PATH=%PATH%;c:\program files (x86)\Bazaar
 
-call cinst hg
+cinst hg
 set PATH=%PATH%;c:\program files\Mercurial
 
 set GOPATH=C:\users\vagrant\go
