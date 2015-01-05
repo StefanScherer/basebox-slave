@@ -67,7 +67,7 @@ java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin timestamper
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin text-finder
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin ws-cleanup
 java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin publish-over-ssh
-java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin peg-formatter
+java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin pegdown-formatter
 
 if [ -f /vagrant/resources/jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin.xml ]; then
   if [ ! -f /var/lib/jenkins/jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin.xml ]; then
