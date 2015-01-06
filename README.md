@@ -283,7 +283,7 @@ After successfully running some Jenkins jobs to build baseboxes, vagrant-vcloud 
 So pick up the URL of the generated box file and feed vagrant on your host:
 
 ```bash
-vagrant box add windows_2012_r2 http://10.100.50.4/job/windows_2012_r2_vcloud/ws/windows_2012_r2_vcloud.box
+vagrant box add ubuntu1404-desktop http://10.100.50.4/job/ubuntu1404-desktop_vmware/ws/ubuntu1404-desktop_vmware.box
 ```
 
 But Jenkins could also be used to test the basebox and upload it to your basebox repo or to the [Vagrant Cloud](https://vagrantcloud.com).
