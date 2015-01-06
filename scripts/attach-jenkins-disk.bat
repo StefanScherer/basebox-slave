@@ -9,7 +9,6 @@ echo online disk >>%DP%
 echo create partition primary >>%DP%
 echo format quick >>%DP%
 echo assign mount=%MOUNTPOINT% >>%DP%
-echo select disk 1 >>%DP%
 
 diskpart /s %DP%
 
