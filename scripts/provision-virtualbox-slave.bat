@@ -1,5 +1,7 @@
 if exist c:\vagrant\resources\provisionfirst.bat call c:\vagrant\resources\provisionfirst.bat
 
+call c:\vagrant\scripts\attach-jenkins-disk.bat
+
 if exist %WinDir%\microsoft.net\framework\v4.0.30319 goto :have_net
 echo Ensuring .NET 4.0 is installed
 @powershell -NoProfile -ExecutionPolicy unrestricted -Command "iex ((new-object net.webclient).DownloadString('https://raw.github.com/StefanScherer/arduino-ide/install/InstallNet4.ps1'))"

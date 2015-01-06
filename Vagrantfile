@@ -5,7 +5,7 @@ Vagrant.configure("2") do |config|
 
   if Vagrant.has_plugin?("vagrant-vcloud")
     config.vm.provider "vcloud" do |vcloud|
-      vcloud.vapp_prefix = "basebox"
+      vcloud.vapp_name = "basebox"
       vcloud.ip_subnet = "172.16.32.1/255.255.255.0" # our test subnet with fixed IP adresses for everyone
       vcloud.ip_dns = ["10.100.20.2", "8.8.8.8"]  # dc + Google
     end
@@ -38,7 +38,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "vmware-slave" do |slave|
-    slave.vm.box = "windows_2008_r2-100gb"
+    slave.vm.box = "windows_2008_r2"
     slave.vm.hostname = "vmware-slave"
 
     slave.vm.communicator = "winrm"
@@ -53,6 +53,7 @@ Vagrant.configure("2") do |config|
       v.memory = 4096
       v.cpus = 2
       v.nested_hypervisor = true
+      v.add_hdds = [ 131072 ] # add 128GByte disk
     end
     slave.vm.provider "virtualbox" do |v|
       v.gui = true
@@ -72,7 +73,7 @@ Vagrant.configure("2") do |config|
   end
 
   config.vm.define "vbox-slave" do |slave|
-    slave.vm.box = "windows_2008_r2-100gb"
+    slave.vm.box = "windows_2008_r2"
     slave.vm.hostname = "vbox-slave"
 
     slave.vm.communicator = "winrm"
@@ -87,6 +88,7 @@ Vagrant.configure("2") do |config|
       v.memory = 4096
       v.cpus = 2
       v.nested_hypervisor = true
+      v.add_hdds = [ 131072 ] # add 128GByte disk
     end
     slave.vm.provider "virtualbox" do |v|
       v.gui = true
@@ -156,6 +158,7 @@ Vagrant.configure("2") do |config|
       v.memory = 4096
       v.cpus = 2
       v.nested_hypervisor = true
+      v.add_hdds = [ 131072 ] # add 128GByte disk
     end
     slave.vm.provider "virtualbox" do |v|
       v.memory = 4096
@@ -186,6 +189,7 @@ Vagrant.configure("2") do |config|
       v.memory = 4096
       v.cpus = 3
       v.nested_hypervisor = true
+      v.add_hdds = [ 131072 ] # add 128GByte disk
     end
     slave.vm.provider "virtualbox" do |v|
       v.memory = 2048
