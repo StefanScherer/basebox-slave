@@ -9,8 +9,8 @@ The basebox build environment itself can be built with the same tools and create
 ## Installation
 On your host machine you will need the following tools installed:
 
-* Vagrant 1.6.5
-* vagrant-vcloud plugin 0.4.3 with the command `vagrant plugin install vagrant-vcloud`
+* Vagrant 1.7.1
+* vagrant-vcloud plugin 0.4.4 (pre-release) with the command `vagrant plugin install vagrant-vcloud-0.4.4.gem`
 * Your vCloud access informations in your global `~/.vagrant.d/Vagrantfile`
 
 After that you should clone this repo and have some customizations. See below for more details.
@@ -59,11 +59,11 @@ This is a good situation to test the `vagrant rdp vmware-slave` which works nice
 The software installed in the vmware-slave is:
 
 * [Chocolatey](http://chocolatey.org) - package like installations on Windows
-* [packer 0.7.1](http://www.packer.io/downloads.html) or optional packer from source
-* [packer-post-processor-vagrant-vmware-ovf 0.2.0](https://github.com/gosddc/packer-post-processor-vagrant-vmware-ovf/releases)
-* VMware Workstation 10.0.3
-* [Vagrant 1.6.5](http://www.vagrantup.com/downloads.html)
-* [vagrant-vcloud 0.4.3](https://github.com/frapposelli/vagrant-vcloud/releases)
+* [packer 0.7.5](http://www.packer.io/downloads.html) or optional packer from source
+* [packer-post-processor-vagrant-vmware-ovf 0.2.1](https://github.com/gosddc/packer-post-processor-vagrant-vmware-ovf/releases)
+* VMware Workstation 10.0.4
+* [Vagrant 1.7.1](http://www.vagrantup.com/downloads.html)
+* [vagrant-vcloud 0.4.4](https://github.com/frapposelli/vagrant-vcloud/releases)
 * optional global Vagrantfile from host (`./resources/Vagrantfile-global`)
 * msysgit
 * wget
@@ -82,7 +82,7 @@ vagrant rdp vbox-slave
 The software installed in the vbox-slave is:
 
 * [Chocolatey](http://chocolatey.org) - package like installations on Windows
-* [packer 0.7.1](http://www.packer.io/downloads.html)
+* [packer 0.7.5](http://www.packer.io/downloads.html)
 * [VirtualBox 4.3.16](https://www.virtualbox.org/wiki/Linux_Downloads)
 * msysgit
 * wget
@@ -249,7 +249,7 @@ All of my Jenkins jobs you can find in this repo do some tests within the vCloud
 * Add the basebox to vagrant with `vagrant add box`
 * Upload the basebox with ovftool into a `BASEBOX-TESTING` catalog in vCloud
 * Create a test vApp with the new Linux/Windows box with a minimal Vagrantfile and `vagrant up --provider=vcloud`
-* Run some [Serverspec](http://serverspec.org) tests for both Linux/Windows with the [vagrant-serverspec](https://github.com/jvoorhis/vagrant-serverspec) plugin.
+* Run some [Serverspec](http://serverspec.org) tests for both Linux/Windows with the [vagrant-serverspec](https://github.com/jvoorhis/vagrant-serverspec) plugin 0.5.0 (pre-release).
 * Windows serverspec tests are in [windows_vcloud.rb](https://github.com/StefanScherer/packer-windows/blob/my_vagrant_vcloud/test/windows_vcloud.rb)
 * Linux serverspec tests are in [ubuntu_vcloud.rb](https://github.com/StefanScherer/ubuntu-vm/blob/my/test/ubuntu_vcloud.rb)
 * Destroy the vApp again with `vagrant destroy -f`
