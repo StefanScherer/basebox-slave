@@ -249,7 +249,7 @@ All of my Jenkins jobs you can find in this repo do some tests within the vCloud
 * Add the basebox to vagrant with `vagrant add box`
 * Upload the basebox with ovftool into a `BASEBOX-TESTING` catalog in vCloud
 * Create a test vApp with the new Linux/Windows box with a minimal Vagrantfile and `vagrant up --provider=vcloud`
-* Run some [Serverspec](http://serverspec.org) tests for both Linux/Windows with the [vagrant-serverspec](https://github.com/jvoorhis/vagrant-serverspec) plugin 0.5.0 (pre-release).
+* Run some [Serverspec](http://serverspec.org) tests for both Linux/Windows with the [vagrant-serverspec](https://github.com/jvoorhis/vagrant-serverspec) plugin 1.0.1
 * Windows serverspec tests are in [windows_vcloud.rb](https://github.com/StefanScherer/packer-windows/blob/my_vagrant_vcloud/test/windows_vcloud.rb)
 * Linux serverspec tests are in [ubuntu_vcloud.rb](https://github.com/StefanScherer/ubuntu-vm/blob/my/test/ubuntu_vcloud.rb)
 * Destroy the vApp again with `vagrant destroy -f`
