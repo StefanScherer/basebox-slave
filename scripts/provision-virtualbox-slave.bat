@@ -19,7 +19,7 @@ goto inst
 set PATH=%PATH%;%ChocolateyInstall%\bin
 :inst
 
-cinst wget
+cinst curl
 
 cinst msysgit
 where git
@@ -56,8 +56,8 @@ set PATH=%PATH%;C:\hashicorp\vagrant\bin
 :have_vagrant
 
 echo Installing Stefan's vagrant-serverspec 0.5.0 ...
-wget --no-verbose --no-check-certificate -O vagrant-serverspec-0.5.0.gem https://github.com/StefanScherer/vagrant-serverspec/releases/download/v0.5.0/vagrant-serverspec-0.5.0.gem
-vagrant plugin install vagrant-serverspec-0.5.0.gem
+rem curl -Lk -o vagrant-serverspec-0.5.0.gem https://github.com/StefanScherer/vagrant-serverspec/releases/download/v0.5.0/vagrant-serverspec-0.5.0.gem
+vagrant plugin install vagrant-serverspec
 
 echo "Installing Jenkins Swarm Client"
 call c:\vagrant\scripts\install-jenkins-slave.bat virtualbox

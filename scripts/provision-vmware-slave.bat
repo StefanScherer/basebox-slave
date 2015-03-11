@@ -19,7 +19,7 @@ goto inst
 set PATH=%PATH%;%ChocolateyInstall%\bin
 :inst
 
-cinst wget
+cinst curl
 
 cinst msysgit
 where git
@@ -70,12 +70,12 @@ set PATH=%PATH%;C:\hashicorp\vagrant\bin
 :have_vagrant
 
 echo Installing Stefan's vagrant-serverspec 0.5.0 ...
-wget --no-verbose --no-check-certificate -O vagrant-serverspec-0.5.0.gem https://github.com/StefanScherer/vagrant-serverspec/releases/download/v0.5.0/vagrant-serverspec-0.5.0.gem
-vagrant plugin install vagrant-serverspec-0.5.0.gem
+rem curl -Lk -o vagrant-serverspec-0.5.0.gem https://github.com/StefanScherer/vagrant-serverspec/releases/download/v0.5.0/vagrant-serverspec-0.5.0.gem
+vagrant plugin install vagrant-serverspec
 
 echo Installing Stefan's vagrant-vcloud plugin 0.4.4 ...
-wget --no-verbose --no-check-certificate -O vagrant-vcloud-0.4.4.gem https://github.com/StefanScherer/vagrant-vcloud/releases/download/v0.4.4/vagrant-vcloud-0.4.4.gem
-vagrant plugin install vagrant-vcloud-0.4.4.gem
+rem curl -Lk -o vagrant-vcloud-0.4.4.gem https://github.com/StefanScherer/vagrant-vcloud/releases/download/v0.4.4/vagrant-vcloud-0.4.4.gem
+vagrant plugin install vagrant-vcloud
 
 if exist C:\Users\vagrant\.vagrant.d\Vagrantfile goto :have_vagrantfile
 if exist C:\vagrant\resources\Vagrantfile-global (
@@ -91,10 +91,10 @@ rem Install VMware Workstation
 if not exist "c:\Program Files (x86)\VMware\VMware Workstation" (
   if not exist "%TEMP%\VMware-workstation.exe" (
     echo Downloading VMware Workstation 10.0.4 ...
-    call wget --no-verbose --no-check-certificate -O "%TEMP%\VMware-workstation.exe" https://download3.vmware.com/software/wkst/file/VMware-workstation-full-10.0.4-2249910.exe
+    curl -Lk -o "%TEMP%\VMware-workstation.exe" https://download3.vmware.com/software/wkst/file/VMware-workstation-full-10.0.4-2249910.exe
     if not exist %TEMP%\VMware-workstation.exe (
       echo Downloading latest VMware Workstation ...
-      call wget --no-verbose --no-check-certificate -O "%TEMP%\VMware-workstation.exe" http://www.vmware.com/go/tryworkstation-win
+      curl -Lk -o "%TEMP%\VMware-workstation.exe" http://www.vmware.com/go/tryworkstation-win
     )
   )
   echo Install VMware Workstation...

@@ -29,8 +29,8 @@ set PATH=%PATH%;%ChocolateyInstall%\bin
 where java
 if ERRORLEVEL 1 cinst javaruntime
 
-where wget
-if ERRORLEVEL 1 cinst wget
+where curl
+if ERRORLEVEL 1 cinst curl
 
 if not exist c:\jenkins mkdir c:\jenkins
 
@@ -38,7 +38,7 @@ if not exist c:\jenkins\swarm-client.jar (
   if exist c:\vagrant\resources\swarm-client.jar (
     copy c:\vagrant\resources\swarm-client.jar c:\jenkins\swarm-client.jar
   ) else (
-    call wget --no-verbose -O c:\jenkins\swarm-client.jar http://maven.jenkins-ci.org/content/repositories/releases/org/jenkins-ci/plugins/swarm-client/1.16/swarm-client-1.16-jar-with-dependencies.jar
+    curl -Lk -o c:\jenkins\swarm-client.jar http://maven.jenkins-ci.org/content/repositories/releases/org/jenkins-ci/plugins/swarm-client/1.16/swarm-client-1.16-jar-with-dependencies.jar
   )
 )
 
