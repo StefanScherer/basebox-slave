@@ -27,10 +27,10 @@ set PATH=%PATH%;%ChocolateyInstall%\bin
 :inst
 
 where java
-if ERRORLEVEL 1 cinst javaruntime
+if ERRORLEVEL 1 cinst -y javaruntime
 
 where curl
-if ERRORLEVEL 1 cinst curl
+if ERRORLEVEL 1 cinst -y curl
 
 if not exist c:\jenkins mkdir c:\jenkins
 

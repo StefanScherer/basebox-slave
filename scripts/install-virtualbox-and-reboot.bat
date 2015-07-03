@@ -12,8 +12,8 @@ goto inst
 set PATH=%PATH%;%ChocolateyInstall%\bin
 :inst
 
-cinst VirtualBox -version 4.3.16
-cinst VirtualBox.ExtensionPack
+cinst -y VirtualBox -version 4.3.28
+cinst -y virtualbox.extensionpack -version 4.3.28.100309
 where vboxmanage
 if ERRORLEVEL 1 call :addVBoxToSystemPath
 goto VBOX_DONE

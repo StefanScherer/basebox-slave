@@ -49,6 +49,7 @@ Vagrant.configure("2") do |config|
 
     slave.vm.network :private_network, ip: "172.16.32.3" # VirtualBox
 
+    slave.vm.provision "shell", path: "scripts/install-chocolatey.ps1", privileged: false
     slave.vm.provision "shell", path: "scripts/provision-vmware-slave.bat"
     slave.vm.provider "vcloud" do |v|
       v.memory = 4096
@@ -84,6 +85,7 @@ Vagrant.configure("2") do |config|
 
     slave.vm.network :private_network, ip: "172.16.32.4" # VirtualBox
 
+    slave.vm.provision "shell", path: "scripts/install-chocolatey.ps1", privileged: false
     slave.vm.provision "shell", path: "scripts/provision-virtualbox-slave.bat"
     slave.vm.provider "vcloud" do |v|
       v.memory = 4096
