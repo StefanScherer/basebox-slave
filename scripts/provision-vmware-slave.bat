@@ -38,7 +38,7 @@ rem call C:\vagrant\scripts\install-packer-from-source.bat
 rem goto packer_firewall
 
 echo Installing official packer version from Chocolatey Package
-cinst -y packer
+cinst -y packer -version 0.8.1
 where packer
 if ERRORLEVEL 1 call :addPackerToSystemPath
 goto PACKER_DONE
@@ -48,7 +48,7 @@ reg add "HKLM\System\CurrentControlSet\Control\Session Manager\Environment" /v P
 set PATH=%PATH%;C:\hashicorp\packer
 exit /b
 :PACKER_DONE
-cinst -y packer-post-processor-vagrant-vmware-ovf
+cinst -y packer-post-processor-vagrant-vmware-ovf -version 0.2.1.20150603
 
 rem Windows 2012 R2 will start jenkins slave as user vagrant, but with USERPROFILE=C:\Users\Default, so write it there, too.
 if not exist C:\Users\Default\AppData\Roaming\packer.config (
@@ -58,8 +58,8 @@ if not exist C:\Users\Default\AppData\Roaming\packer.config (
 )
 
 :packer_firewall
-netsh advfirewall firewall add rule name="packer-builder-vmware-iso" dir=in program="c:\HashiCorp\packer\packer-builder-vmware-iso.exe" action=allow
-netsh advfirewall firewall add rule name="packer-builder-virtualbox-iso" dir=in program="c:\HashiCorp\packer\packer-builder-virtualbox-iso.exe" action=allow
+netsh advfirewall firewall add rule name="packer-builder-vmware-iso" dir=in program="%ChocolateyInstall%\lib\packer\tools\packer-builder-vmware-iso.exe" action=allow
+netsh advfirewall firewall add rule name="packer-builder-virtualbox-iso" dir=in program="%ChocolateyInstall%\lib\packer\tools\packer-builder-virtualbox-iso.exe" action=allow
 netsh advfirewall firewall add rule name="packer-builder-vmware-iso" dir=in program="c:\Users\vagrant\go\bin\packer-builder-vmware-iso.exe" action=allow
 netsh advfirewall firewall add rule name="packer-builder-virtualbox-iso" dir=in program="c:\Users\vagrant\go\bin\packer-builder-virtualbox-iso.exe" action=allow
 
@@ -69,13 +69,12 @@ cinst -y vagrant
 set PATH=%PATH%;C:\hashicorp\vagrant\bin
 :have_vagrant
 
-echo Installing Stefan's vagrant-serverspec 0.5.0 ...
-rem curl -Lk -o vagrant-serverspec-0.5.0.gem https://github.com/StefanScherer/vagrant-serverspec/releases/download/v0.5.0/vagrant-serverspec-0.5.0.gem
+echo Installing vagrant-serverspec ...
 vagrant plugin install vagrant-serverspec
 
 echo Installing Stefan's vagrant-vcloud plugin 0.4.4 ...
-rem curl -Lk -o vagrant-vcloud-0.4.4.gem https://github.com/StefanScherer/vagrant-vcloud/releases/download/v0.4.4/vagrant-vcloud-0.4.4.gem
-vagrant plugin install vagrant-vcloud
+curl -Lk -o vagrant-vcloud-0.4.4.gem https://github.com/StefanScherer/vagrant-vcloud/releases/download/v0.4.4/vagrant-vcloud-0.4.4.gem
+vagrant plugin install vagrant-vcloud-0.4.4.gem
 
 if exist C:\Users\vagrant\.vagrant.d\Vagrantfile goto :have_vagrantfile
 if exist C:\vagrant\resources\Vagrantfile-global (
@@ -88,20 +87,7 @@ if exist C:\vagrant\resources\Vagrantfile-global (
 :have_vagrantfile
 
 rem Install VMware Workstation
-if not exist "c:\Program Files (x86)\VMware\VMware Workstation" (
-  if not exist "%TEMP%\VMware-workstation.exe" (
-    echo Downloading VMware Workstation 10.0.4 ...
-    curl -Lk -o "%TEMP%\VMware-workstation.exe" https://download3.vmware.com/software/wkst/file/VMware-workstation-full-10.0.4-2249910.exe
-    if not exist %TEMP%\VMware-workstation.exe (
-      echo Downloading latest VMware Workstation ...
-      curl -Lk -o "%TEMP%\VMware-workstation.exe" http://www.vmware.com/go/tryworkstation-win
-    )
-  )
-  echo Install VMware Workstation...
-  rem "%TEMP%\VMware-workstation.exe" /s /nsr /v EULAS_AGREED=1 SERIALNUMBER="xxxxx-xxxxx-xxxxx-xxxxx-xxxxx"
-  "%TEMP%\VMware-workstation.exe" /s /nsr /v EULAS_AGREED=1
-  del "%TEMP%\VMware-workstation.exe"
-)
+choco install -y vmwareworkstation
 
 rem put ovftool in path (not necessary for packer, but for jenkins test-box-vcloud.bat)
 where ovftool

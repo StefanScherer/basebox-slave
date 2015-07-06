@@ -32,7 +32,7 @@ set PATH=%PATH%;C:\Program Files (x86)\Git\cmd
 exit /b
 :GIT_DONE
 
-cinst -y packer
+cinst -y packer -version 0.8.1
 where packer
 if ERRORLEVEL 1 call :addPackerToSystemPath
 goto PACKER_DONE
@@ -44,8 +44,8 @@ exit /b
 :PACKER_DONE
 
 :packer_firewall
-netsh advfirewall firewall add rule name="packer-builder-vmware-iso" dir=in program="c:\HashiCorp\packer\packer-builder-vmware-iso.exe" action=allow
-netsh advfirewall firewall add rule name="packer-builder-virtualbox-iso" dir=in program="c:\HashiCorp\packer\packer-builder-virtualbox-iso.exe" action=allow
+netsh advfirewall firewall add rule name="packer-builder-vmware-iso" dir=in program="%ChocolateyInstall%\lib\packer\tools\packer-builder-vmware-iso.exe" action=allow
+netsh advfirewall firewall add rule name="packer-builder-virtualbox-iso" dir=in program="%ChocolateyInstall%\lib\packer\tools\packer-builder-virtualbox-iso.exe" action=allow
 netsh advfirewall firewall add rule name="packer-builder-vmware-iso" dir=in program="c:\Users\vagrant\go\bin\packer-builder-vmware-iso.exe" action=allow
 netsh advfirewall firewall add rule name="packer-builder-virtualbox-iso" dir=in program="c:\Users\vagrant\go\bin\packer-builder-virtualbox-iso.exe" action=allow
 
@@ -55,8 +55,7 @@ cinst -y vagrant
 set PATH=%PATH%;C:\hashicorp\vagrant\bin
 :have_vagrant
 
-echo Installing Stefan's vagrant-serverspec 0.5.0 ...
-rem curl -Lk -o vagrant-serverspec-0.5.0.gem https://github.com/StefanScherer/vagrant-serverspec/releases/download/v0.5.0/vagrant-serverspec-0.5.0.gem
+echo Installing vagrant-serverspec ...
 vagrant plugin install vagrant-serverspec
 
 echo "Installing Jenkins Swarm Client"
