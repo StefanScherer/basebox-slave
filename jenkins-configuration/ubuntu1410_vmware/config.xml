@@ -4,7 +4,7 @@
   <description></description>
   <keepDependencies>false</keepDependencies>
   <properties/>
-  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.3.5">
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@2.3.2">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
@@ -40,7 +40,7 @@
       <unstableIfFound>false</unstableIfFound>
       <alsoCheckConsoleOutput>true</alsoCheckConsoleOutput>
     </hudson.plugins.textfinder.TextFinderPublisher>
-    <jenkins.plugins.publish__over__ssh.BapSshPublisherPlugin plugin="publish-over-ssh@1.13">
+    <jenkins.plugins.publish__over__ssh.BapSshPublisherPlugin plugin="publish-over-ssh@1.12">
       <consolePrefix>SSH: </consolePrefix>
       <delegate>
         <publishers>
@@ -74,12 +74,12 @@
         <hostConfigurationAccess class="jenkins.plugins.publish_over_ssh.BapSshPublisherPlugin" reference="../.."/>
       </delegate>
     </jenkins.plugins.publish__over__ssh.BapSshPublisherPlugin>
-    <hudson.tasks.Mailer plugin="mailer@1.15">
+    <hudson.tasks.Mailer plugin="mailer@1.12">
       <recipients>scherer_stefan@icloud.com</recipients>
       <dontNotifyEveryUnstableBuild>false</dontNotifyEveryUnstableBuild>
       <sendToIndividuals>false</sendToIndividuals>
     </hudson.tasks.Mailer>
-    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.26">
+    <hudson.plugins.ws__cleanup.WsCleanup plugin="ws-cleanup@0.24">
       <patterns>
         <hudson.plugins.ws__cleanup.Pattern>
           <pattern>packer_cache</pattern>
@@ -102,6 +102,6 @@
     <hudson.plugins.ansicolor.AnsiColorBuildWrapper plugin="ansicolor@0.4.1">
       <colorMapName>xterm</colorMapName>
     </hudson.plugins.ansicolor.AnsiColorBuildWrapper>
-    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.7"/>
+    <hudson.plugins.timestamper.TimestamperBuildWrapper plugin="timestamper@1.5.15"/>
   </buildWrappers>
 </project>

@@ -28,10 +28,6 @@
     "version": "1.13"
   },
   {
-    "id": "postbuild-task",
-    "version": "1.8"
-  },
-  {
     "id": "external-monitor-job",
     "version": "1.4"
   },
@@ -65,7 +61,7 @@
   },
   {
     "id": "maven-plugin",
-    "version": "2.10"
+    "version": "2.7.1"
   },
   {
     "id": "ant",
@@ -85,7 +81,7 @@
   },
   {
     "id": "subversion",
-    "version": "2.5"
+    "version": "1.54"
   },
   {
     "id": "translation",
@@ -105,7 +101,7 @@
   },
   {
     "id": "pam-auth",
-    "version": "1.2"
+    "version": "1.1"
   },
   {
     "id": "greenballs",
