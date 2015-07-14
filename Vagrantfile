@@ -55,7 +55,7 @@ Vagrant.configure("2") do |config|
       v.memory = 4096
       v.cpus = 2
       v.nested_hypervisor = true
-##      v.add_hdds = [ 131072 ] # add 128GByte disk
+      v.add_hdds = [ 131072 ] # add 128GByte disk
     end
     slave.vm.provider "virtualbox" do |v|
       v.gui = true
@@ -91,7 +91,7 @@ Vagrant.configure("2") do |config|
       v.memory = 4096
       v.cpus = 2
       v.nested_hypervisor = true
-##      v.add_hdds = [ 131072 ] # add 128GByte disk
+      v.add_hdds = [ 131072 ] # add 128GByte disk
     end
     slave.vm.provider "virtualbox" do |v|
       v.gui = true
