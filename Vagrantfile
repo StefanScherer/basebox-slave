@@ -53,7 +53,7 @@ Vagrant.configure("2") do |config|
     slave.vm.provision "shell", path: "scripts/provision-vmware-slave.bat"
     slave.vm.provider "vcloud" do |v|
       v.memory = 4096
-      v.cpus = 2
+      v.cpus = 3
       v.nested_hypervisor = true
       v.add_hdds = [ 131072 ] # add 128GByte disk
     end
@@ -89,7 +89,7 @@ Vagrant.configure("2") do |config|
     slave.vm.provision "shell", path: "scripts/provision-virtualbox-slave.bat"
     slave.vm.provider "vcloud" do |v|
       v.memory = 4096
-      v.cpus = 2
+      v.cpus = 3
       v.nested_hypervisor = true
       v.add_hdds = [ 131072 ] # add 128GByte disk
     end
@@ -159,7 +159,7 @@ Vagrant.configure("2") do |config|
     slave.vm.provision "shell", path: "scripts/install-xrdp.sh"
     slave.vm.provider "vcloud" do |v|
       v.memory = 4096
-      v.cpus = 2
+      v.cpus = 3
       v.nested_hypervisor = true
 ##      v.add_hdds = [ 131072 ] # add 128GByte disk
     end
