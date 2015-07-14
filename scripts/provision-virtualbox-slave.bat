@@ -66,6 +66,11 @@ echo Installing VirtualBox - delayed - guest will reboot
 start c:\vagrant\scripts\install-virtualbox-and-reboot.bat
 :have_vbox
 
+if exist  C:\HashiCorp\Vagrant\embedded\gems\gems\vagrant-1.7.3\plugins\providers\virtualbox\driver\version_5_0.rb (
+  echo Patching Vagrant 1.7.3 VirtualBox provider
+  copy /Y C:\vagrant\scripts\version_5_0.rb C:\HashiCorp\Vagrant\embedded\gems\gems\vagrant-1.7.3\plugins\providers\virtualbox\driver\version_5_0.rb
+)
+
 if exist C:\vagrant\resources\hosts (
   echo Appending additional hosts entries
   copy C:\Windows\System32\drivers\etc\hosts + C:\vagrant\resources\hosts C:\Windows\System32\drivers\etc\hosts
