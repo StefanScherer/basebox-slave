@@ -15,24 +15,23 @@ sudo apt-get install -qq git unzip
 # install packer
 sudo mkdir /opt/packer
 cd /opt/packer
-echo "Downloading packer 0.7.1..."
-sudo wget --no-verbose https://dl.bintray.com/mitchellh/packer/0.7.1_linux_amd64.zip
-echo "Installing packer 0.7.1..."
-sudo unzip 0.7.1_linux_amd64.zip
-sudo rm 0.7.1_linux_amd64.zip
+echo "Downloading packer 0.8.5..."
+sudo wget --no-verbose https://dl.bintray.com/mitchellh/packer/0.8.5_linux_amd64.zip
+echo "Installing packer 0.8.5..."
+sudo unzip 0.8.5_linux_amd64.zip
+sudo rm 0.8.5_linux_amd64.zip
 cd /usr/bin
 sudo ln -s /opt/packer/* .
 
 
-echo "Downloading Vagrant 1.6.5 ..."
-wget --no-verbose -O /tmp/vagrant.deb https://dl.bintray.com/mitchellh/vagrant/vagrant_1.6.5_x86_64.deb
-echo "Installing Vagrant 1.6.5 ..."
+echo "Downloading Vagrant 1.7.4 ..."
+wget --no-verbose -O /tmp/vagrant.deb https://dl.bintray.com/mitchellh/vagrant/vagrant_1.7.4_x86_64.deb
+echo "Installing Vagrant 1.7.4 ..."
 sudo dpkg -i /tmp/vagrant.deb
 rm /tmp/vagrant.deb
 
-echo "Installing Stefan's varant-serverspec plugin 0.5.0 ..."
-wget --no-verbose --no-check-certificate -O vagrant-serverspec-0.5.0.gem https://github.com/StefanScherer/vagrant-serverspec/releases/download/v0.5.0/vagrant-serverspec-0.5.0.gem
-vagrant plugin install vagrant-serverspec-0.5.0.gem
+echo "Installing varant-serverspec plugin ..."
+vagrant plugin install vagrant-serverspec
 
 echo "Installing VirtualBox 4.3.16 ..."
 # workaround in box-cutter/ubuntu1404's minimize.sh removes /usr/src/* but does not remove packages

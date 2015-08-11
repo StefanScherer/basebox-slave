@@ -32,7 +32,7 @@ set PATH=%PATH%;C:\Program Files (x86)\Git\cmd
 exit /b
 :GIT_DONE
 
-cinst -y packer -version 0.8.1
+cinst -y packer -version 0.8.5
 where packer
 if ERRORLEVEL 1 call :addPackerToSystemPath
 goto PACKER_DONE

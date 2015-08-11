@@ -38,7 +38,7 @@ rem call C:\vagrant\scripts\install-packer-from-source.bat
 rem goto packer_firewall
 
 echo Installing official packer version from Chocolatey Package
-cinst -y packer -version 0.8.1
+cinst -y packer -version 0.8.5
 where packer
 if ERRORLEVEL 1 call :addPackerToSystemPath
 goto PACKER_DONE
